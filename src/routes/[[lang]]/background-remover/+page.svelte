@@ -74,8 +74,9 @@
 	let selectedFiles: File[] = $state([]);
 	let batchResults: Array<{
 		file: File;
-		originalUrl: string;
-		processedUrl: string | null;
+		originalThumbnail: string;
+		processedThumbnail: string | null;
+		processedFullUrl: string | null; // Full size for download
 		error?: string;
 	}> = $state([]);
 	let currentBatchIndex = $state(0);
@@ -127,8 +128,61 @@
 		}
 	}
 
-	async function processImage(imageUrl: string): Promise<string | null> {
-		if (!segmenter) return null;
+	// Helper function to create a thumbnail from a blob URL
+	async function createThumbnail(imageUrl: string, maxSize: number = 150): Promise<string | null> {
+		return new Promise((resolve) => {
+			const img = new Image();
+			img.onload = () => {
+				const canvas = document.createElement('canvas');
+				const ctx = canvas.getContext('2d');
+
+				// Calculate thumbnail dimensions
+				let width = img.width;
+				let height = img.height;
+				if (width > height) {
+					if (width > maxSize) {
+						height = (height * maxSize) / width;
+						width = maxSize;
+					}
+				} else {
+					if (height > maxSize) {
+						width = (width * maxSize) / height;
+						height = maxSize;
+					}
+				}
+
+				canvas.width = width;
+				canvas.height = height;
+				ctx?.drawImage(img, 0, 0, width, height);
+
+				canvas.toBlob(
+					(blob) => {
+						if (blob) {
+							resolve(URL.createObjectURL(blob));
+						} else {
+							resolve(null);
+						}
+						// Clean up
+						canvas.remove();
+					},
+					'image/jpeg',
+					0.8
+				); // Use JPEG for smaller thumbnails
+			};
+			img.onerror = () => {
+				resolve(null);
+			};
+			img.src = imageUrl;
+		});
+	}
+
+	async function processImage(
+		imageUrl: string
+	): Promise<{ fullUrl: string | null; thumbnail: string | null }> {
+		if (!segmenter) return { fullUrl: null, thumbnail: null };
+
+		let tempCanvas: HTMLCanvasElement | null = null;
+		let rawImage: any = null;
 
 		try {
 			// Process the image using the pipeline
@@ -137,8 +191,8 @@
 			// The pipeline returns an array with the processed image
 			if (output && output.length > 0) {
 				// The output is a RawImage, create a proper HTML canvas
-				const rawImage = output[0];
-				const tempCanvas = rawImage.toCanvas();
+				rawImage = output[0];
+				tempCanvas = rawImage.toCanvas();
 
 				// Create a new HTML canvas element
 				const canvas = document.createElement('canvas');
@@ -147,22 +201,48 @@
 				const ctx = canvas.getContext('2d');
 
 				// Draw the image onto the HTML canvas
-				ctx?.drawImage(tempCanvas, 0, 0);
+				if (ctx && tempCanvas) {
+					ctx.drawImage(tempCanvas, 0, 0);
+				}
+
+				// Clean up temp canvas immediately
+				if (tempCanvas && tempCanvas.remove) {
+					tempCanvas.remove();
+				}
+				tempCanvas = null;
+
+				// Dispose of RawImage if it has a dispose method
+				if (rawImage && typeof rawImage.dispose === 'function') {
+					rawImage.dispose();
+				}
+				rawImage = null;
 
 				return new Promise((resolve) => {
-					canvas.toBlob((blob) => {
+					canvas.toBlob(async (blob) => {
 						if (blob) {
-							resolve(URL.createObjectURL(blob));
+							const fullUrl = URL.createObjectURL(blob);
+							// Create thumbnail from the full image
+							const thumbnail = await createThumbnail(fullUrl, 150);
+							resolve({ fullUrl, thumbnail });
 						} else {
-							resolve(null);
+							resolve({ fullUrl: null, thumbnail: null });
 						}
+						// Clean up the canvas
+						canvas.remove();
 					}, 'image/png');
 				});
 			}
-			return null;
+			return { fullUrl: null, thumbnail: null };
 		} catch (err) {
 			console.error('Error processing image:', err);
-			return null;
+			// Clean up on error
+			if (tempCanvas && tempCanvas.remove) {
+				tempCanvas.remove();
+			}
+			if (rawImage && typeof rawImage.dispose === 'function') {
+				rawImage.dispose();
+			}
+			return { fullUrl: null, thumbnail: null };
 		}
 	}
 
@@ -186,7 +266,11 @@
 			if (processedImageUrl) {
 				URL.revokeObjectURL(processedImageUrl);
 			}
-			processedImageUrl = result;
+			processedImageUrl = result.fullUrl;
+			// Clean up thumbnail since we don't use it in single mode
+			if (result.thumbnail) {
+				URL.revokeObjectURL(result.thumbnail);
+			}
 		} catch (err) {
 			console.error('Processing error:', err);
 			error = true;
@@ -204,11 +288,12 @@
 			currentBatchIndex = 0;
 			totalBatchCount = files.length;
 
-			// Initialize batch results
+			// Initialize batch results with empty placeholders
 			batchResults = files.map((file) => ({
 				file,
-				originalUrl: URL.createObjectURL(file),
-				processedUrl: null
+				originalThumbnail: '',
+				processedThumbnail: null,
+				processedFullUrl: null
 			}));
 
 			await requestWakeLock();
@@ -218,12 +303,34 @@
 				currentBatchIndex = i + 1;
 				processingProgress = Math.round((i / files.length) * 100);
 
+				let originalUrl: string | null = null;
 				try {
-					const result = await processImage(batchResults[i].originalUrl);
-					batchResults[i].processedUrl = result;
+					// Create blob URL for the original file
+					originalUrl = URL.createObjectURL(files[i]);
+
+					// Create thumbnail for original
+					const originalThumb = await createThumbnail(originalUrl, 150);
+					if (originalThumb) {
+						batchResults[i].originalThumbnail = originalThumb;
+					}
+
+					// Process the image
+					const result = await processImage(originalUrl);
+
+					// Store results
+					batchResults[i].processedThumbnail = result.thumbnail;
+					batchResults[i].processedFullUrl = result.fullUrl;
+
+					// IMPORTANT: Immediately revoke the original blob URL to free memory
+					URL.revokeObjectURL(originalUrl);
+					originalUrl = null;
 				} catch (err) {
 					console.error(`Error processing image ${i + 1}:`, err);
 					batchResults[i].error = 'Processing failed';
+					// Clean up on error
+					if (originalUrl) {
+						URL.revokeObjectURL(originalUrl);
+					}
 				}
 
 				// Update reactivity
@@ -270,11 +377,16 @@
 			originalImageUrl = null;
 			selectedFile = null;
 		} else {
-			// Clear batch results
+			// Clear batch results - revoke all URLs
 			batchResults.forEach((result) => {
-				URL.revokeObjectURL(result.originalUrl);
-				if (result.processedUrl) {
-					URL.revokeObjectURL(result.processedUrl);
+				if (result.originalThumbnail) {
+					URL.revokeObjectURL(result.originalThumbnail);
+				}
+				if (result.processedThumbnail) {
+					URL.revokeObjectURL(result.processedThumbnail);
+				}
+				if (result.processedFullUrl) {
+					URL.revokeObjectURL(result.processedFullUrl);
 				}
 			});
 			batchResults = [];
@@ -290,12 +402,12 @@
 
 	async function downloadBatchAsZip() {
 		const zip = new JSZip();
-		const successfulResults = batchResults.filter((r) => r.processedUrl && !r.error);
+		const successfulResults = batchResults.filter((r) => r.processedFullUrl && !r.error);
 
 		for (let i = 0; i < successfulResults.length; i++) {
 			const result = successfulResults[i];
 			try {
-				const response = await fetch(result.processedUrl!);
+				const response = await fetch(result.processedFullUrl!);
 				const blob = await response.blob();
 				const fileName = `${result.file.name.split('.')[0]}_bg_removed.png`;
 				zip.file(fileName, blob);
@@ -342,11 +454,16 @@
 		if (originalImageUrl && originalImageUrl.startsWith('blob:')) {
 			URL.revokeObjectURL(originalImageUrl);
 		}
-		// Clean up batch results
+		// Clean up batch results - all URLs
 		batchResults.forEach((result) => {
-			URL.revokeObjectURL(result.originalUrl);
-			if (result.processedUrl) {
-				URL.revokeObjectURL(result.processedUrl);
+			if (result.originalThumbnail) {
+				URL.revokeObjectURL(result.originalThumbnail);
+			}
+			if (result.processedThumbnail) {
+				URL.revokeObjectURL(result.processedThumbnail);
+			}
+			if (result.processedFullUrl) {
+				URL.revokeObjectURL(result.processedFullUrl);
 			}
 		});
 	});
