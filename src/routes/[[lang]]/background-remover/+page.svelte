@@ -129,7 +129,7 @@
 	}
 
 	// Helper function to create a thumbnail from a blob URL
-	async function createThumbnail(imageUrl: string, maxSize: number = 150): Promise<string | null> {
+	async function createThumbnail(imageUrl: string, maxSize: number = 500): Promise<string | null> {
 		return new Promise((resolve) => {
 			const img = new Image();
 			img.onload = () => {
@@ -155,19 +155,15 @@
 				canvas.height = height;
 				ctx?.drawImage(img, 0, 0, width, height);
 
-				canvas.toBlob(
-					(blob) => {
-						if (blob) {
-							resolve(URL.createObjectURL(blob));
-						} else {
-							resolve(null);
-						}
-						// Clean up
-						canvas.remove();
-					},
-					'image/jpeg',
-					0.8
-				); // Use JPEG for smaller thumbnails
+				canvas.toBlob((blob) => {
+					if (blob) {
+						resolve(URL.createObjectURL(blob));
+					} else {
+						resolve(null);
+					}
+					// Clean up
+					canvas.remove();
+				}, 'image/png'); // Use PNG to preserve transparency
 			};
 			img.onerror = () => {
 				resolve(null);
@@ -222,7 +218,7 @@
 						if (blob) {
 							const fullUrl = URL.createObjectURL(blob);
 							// Create thumbnail from the full image
-							const thumbnail = await createThumbnail(fullUrl, 150);
+							const thumbnail = await createThumbnail(fullUrl, 500);
 							resolve({ fullUrl, thumbnail });
 						} else {
 							resolve({ fullUrl: null, thumbnail: null });
@@ -309,7 +305,7 @@
 					originalUrl = URL.createObjectURL(files[i]);
 
 					// Create thumbnail for original
-					const originalThumb = await createThumbnail(originalUrl, 150);
+					const originalThumb = await createThumbnail(originalUrl, 500);
 					if (originalThumb) {
 						batchResults[i].originalThumbnail = originalThumb;
 					}
