@@ -8,8 +8,9 @@
 
 	interface BatchResult {
 		file: File;
-		originalUrl: string;
-		processedUrl: string | null;
+		originalThumbnail: string;
+		processedThumbnail: string | null;
+		processedFullUrl: string | null;
 		error?: string;
 	}
 
@@ -21,8 +22,8 @@
 
 	let { batchResults, onProcessAnother, onDownloadZip }: Props = $props();
 
-	let successfulResults = $derived(batchResults.filter((r) => r.processedUrl && !r.error));
-	let failedResults = $derived(batchResults.filter((r) => r.error || !r.processedUrl));
+	let successfulResults = $derived(batchResults.filter((r) => r.processedFullUrl && !r.error));
+	let failedResults = $derived(batchResults.filter((r) => r.error || !r.processedFullUrl));
 
 	// Helper functions to generate alt text (to avoid wuchale plugin issues with template strings)
 	function getOriginalAltText(fileName: string) {
@@ -38,10 +39,10 @@
 	}
 
 	function downloadIndividualImage(result: BatchResult) {
-		if (!result.processedUrl) return;
+		if (!result.processedFullUrl) return;
 
 		const link = document.createElement('a');
-		link.href = result.processedUrl;
+		link.href = result.processedFullUrl;
 		link.download = `${result.file.name.split('.')[0]}_bg_removed.png`;
 		document.body.appendChild(link);
 		link.click();
@@ -96,14 +97,17 @@
 									<div class="before-after">
 										<div class="image-side">
 											<div class="image-label">Before</div>
-											<img src={result.originalUrl} alt={getOriginalAltText(result.file.name)} />
+											<img
+												src={result.originalThumbnail}
+												alt={getOriginalAltText(result.file.name)}
+											/>
 										</div>
 										<div class="image-side">
 											<div class="image-label">After</div>
 											<div class="processed-image-container">
 												<div class="transparent-bg-pattern"></div>
 												<img
-													src={result.processedUrl}
+													src={result.processedThumbnail}
 													alt={getProcessedAltText(result.file.name)}
 												/>
 											</div>
@@ -138,7 +142,7 @@
 						{#each failedResults as result (result.file.name)}
 							<div class="failed-item">
 								<div class="failed-preview">
-									<img src={result.originalUrl} alt={getFailedAltText(result.file.name)} />
+									<img src={result.originalThumbnail} alt={getFailedAltText(result.file.name)} />
 									<div class="failed-overlay">
 										<span class="failed-icon"><XCircleIcon /></span>
 									</div>
