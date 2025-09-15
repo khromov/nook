@@ -161,8 +161,7 @@
 					} else {
 						resolve(null);
 					}
-					// Clean up
-					canvas.remove();
+					// Canvas will be garbage collected when function exits
 				}, 'image/png'); // Use PNG to preserve transparency
 			};
 			img.onerror = () => {
@@ -202,8 +201,8 @@
 				}
 
 				// Clean up temp canvas immediately
-				if (tempCanvas && tempCanvas.remove) {
-					tempCanvas.remove();
+				if (tempCanvas && tempCanvas.parentNode) {
+					tempCanvas.parentNode.removeChild(tempCanvas);
 				}
 				tempCanvas = null;
 
@@ -223,8 +222,6 @@
 						} else {
 							resolve({ fullUrl: null, thumbnail: null });
 						}
-						// Clean up the canvas
-						canvas.remove();
 					}, 'image/png');
 				});
 			}
@@ -232,12 +229,14 @@
 		} catch (err) {
 			console.error('Error processing image:', err);
 			// Clean up on error
-			if (tempCanvas && tempCanvas.remove) {
-				tempCanvas.remove();
+			if (tempCanvas && tempCanvas.parentNode) {
+				tempCanvas.parentNode.removeChild(tempCanvas);
 			}
+			tempCanvas = null;
 			if (rawImage && typeof rawImage.dispose === 'function') {
 				rawImage.dispose();
 			}
+			rawImage = null;
 			return { fullUrl: null, thumbnail: null };
 		}
 	}
