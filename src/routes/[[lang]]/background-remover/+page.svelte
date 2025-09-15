@@ -131,8 +131,11 @@
 	// Helper function to create a thumbnail from a blob URL
 	async function createThumbnail(imageUrl: string, maxSize: number = 500): Promise<string | null> {
 		return new Promise((resolve) => {
-			const img = new Image();
+			let img: HTMLImageElement | null = new Image();
+
 			img.onload = () => {
+				if (!img) return; // Safety check
+
 				const canvas = document.createElement('canvas');
 				const ctx = canvas.getContext('2d');
 
@@ -161,12 +164,17 @@
 					} else {
 						resolve(null);
 					}
-					// Canvas will be garbage collected when function exits
+					// Clean up img reference to help garbage collection
+					img = null;
 				}, 'image/png'); // Use PNG to preserve transparency
 			};
+
 			img.onerror = () => {
+				// Clean up on error
+				img = null;
 				resolve(null);
 			};
+
 			img.src = imageUrl;
 		});
 	}
