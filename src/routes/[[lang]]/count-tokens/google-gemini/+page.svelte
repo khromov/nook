@@ -21,7 +21,8 @@
 	let tokens = $derived.by(() => {
 		if (!tokenizer || !$tokenCounterText) return [];
 		try {
-			return tokenizer._encode_text($tokenCounterText);
+			const encoded = tokenizer($tokenCounterText);
+			return encoded.input_ids.data;
 		} catch (error) {
 			console.error('Error encoding text:', error);
 			return [];
@@ -32,7 +33,7 @@
 		if (!tokenizer || tokens.length === 0) return [];
 		return tokens.map((tokenId: number) => {
 			try {
-				return tokenizer.decode([tokenId]);
+				return tokenizer.decode([tokenId], { skip_special_tokens: false });
 			} catch {
 				return `[Token ${tokenId}]`;
 			}

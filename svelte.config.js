@@ -7,8 +7,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		output: {
-			/* TODO: Remove once we have a smaller alternative to @lenml/tokenizer-gemini */
-			/*bundleStrategy: 'single'*/
+			bundleStrategy: 'single'
 		}
 	}
 };
