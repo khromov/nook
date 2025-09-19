@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-09-19T22:08:53.051Z\n"
+"PO-Revision-Date: 2025-09-19T22:22:32.541Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -57,9 +57,9 @@ msgstr "Model Ready"
 msgid "Failed to load transcription model. Please try again."
 msgstr "Failed to load transcription model. Please try again."
 
-#: src/routes/[[lang]]/background-remover/+page.svelte
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
+#: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Retry"
 msgstr "Retry"
 
@@ -191,8 +191,8 @@ msgstr "Change the language settings for the Enclave application"
 msgid "Language Settings"
 msgstr "Language Settings"
 
-#: src/routes/[[lang]]/language/+page.svelte
 #: src/lib/components/common/LanguageSelector.svelte
+#: src/routes/[[lang]]/language/+page.svelte
 msgid "Select Language"
 msgstr "Select Language"
 
@@ -516,13 +516,13 @@ msgstr "<0/> Raw Tokens ({0})"
 msgid "Type or paste text in the input field above to analyze tokens and character count."
 msgstr "Type or paste text in the input field above to analyze tokens and character count."
 
-#: src/lib/components/count-tokens/TokenStats.svelte
 #: src/routes/+layout.svelte
+#: src/lib/components/count-tokens/TokenStats.svelte
 msgid "Tokens"
 msgstr "Tokens"
 
-#: src/lib/components/tts/TextStatistics.svelte
 #: src/lib/components/count-tokens/TokenStats.svelte
+#: src/lib/components/tts/TextStatistics.svelte
 msgid "Characters"
 msgstr "Characters"
 
@@ -538,9 +538,9 @@ msgstr "Input Text"
 msgid "Load example"
 msgstr "Load example"
 
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
 #: src/lib/components/count-tokens/TextInputSection.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
 msgid "Clear text"
 msgstr "Clear text"
 
@@ -697,8 +697,8 @@ msgstr ""
 msgid "Failed to load model. Please check your connection and try again."
 msgstr "Failed to load model. Please check your connection and try again."
 
-#: src/routes/[[lang]]/chat/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/chat/+page.svelte
 msgid "Loading Model"
 msgstr "Loading Model"
 
@@ -975,15 +975,15 @@ msgstr "Recommended"
 msgid "Token ID: {0}"
 msgstr "Token ID: {0}"
 
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
 #: src/lib/components/count-tokens/TextInputSection.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
 msgid "Copied!"
 msgstr "Copied!"
 
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
 #: src/lib/components/count-tokens/TextInputSection.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
 msgid "Copy text"
 msgstr "Copy text"
 
@@ -1003,8 +1003,8 @@ msgstr "Loading Cached Model"
 msgid "Downloading Model"
 msgstr "Downloading Model"
 
-#: src/routes/[[lang]]/background-remover/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Loading..."
 msgstr "Loading..."
 
@@ -1047,8 +1047,8 @@ msgstr "Reload Model"
 msgid "Failed to load model"
 msgstr "Failed to load model"
 
-#: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
+#: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Average token length: ~4 characters for English text"
@@ -1173,9 +1173,9 @@ msgstr "Audio Transcription - Enclave"
 msgid "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
 msgstr "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
 
-#: src/routes/[[lang]]/og/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
 msgid "Enclave: Local AI"
 msgstr "Enclave: Local AI"
 
@@ -1211,17 +1211,9 @@ msgstr "OpenGraph Generator - Enclave: Local AI"
 msgid "Google Gemini"
 msgstr "Google Gemini"
 
-#: src/routes/[[lang]]/count-tokens/+page.svelte
-msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
-msgstr "Count tokens for Gemini models including Pro, Ultra, and Flash"
-
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Google Gemini Tokenizer"
 msgstr "Google Gemini Tokenizer"
-
-#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
-msgid "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
-msgstr "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
 
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "About Gemini's Tokenizer"
@@ -1234,3 +1226,8 @@ msgstr "Gemini uses a SentencePiece tokenizer optimized for multimodal understan
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Handles multiple languages and code efficiently"
 msgstr "Handles multiple languages and code efficiently"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Count tokens for Gemini models"
+msgstr "Count tokens for Gemini models"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:12:40.444Z\n"
-"PO-Revision-Date: 2025-09-19T22:09:36.217Z\n"
+"PO-Revision-Date: 2025-09-19T22:22:32.543Z\n"
 "Last-Translator: \n"
 "Language: sv\n"
 "Language-Team: \n"
@@ -90,8 +90,8 @@ msgstr "All bearbetning sker lokalt i din webbläsare med WebAssembly."
 msgid "No data is sent to external servers."
 msgstr "Ingen data skickas till externa servrar."
 
-#: src/lib/components/count-tokens/TokenStats.svelte
 #: src/routes/+layout.svelte
+#: src/lib/components/count-tokens/TokenStats.svelte
 msgid "Tokens"
 msgstr "Tokens"
 
@@ -198,8 +198,8 @@ msgstr "<0/> Bearbetar bild"
 #. placeholder {0}: progress
 #. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
-#: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
+#: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 msgid "{0}% Complete"
 msgstr "{0}% klart"
@@ -601,9 +601,9 @@ msgstr "Byt modell"
 msgid "Failed to load transcription model. Please try again."
 msgstr "Misslyckades att ladda transkriptionsmodell. Försök igen."
 
-#: src/routes/[[lang]]/background-remover/+page.svelte
 #: src/routes/[[lang]]/text-to-speech/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Retry"
 msgstr "Försök igen"
 
@@ -1012,8 +1012,8 @@ msgstr "Laddar cachad modell"
 msgid "Downloading Model"
 msgstr "Laddar ner modell"
 
-#: src/routes/[[lang]]/background-remover/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Loading..."
 msgstr "Laddar..."
 
@@ -1029,8 +1029,8 @@ msgstr "Transkriptionsmodellen laddas ner till din webbläsare."
 msgid "Loading model... Progress tracking not available in this browser."
 msgstr "Laddar modell... Framståndsspårning inte tillgänglig i denna webbläsare."
 
-#: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
+#: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Genomsnittlig tokenlängd: ~4 tecken för engelsk text"
@@ -1173,9 +1173,9 @@ msgstr "Ljudtranskription - Enclave"
 msgid "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
 msgstr "Konvertera tal till text med Whisper AI. Ladda upp vilken ljudfil som helst och exportera som text- eller undertextfil. Hög noggrannhet med flera format och lokal bearbetning."
 
-#: src/routes/[[lang]]/og/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
 msgid "Enclave: Local AI"
 msgstr "Enclave: Lokal AI"
 
@@ -1211,17 +1211,9 @@ msgstr "OpenGraph-generator - Lokala AI-verktyg"
 msgid "Google Gemini"
 msgstr "Google Gemini"
 
-#: src/routes/[[lang]]/count-tokens/+page.svelte
-msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
-msgstr "Räkna tokens för Gemini-modeller inklusive Pro, Ultra och Flash"
-
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Google Gemini Tokenizer"
 msgstr "Google Gemini Tokenizer"
-
-#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
-msgid "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
-msgstr "Räkna tokens för Gemini-modeller (Pro, Ultra, Flash) med den officiella tokenizern"
 
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "About Gemini's Tokenizer"
@@ -1234,3 +1226,8 @@ msgstr "Gemini använder en SentencePiece-tokenizer optimerad för multimodal f�
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Handles multiple languages and code efficiently"
 msgstr "Hanterar flera språk och kod effektivt"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Count tokens for Gemini models"
+msgstr ""

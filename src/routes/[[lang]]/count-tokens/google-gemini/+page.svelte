@@ -55,7 +55,7 @@
 	<TokenizerHeader
 		icon={SparklesIcon}
 		title="Google Gemini Tokenizer"
-		description="Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
+		description="Count tokens for Gemini models"
 	/>
 
 	<div class="tokenizer-main">

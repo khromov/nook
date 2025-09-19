@@ -66,9 +66,7 @@
 					<ShapesIcon />
 				</div>
 				<h2>Google Gemini</h2>
-				<p class="card-description">
-					Count tokens for Gemini models including Pro, Ultra, and Flash
-				</p>
+				<p class="card-description">Count tokens for Gemini models</p>
 				<div class="card-action">
 					<span>Open Tokenizer</span>
 					<ChevronRightIcon />

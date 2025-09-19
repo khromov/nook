@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:41:34.932Z\n"
-"PO-Revision-Date: 2025-09-19T22:09:36.216Z\n"
+"PO-Revision-Date: 2025-09-19T22:22:32.542Z\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: \n"
@@ -364,8 +364,8 @@ msgstr "録音完了"
 msgid "<0/> Clear Recording"
 msgstr "<0/> 録音をクリア"
 
-#: src/lib/components/count-tokens/TokenStats.svelte
 #: src/routes/+layout.svelte
+#: src/lib/components/count-tokens/TokenStats.svelte
 msgid "Tokens"
 msgstr "トークン"
 
@@ -466,9 +466,9 @@ msgstr "モデル準備完了"
 msgid "Failed to load transcription model. Please try again."
 msgstr "文字起こしモデルの読み込みに失敗しました。もう一度お試しください。"
 
-#: src/routes/[[lang]]/background-remover/+page.svelte
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
+#: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Retry"
 msgstr "再試行"
 
@@ -562,8 +562,8 @@ msgstr "WebGPUを試す (実験的) <0/>"
 msgid "Failed to load model. Please check your connection and try again."
 msgstr "モデルの読み込みに失敗しました。接続を確認してもう一度お試しください。"
 
-#: src/routes/[[lang]]/chat/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/chat/+page.svelte
 msgid "Loading Model"
 msgstr "モデル読み込み中"
 
@@ -1012,8 +1012,8 @@ msgstr "キャッシュされたモデルを読み込み中"
 msgid "Downloading Model"
 msgstr "モデルをダウンロード中"
 
-#: src/routes/[[lang]]/background-remover/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Loading..."
 msgstr "読み込み中..."
 
@@ -1029,8 +1029,8 @@ msgstr "文字起こしモデルをブラウザにダウンロード中です。
 msgid "Loading model... Progress tracking not available in this browser."
 msgstr "モデル読み込み中... このブラウザではプログレス追跡は利用できません。"
 
-#: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
+#: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "平均トークン長: 英語テキストで約4文字"
@@ -1173,9 +1173,9 @@ msgstr "音声転写 - Enclave"
 msgid "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
 msgstr "Whisper AIを使用して音声をテキストに変換。任意の音声ファイルをアップロードしてテキストまたは字幕ファイルとしてエクスポート。複数フォーマットとローカル処理により高精度を実現。"
 
-#: src/routes/[[lang]]/og/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
 msgid "Enclave: Local AI"
 msgstr "Enclave: ローカルAI"
 
@@ -1211,17 +1211,9 @@ msgstr "OpenGraphジェネレーター - ローカルAIツール"
 msgid "Google Gemini"
 msgstr "Google Gemini"
 
-#: src/routes/[[lang]]/count-tokens/+page.svelte
-msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
-msgstr "Pro、Ultra、Flashを含むGeminiモデルのトークンをカウント"
-
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Google Gemini Tokenizer"
 msgstr "Google Geminiトークナイザー"
-
-#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
-msgid "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
-msgstr "公式トークナイザーを使用してGeminiモデル（Pro、Ultra、Flash）のトークンをカウント"
 
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "About Gemini's Tokenizer"
@@ -1234,3 +1226,8 @@ msgstr "Geminiはマルチモーダル理解に最適化されたSentencePiece�
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Handles multiple languages and code efficiently"
 msgstr "複数の言語とコードを効率的に処理"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Count tokens for Gemini models"
+msgstr ""
