@@ -1209,28 +1209,28 @@ msgstr "Generador OpenGraph - Herramientas de IA Local"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Google Gemini"
-msgstr ""
+msgstr "Google Gemini"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
-msgstr ""
+msgstr "Cuenta tokens para modelos Gemini incluyendo Pro, Ultra y Flash"
 
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Google Gemini Tokenizer"
-msgstr ""
+msgstr "Tokenizador de Google Gemini"
 
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
-msgstr ""
+msgstr "Cuenta tokens para modelos Gemini (Pro, Ultra, Flash) usando el tokenizador oficial"
 
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "About Gemini's Tokenizer"
-msgstr ""
+msgstr "Acerca del Tokenizador de Gemini"
 
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Gemini uses a SentencePiece tokenizer optimized for multimodal understanding"
-msgstr ""
+msgstr "Gemini usa un tokenizador SentencePiece optimizado para comprensión multimodal"
 
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Handles multiple languages and code efficiently"
-msgstr ""
+msgstr "Maneja múltiples idiomas y código eficientemente"
