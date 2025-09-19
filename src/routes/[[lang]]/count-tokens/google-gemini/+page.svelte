@@ -22,13 +22,10 @@
 		if (!tokenizer || !$tokenCounterText) return [];
 		try {
 			const encoded = tokenizer($tokenCounterText);
-			// Try different ways to access the token IDs
-			if (encoded.input_ids) {
-				if (encoded.input_ids.data) {
-					return Array.from(encoded.input_ids.data);
-				} else if (Array.isArray(encoded.input_ids)) {
-					return encoded.input_ids;
-				}
+			// Handle BigInt64Array from Transformers.js
+			if (encoded.input_ids && encoded.input_ids.data) {
+				// Convert BigInt values to regular numbers
+				return Array.from(encoded.input_ids.data, (bigIntValue) => Number(bigIntValue));
 			}
 			return [];
 		} catch (error) {
@@ -41,8 +38,8 @@
 		if (!tokenizer || tokens.length === 0) return [];
 		return tokens.map((tokenId: number) => {
 			try {
-				// Use the tokenizer's decode method with proper parameters
-				const decoded = tokenizer.decode([Number(tokenId)], { skip_special_tokens: false });
+				// Ensure tokenId is a regular number (should already be from tokens conversion)
+				const decoded = tokenizer.decode([tokenId], { skip_special_tokens: false });
 				return decoded || `[Token ${tokenId}]`;
 			} catch (error) {
 				console.error('Error decoding token:', tokenId, error);
