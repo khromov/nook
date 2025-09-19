@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:12:40.444Z\n"
-"PO-Revision-Date: 2025-09-19T22:03:35.350Z\n"
+"PO-Revision-Date: 2025-09-19T22:09:36.217Z\n"
 "Last-Translator: \n"
 "Language: sv\n"
 "Language-Team: \n"
@@ -103,14 +103,17 @@ msgstr "Byt språk"
 msgid "View source on GitHub"
 msgstr "Visa källkod på GitHub"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Original {0}"
 msgstr "Original {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Processed {0}"
 msgstr "Bearbetad {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Failed {0}"
 msgstr "Misslyckad {0}"
@@ -119,10 +122,12 @@ msgstr "Misslyckad {0}"
 msgid "<0/> Batch Processing Complete!"
 msgstr "<0/> Batchbearbetning klar!"
 
+#. placeholder {0}: successfulResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Successful"
 msgstr "{0} lyckade"
 
+#. placeholder {0}: failedResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Failed"
 msgstr "{0} misslyckade"
@@ -163,6 +168,7 @@ msgstr "Bearbetning misslyckades"
 msgid "Favicon Concept Gallery"
 msgstr "Favicon-konceptgalleri"
 
+#. placeholder {0}: allConcepts.length
 #: src/routes/favicon/+page.svelte
 msgid ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
@@ -187,6 +193,10 @@ msgstr ""
 msgid "<0/> Processing Image"
 msgstr "<0/> Bearbetar bild"
 
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -240,6 +250,8 @@ msgstr "Batchbearbetning"
 msgid "Drop your image here"
 msgstr "Släpp din bild här"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> {0} image{1} selected"
 msgstr "<0/> {0} bild{1} valda"
@@ -269,6 +281,7 @@ msgstr "ELLER"
 msgid "<0/> Try Example Image"
 msgstr "<0/> Testa exempelbild"
 
+#. placeholder {0}: selectedFiles.length
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Selected Images ({0})"
 msgstr "Valda bilder ({0})"
@@ -277,11 +290,15 @@ msgstr "Valda bilder ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> Rensa alla"
 
+#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
 msgstr "{0} MB"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> Process {0} Image{1}"
 msgstr "<0/> Bearbeta {0} bild{1}"
@@ -319,6 +336,7 @@ msgstr "Skicka meddelande"
 msgid "<0/> Model responses may not always be accurate."
 msgstr "<0/> Modellsvar är inte alltid korrekta."
 
+#. placeholder {0}: tokenCount
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "<0/> Raw Tokens ({0})"
 msgstr "<0/> Råa tokens ({0})"
@@ -402,6 +420,7 @@ msgstr "Rensa text"
 msgid "Speed:"
 msgstr "Hastighet:"
 
+#. placeholder {0}: speed
 #: src/lib/components/tts/SpeedControl.svelte
 msgid "{0}x"
 msgstr "{0}x"
@@ -466,6 +485,7 @@ msgstr "Hej! Jag är Adam, din pålitliga röstpartner."
 msgid "Hello there! I'm Echo, echoing your thoughts perfectly."
 msgstr "Hej där! Jag är Echo, ekar dina tankar perfekt."
 
+#. placeholder {0}: voiceName.replace(/\s*\(.*?\)\s*/g, '')
 #: src/lib/components/tts/VoiceSelector.svelte
 msgid "Hi! I'm {0}, nice to meet you!"
 msgstr "Hej! Jag är {0}, trevligt att träffas!"
@@ -495,6 +515,7 @@ msgstr "Försöker igen..."
 msgid "Select Language"
 msgstr "Välj språk"
 
+#. placeholder {0}: stepNumber
 #: src/lib/components/common/StepHeader.svelte
 msgid "Step {0}:"
 msgstr "Steg {0}:"
@@ -503,6 +524,7 @@ msgstr "Steg {0}:"
 msgid "<0/> Start Recording"
 msgstr "<0/> Starta inspelning"
 
+#. placeholder {0}: formatTime(recordingTime)
 #: src/lib/components/whisper/AudioRecorder.svelte
 msgid "<0/> Recording... {0}"
 msgstr "<0/> Spelar in... {0}"
@@ -810,6 +832,7 @@ msgstr "Stor, mycket långsam modell"
 msgid "Generally provides better results"
 msgstr "Ger generellt bättre resultat"
 
+#. placeholder {0}: getAvailableModels().find((m) => m.id === selectedModelId)?.name
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Background Remover ({0})"
 msgstr "Bakgrundsborttagare ({0})"
@@ -947,6 +970,7 @@ msgstr ""
 msgid "Recommended"
 msgstr "Rekommenderad"
 
+#. placeholder {0}: tokens[i]
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "Token ID: {0}"
 msgstr "Token-ID: {0}"
@@ -971,6 +995,7 @@ msgstr "Stoppa förhandsgranskning"
 msgid "Preview voice"
 msgstr "Förhandsgranska röst"
 
+#. placeholder {0}: file.name
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Remove {0}"
 msgstr "Ta bort {0}"
@@ -1018,6 +1043,8 @@ msgstr "Kod och specialtecken använder vanligtvis fler tokens"
 msgid "Processing image and removing background..."
 msgstr "Bearbetar bild och tar bort bakgrund..."
 
+#. placeholder {0}: currentBatchIndex
+#. placeholder {1}: totalBatchCount
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Processing image {0} of {1}..."
 msgstr "Bearbetar bild {0} av {1}..."

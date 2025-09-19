@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:20:18.035Z\n"
-"PO-Revision-Date: 2025-09-19T22:03:35.351Z\n"
+"PO-Revision-Date: 2025-09-19T22:09:36.218Z\n"
 "Last-Translator: \n"
 "Language: uk\n"
 "Language-Team: \n"
@@ -107,6 +107,7 @@ msgstr "Переглянути код на GitHub"
 msgid "Favicon Concept Gallery"
 msgstr "Галерея концептів фавіконів"
 
+#. placeholder {0}: allConcepts.length
 #: src/routes/favicon/+page.svelte
 msgid ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
@@ -127,14 +128,17 @@ msgstr ""
 "Кожен фавікон використовує яскраві кольори, сильні контрасти та чітку іконографію, придатну для різних\n"
 "розмірів відображення."
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Original {0}"
 msgstr "Оригінал {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Processed {0}"
 msgstr "Оброблено {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Failed {0}"
 msgstr "Помилка {0}"
@@ -143,10 +147,12 @@ msgstr "Помилка {0}"
 msgid "<0/> Batch Processing Complete!"
 msgstr "<0/> Пакетну обробку завершено!"
 
+#. placeholder {0}: successfulResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Successful"
 msgstr "{0} Успішно"
 
+#. placeholder {0}: failedResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Failed"
 msgstr "{0} З помилками"
@@ -187,6 +193,10 @@ msgstr "Обробка не вдалася"
 msgid "<0/> Processing Image"
 msgstr "<0/> Обробка зображення"
 
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -222,6 +232,8 @@ msgstr "Пакетна обробка"
 msgid "Drop your image here"
 msgstr "Перетягніть зображення сюди"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> {0} image{1} selected"
 msgstr "<0/> {0} зображення{1} обрано"
@@ -251,6 +263,7 @@ msgstr "АБО"
 msgid "<0/> Try Example Image"
 msgstr "<0/> Спробувати приклад"
 
+#. placeholder {0}: selectedFiles.length
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Selected Images ({0})"
 msgstr "Обрані зображення ({0})"
@@ -259,11 +272,15 @@ msgstr "Обрані зображення ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> Очистити все"
 
+#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
 msgstr "{0} МБ"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> Process {0} Image{1}"
 msgstr "<0/> Обробити {0} зображення{1}"
@@ -323,6 +340,7 @@ msgstr "<0/> Відповіді моделі можуть бути не завж
 msgid "Type or paste text in the input field above to analyze tokens and character count."
 msgstr "Введіть або вставте текст у поле вводу вище для аналізу токенів та підрахунку символів."
 
+#. placeholder {0}: tokenCount
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "<0/> Raw Tokens ({0})"
 msgstr "<0/> Необроблені токени ({0})"
@@ -410,6 +428,7 @@ msgstr "Повторна спроба..."
 msgid "<0/> Start Recording"
 msgstr "<0/> Почати запис"
 
+#. placeholder {0}: formatTime(recordingTime)
 #: src/lib/components/whisper/AudioRecorder.svelte
 msgid "<0/> Recording... {0}"
 msgstr "<0/> Запис... {0}"
@@ -454,6 +473,7 @@ msgstr "або"
 msgid "Browse Files"
 msgstr "Обрати файли"
 
+#. placeholder {0}: stepNumber
 #: src/lib/components/common/StepHeader.svelte
 msgid "Step {0}:"
 msgstr "Крок {0}:"
@@ -553,6 +573,7 @@ msgstr "80МБ • Найвища якість • Повільно"
 msgid "Speed:"
 msgstr "Швидкість:"
 
+#. placeholder {0}: speed
 #: src/lib/components/tts/SpeedControl.svelte
 msgid "{0}x"
 msgstr "{0}x"
@@ -634,6 +655,7 @@ msgstr "Привіт! Я Adam, ваш надійний голосовий суп
 msgid "Hello there! I'm Echo, echoing your thoughts perfectly."
 msgstr "Привіт! Я Echo, ідеально відлунюю ваші думки."
 
+#. placeholder {0}: voiceName.replace(/\s*\(.*?\)\s*/g, '')
 #: src/lib/components/tts/VoiceSelector.svelte
 msgid "Hi! I'm {0}, nice to meet you!"
 msgstr "Привіт! Я {0}, приємно познайомитись!"
@@ -895,6 +917,7 @@ msgstr "Велика, дуже повільна модель"
 msgid "Generally provides better results"
 msgstr "Зазвичай дає кращі результати"
 
+#. placeholder {0}: getAvailableModels().find((m) => m.id === selectedModelId)?.name
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Background Remover ({0})"
 msgstr "Видалення фону ({0})"
@@ -947,6 +970,7 @@ msgstr ""
 msgid "Recommended"
 msgstr "Рекомендовано"
 
+#. placeholder {0}: tokens[i]
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "Token ID: {0}"
 msgstr "ID токена: {0}"
@@ -971,6 +995,7 @@ msgstr "Зупинити попередній перегляд"
 msgid "Preview voice"
 msgstr "Попередній перегляд голосу"
 
+#. placeholder {0}: file.name
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Remove {0}"
 msgstr "Видалити {0}"
@@ -1018,6 +1043,8 @@ msgstr "Код та спеціальні символи звичайно вик�
 msgid "Processing image and removing background..."
 msgstr "Обробка зображення та видалення фону..."
 
+#. placeholder {0}: currentBatchIndex
+#. placeholder {1}: totalBatchCount
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Processing image {0} of {1}..."
 msgstr "Обробка зображення {0} з {1}..."

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:12:14.886Z\n"
-"PO-Revision-Date: 2025-09-19T22:03:35.343Z\n"
+"PO-Revision-Date: 2025-09-19T22:09:36.205Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -82,10 +82,12 @@ msgstr "No se envían datos a servidores externos."
 msgid "<0/> Batch Processing Complete!"
 msgstr "<0/> ¡Procesamiento por Lotes Completado!"
 
+#. placeholder {0}: successfulResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Successful"
 msgstr "{0} Exitosos"
 
+#. placeholder {0}: failedResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Failed"
 msgstr "{0} Fallidos"
@@ -131,6 +133,10 @@ msgstr "Procesamiento fallido"
 msgid "<0/> Processing Image"
 msgstr "<0/> Procesando Imagen"
 
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -184,6 +190,8 @@ msgstr "Entrar"
 msgid "Drop your image here"
 msgstr "Suelta tu imagen aquí"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> {0} image{1} selected"
 msgstr "<0/> {0} imagen{1} seleccionada{1}"
@@ -201,6 +209,7 @@ msgstr "O"
 msgid "<0/> Try Example Image"
 msgstr "<0/> Probar Imagen de Ejemplo"
 
+#. placeholder {0}: selectedFiles.length
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Selected Images ({0})"
 msgstr "Imágenes Seleccionadas ({0})"
@@ -209,15 +218,20 @@ msgstr "Imágenes Seleccionadas ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> Limpiar Todo"
 
+#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
 msgstr "{0} MB"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> Process {0} Image{1}"
 msgstr "<0/> Procesar {0} Imagen{1}"
 
+#. placeholder {0}: tokenCount
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "<0/> Raw Tokens ({0})"
 msgstr "<0/> Tokens Sin Procesar ({0})"
@@ -270,6 +284,7 @@ msgstr "Tú"
 msgid "AI"
 msgstr "IA"
 
+#. placeholder {0}: stepNumber
 #: src/lib/components/common/StepHeader.svelte
 msgid "Step {0}:"
 msgstr "Paso {0}:"
@@ -370,6 +385,7 @@ msgstr "80MB • Máxima Calidad • Lento"
 msgid "Speed:"
 msgstr "Velocidad:"
 
+#. placeholder {0}: speed
 #: src/lib/components/tts/SpeedControl.svelte
 msgid "{0}x"
 msgstr "{0}x"
@@ -382,6 +398,7 @@ msgstr "Palabras"
 msgid "<0/> Start Recording"
 msgstr "<0/> Iniciar Grabación"
 
+#. placeholder {0}: formatTime(recordingTime)
 #: src/lib/components/whisper/AudioRecorder.svelte
 msgid "<0/> Recording... {0}"
 msgstr "<0/> Grabando... {0}"
@@ -430,6 +447,7 @@ msgstr "¡Hola! Soy Adam, tu compañero de voz confiable."
 msgid "Hello there! I'm Echo, echoing your thoughts perfectly."
 msgstr "¡Hola! Soy Echo, haciendo eco de tus pensamientos perfectamente."
 
+#. placeholder {0}: voiceName.replace(/\s*\(.*?\)\s*/g, '')
 #: src/lib/components/tts/VoiceSelector.svelte
 msgid "Hi! I'm {0}, nice to meet you!"
 msgstr "¡Hola! Soy {0}, ¡un placer conocerte!"
@@ -782,18 +800,22 @@ msgstr "Cuenta tokens para GPT-5, GPT-4, GPT-4o, GPT-3.5 Turbo, ChatGPT y otros 
 msgid "About OpenAI's Tokenizer"
 msgstr "Acerca del Tokenizador de OpenAI"
 
+#. placeholder {0}: getAvailableModels().find((m) => m.id === selectedModelId)?.name
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Background Remover ({0})"
 msgstr "Eliminador de Fondo ({0})"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Original {0}"
 msgstr "Original {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Processed {0}"
 msgstr "Procesado {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Failed {0}"
 msgstr "Fallido {0}"
@@ -847,6 +869,7 @@ msgstr ""
 "Convierte texto en voz de sonido natural usando modelos de IA. Elige entre los modelos Kitten TTS, Piper\n"
 "o Kokoro para síntesis de voz de alta calidad."
 
+#. placeholder {0}: allConcepts.length
 #: src/routes/favicon/+page.svelte
 msgid ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
@@ -947,6 +970,7 @@ msgstr ""
 msgid "Recommended"
 msgstr "Recomendado"
 
+#. placeholder {0}: tokens[i]
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "Token ID: {0}"
 msgstr "ID de Token: {0}"
@@ -971,6 +995,7 @@ msgstr "Detener vista previa"
 msgid "Preview voice"
 msgstr "Previsualizar voz"
 
+#. placeholder {0}: file.name
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Remove {0}"
 msgstr "Eliminar {0}"
@@ -1008,6 +1033,8 @@ msgstr "Error al cargar el modelo"
 msgid "Processing image and removing background..."
 msgstr "Procesando imagen y eliminando fondo..."
 
+#. placeholder {0}: currentBatchIndex
+#. placeholder {1}: totalBatchCount
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Processing image {0} of {1}..."
 msgstr "Procesando imagen {0} de {1}..."

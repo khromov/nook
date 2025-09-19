@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-09-19T22:03:35.341Z\n"
+"PO-Revision-Date: 2025-09-19T22:08:53.051Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -96,6 +96,8 @@ msgstr "Demo File"
 msgid "Listen →"
 msgstr "Listen →"
 
+#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
@@ -117,6 +119,7 @@ msgstr "Browse Files"
 msgid "<0/> Start Recording"
 msgstr "<0/> Start Recording"
 
+#. placeholder {0}: formatTime(recordingTime)
 #: src/lib/components/whisper/AudioRecorder.svelte
 msgid "<0/> Recording... {0}"
 msgstr "<0/> Recording... {0}"
@@ -137,6 +140,10 @@ msgstr "<0/> Clear Recording"
 msgid "<0/> Transcribing Audio"
 msgstr "<0/> Transcribing Audio"
 
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -193,6 +200,7 @@ msgstr "Select Language"
 msgid "Favicon Concept Gallery"
 msgstr "Favicon Concept Gallery"
 
+#. placeholder {0}: allConcepts.length
 #: src/routes/favicon/+page.svelte
 msgid ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
@@ -286,14 +294,17 @@ msgstr "All processing happens locally in your browser using WebAssembly."
 msgid "No data is sent to external servers."
 msgstr "No data is sent to external servers."
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Original {0}"
 msgstr "Original {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Processed {0}"
 msgstr "Processed {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Failed {0}"
 msgstr "Failed {0}"
@@ -302,10 +313,12 @@ msgstr "Failed {0}"
 msgid "<0/> Batch Processing Complete!"
 msgstr "<0/> Batch Processing Complete!"
 
+#. placeholder {0}: successfulResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Successful"
 msgstr "{0} Successful"
 
+#. placeholder {0}: failedResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Failed"
 msgstr "{0} Failed"
@@ -355,6 +368,8 @@ msgstr "Enter"
 msgid "Drop your image here"
 msgstr "Drop your image here"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> {0} image{1} selected"
 msgstr "<0/> {0} image{1} selected"
@@ -367,6 +382,7 @@ msgstr "Drop multiple images here"
 msgid "<0/> Try Example Image"
 msgstr "<0/> Try Example Image"
 
+#. placeholder {0}: selectedFiles.length
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Selected Images ({0})"
 msgstr "Selected Images ({0})"
@@ -375,6 +391,8 @@ msgstr "Selected Images ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> Clear All"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> Process {0} Image{1}"
 msgstr "<0/> Process {0} Image{1}"
@@ -489,6 +507,7 @@ msgstr "<0/> Load Selected Model"
 msgid "<0/> Models run locally in your browser. No data is sent to external servers."
 msgstr "<0/> Models run locally in your browser. No data is sent to external servers."
 
+#. placeholder {0}: tokenCount
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "<0/> Raw Tokens ({0})"
 msgstr "<0/> Raw Tokens ({0})"
@@ -529,6 +548,7 @@ msgstr "Clear text"
 msgid "Error"
 msgstr "Error"
 
+#. placeholder {0}: stepNumber
 #: src/lib/components/common/StepHeader.svelte
 msgid "Step {0}:"
 msgstr "Step {0}:"
@@ -537,6 +557,7 @@ msgstr "Step {0}:"
 msgid "Speed:"
 msgstr "Speed:"
 
+#. placeholder {0}: speed
 #: src/lib/components/tts/SpeedControl.svelte
 msgid "{0}x"
 msgstr "{0}x"
@@ -597,6 +618,7 @@ msgstr "Hi! I'm Adam, your reliable voice companion."
 msgid "Hello there! I'm Echo, echoing your thoughts perfectly."
 msgstr "Hello there! I'm Echo, echoing your thoughts perfectly."
 
+#. placeholder {0}: voiceName.replace(/\s*\(.*?\)\s*/g, '')
 #: src/lib/components/tts/VoiceSelector.svelte
 msgid "Hi! I'm {0}, nice to meet you!"
 msgstr "Hi! I'm {0}, nice to meet you!"
@@ -688,6 +710,7 @@ msgstr "This will take a couple of minutes. The chat model is being downloaded t
 msgid "New <0>Chat</0>"
 msgstr "New <0>Chat</0>"
 
+#. placeholder {0}: getAvailableModels().find((m) => m.id === selectedModelId)?.name
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Background Remover ({0})"
 msgstr "Background Remover ({0})"
@@ -947,6 +970,7 @@ msgstr ""
 msgid "Recommended"
 msgstr "Recommended"
 
+#. placeholder {0}: tokens[i]
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "Token ID: {0}"
 msgstr "Token ID: {0}"
@@ -996,6 +1020,7 @@ msgstr "The transcription model is being downloaded to your browser."
 msgid "Loading model... Progress tracking not available in this browser."
 msgstr "Loading model... Progress tracking not available in this browser."
 
+#. placeholder {0}: file.name
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Remove {0}"
 msgstr "Remove {0}"
@@ -1004,6 +1029,8 @@ msgstr "Remove {0}"
 msgid "Processing image and removing background..."
 msgstr "Processing image and removing background..."
 
+#. placeholder {0}: currentBatchIndex
+#. placeholder {1}: totalBatchCount
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Processing image {0} of {1}..."
 msgstr "Processing image {0} of {1}..."
