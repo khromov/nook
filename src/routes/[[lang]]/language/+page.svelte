@@ -2,6 +2,7 @@
 	import CardInterface from '$lib/components/common/CardInterface.svelte';
 	import ContentArea from '$lib/components/common/ContentArea.svelte';
 	import Toolbar from '$lib/components/common/Toolbar.svelte';
+	import { resolve } from '$app/paths';
 	import { locales } from '$lib/i18n-utils';
 
 	interface Language {
@@ -46,7 +47,10 @@
 
 				<div class="language-grid">
 					{#each availableLanguages as language (language.code)}
-						<a href={language.code === 'en' ? '/' : `/${language.code}/`} class="language-card">
+						<a
+							href={resolve(language.code === 'en' ? '/' : `/${language.code}/`)}
+							class="language-card"
+						>
 							<div class="language-code">{language.code.toUpperCase()}</div>
 							<div class="language-info">
 								<div class="language-name">{language.name}</div>

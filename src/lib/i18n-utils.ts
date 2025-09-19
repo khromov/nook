@@ -1,4 +1,5 @@
 import { locales } from 'virtual:wuchale/locales';
+import { resolve } from '$app/paths';
 
 /**
  * Extract the current language from a URL pathname
@@ -21,14 +22,19 @@ export function createLocalizedLink(path: string, lang: string): string {
 	// Add trailing slash to all paths except root
 	const pathWithSlash = path === '/' ? path : path.endsWith('/') ? path : `${path}/`;
 
+	let localizedPath: string;
 	if (lang === 'en') {
-		return pathWithSlash; // English uses clean URLs without prefix
+		localizedPath = pathWithSlash; // English uses clean URLs without prefix
+	} else {
+		// Handle root path specially to avoid double slash
+		if (pathWithSlash === '/') {
+			localizedPath = `/${lang}/`;
+		} else {
+			localizedPath = `/${lang}${pathWithSlash}`;
+		}
 	}
-	// Handle root path specially to avoid double slash
-	if (pathWithSlash === '/') {
-		return `/${lang}/`;
-	}
-	return `/${lang}${pathWithSlash}`;
+
+	return resolve(localizedPath);
 }
 
 /**

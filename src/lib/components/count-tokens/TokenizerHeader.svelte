@@ -2,6 +2,7 @@
 	import type { Component } from 'svelte';
 	import { page } from '$app/stores';
 	import RefreshCwIcon from 'virtual:icons/lucide/refresh-cw';
+	import { resolve } from '$app/paths';
 	import { getCurrentLanguageFromPage, getTokenizerPaths } from '$lib/i18n-utils';
 
 	interface Props {
@@ -41,7 +42,12 @@
 
 <div class="tokenizer-header">
 	{#if targetHref && targetLabel}
-		<a class="switch-button" href={targetHref} aria-label={targetLabel} title={targetLabel}>
+		<a
+			class="switch-button"
+			href={resolve(targetHref)}
+			aria-label={targetLabel}
+			title={targetLabel}
+		>
 			<RefreshCwIcon />
 		</a>
 	{/if}

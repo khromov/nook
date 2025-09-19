@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { getCurrentLanguageFromPage, getTokenizerPaths } from '$lib/i18n-utils';
 	import MessageSquareIcon from 'virtual:icons/lucide/message-square';
 	import BrainIcon from 'virtual:icons/lucide/brain';
@@ -25,7 +26,7 @@
 			<button
 				class="nav-item"
 				class:active={isActive('anthropic-claude')}
-				onclick={() => goto(tokenizerPaths.anthropic)}
+				onclick={() => goto(resolve(tokenizerPaths.anthropic))}
 			>
 				<BrainIcon />
 				<span>Claude</span>
@@ -34,7 +35,7 @@
 			<button
 				class="nav-item"
 				class:active={isActive('openai-chatgpt')}
-				onclick={() => goto(tokenizerPaths.openai)}
+				onclick={() => goto(resolve(tokenizerPaths.openai))}
 			>
 				<MessageSquareIcon />
 				<span>OpenAI</span>
@@ -43,7 +44,7 @@
 			<button
 				class="nav-item"
 				class:active={isActive('google-gemini')}
-				onclick={() => goto(tokenizerPaths.gemini)}
+				onclick={() => goto(resolve(tokenizerPaths.gemini))}
 			>
 				<ShapesIcon />
 				<span>Gemini</span>
