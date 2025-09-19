@@ -15,7 +15,7 @@
 		"lint:fix": "prettier --write . && eslint . --fix",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"checks": "npm run format && npm run lint && npm run check",
+		"checks": "npm run format && npm run lint && npm run check && npm run test",
 		"copy-wasm": "node scripts/copy-wasm-files.js",
 		"ai-digest": "npx ai-digest --ignore-file .cocoignore --minify-file .cocominify",
 		"wc": "npx wuchale",
