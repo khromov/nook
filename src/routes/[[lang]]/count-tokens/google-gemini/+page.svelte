@@ -22,7 +22,6 @@
 		if (!tokenizer || !$tokenCounterText) return [];
 		try {
 			const encoded = tokenizer($tokenCounterText);
-			console.log('Encoded result:', encoded);
 			// Try different ways to access the token IDs
 			if (encoded.input_ids) {
 				if (encoded.input_ids.data) {
@@ -40,12 +39,10 @@
 	let tokenCount = $derived(tokens.length);
 	let decodedTokens = $derived.by(() => {
 		if (!tokenizer || tokens.length === 0) return [];
-		console.log('Decoding tokens:', tokens);
 		return tokens.map((tokenId: number) => {
 			try {
 				// Use the tokenizer's decode method with proper parameters
 				const decoded = tokenizer.decode([Number(tokenId)], { skip_special_tokens: false });
-				console.log(`Token ${tokenId} decoded to:`, decoded);
 				return decoded || `[Token ${tokenId}]`;
 			} catch (error) {
 				console.error('Error decoding token:', tokenId, error);
@@ -61,9 +58,6 @@
 	onMount(() => {
 		if (data.tokenizer) {
 			tokenizer = data.tokenizer;
-			console.log('Gemini tokenizer loaded successfully');
-		} else if (data.error) {
-			console.error('Tokenizer loading error:', data.error);
 		}
 	});
 </script>
@@ -78,27 +72,14 @@
 	<div class="tokenizer-main">
 		<TextInputSection bind:text={$tokenCounterText} {exampleTexts} />
 
-		<!-- Error Section -->
-		{#if data.error}
-			<div class="error-section">
-				<h3>Error loading tokenizer</h3>
-				<p>{data.error}</p>
-				<p>Please check the browser console for more details.</p>
+		<!-- Results Section -->
+		{#if tokenCount > 0}
+			<div class="results-section">
+				<TokenStats {tokenCount} {charCount} />
+				<RawTokensDisplay {tokens} {decodedTokens} bind:showRawTokens />
 			</div>
-		{:else if !tokenizer}
-			<div class="loading-section">
-				<p>Loading tokenizer...</p>
-			</div>
-		{:else}
-			<!-- Results Section -->
-			{#if tokenCount > 0}
-				<div class="results-section">
-					<TokenStats {tokenCount} {charCount} />
-					<RawTokensDisplay {tokens} {decodedTokens} bind:showRawTokens />
-				</div>
-			{:else if $tokenCounterText.length === 0}
-				<EmptyState />
-			{/if}
+		{:else if tokenizer && $tokenCounterText.length === 0}
+			<EmptyState />
 		{/if}
 	</div>
 
@@ -138,26 +119,13 @@
 		gap: 2rem;
 	}
 
-	.results-section,
-	.error-section,
-	.loading-section {
+	.results-section {
 		background: var(--color-background-main);
 		border: var(--border-brutalist-thick);
 		box-shadow: var(--shadow-brutalist-large);
 		padding: 1.5rem;
 		transform: rotate(-0.2deg);
 		animation: slideIn 0.3s ease-out;
-	}
-
-	.error-section {
-		background: var(--color-background-destructive);
-		border-color: var(--color-border-destructive);
-	}
-
-	.loading-section {
-		background: var(--color-background-muted);
-		border-color: var(--color-border-muted);
-		text-align: center;
 	}
 
 	@keyframes slideIn {

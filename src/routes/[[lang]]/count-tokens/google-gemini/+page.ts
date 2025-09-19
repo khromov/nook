@@ -8,11 +8,8 @@ export const load = (async () => {
 		};
 	} else {
 		try {
-			console.log('Loading Gemini tokenizer in browser');
 			const { AutoTokenizer } = await import('@huggingface/transformers');
-			console.log('AutoTokenizer imported successfully');
 			const tokenizer = await AutoTokenizer.from_pretrained('Xenova/gemma-tokenizer');
-			console.log('Gemini tokenizer loaded successfully:', tokenizer);
 			return {
 				tokenizer
 			};
