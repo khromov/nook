@@ -45,8 +45,8 @@ export const GET: RequestHandler = async () => {
 
 	return new Response(sitemap, {
 		headers: {
-			'Content-Type': 'application/xml',
-			'Cache-Control': 'public, max-age=3600'
+			/* @wc-ignore */ 'Content-Type': 'application/xml',
+			/* @wc-ignore */ 'Cache-Control': 'public, max-age=3600'
 		}
 	});
 };

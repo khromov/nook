@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:12:40.444Z\n"
-"PO-Revision-Date: 2025-09-19T22:50:58.663Z\n"
+"PO-Revision-Date: 2025-09-19T23:04:44.665Z\n"
 "Last-Translator: \n"
 "Language: sv\n"
 "Language-Team: \n"
@@ -198,8 +198,8 @@ msgstr "<0/> Bearbetar bild"
 #. placeholder {0}: progress
 #. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
-#: src/lib/components/whisper/TranscriptionProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
+#: src/lib/components/whisper/TranscriptionProgress.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 msgid "{0}% Complete"
 msgstr "{0}% klart"
@@ -601,9 +601,9 @@ msgstr "Byt modell"
 msgid "Failed to load transcription model. Please try again."
 msgstr "Misslyckades att ladda transkriptionsmodell. Försök igen."
 
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 #: src/routes/[[lang]]/background-remover/+page.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
 msgid "Retry"
 msgstr "Försök igen"
 
@@ -729,8 +729,8 @@ msgstr ""
 msgid "Failed to load model. Please check your connection and try again."
 msgstr "Misslyckades att ladda modell. Kontrollera din anslutning och försök igen."
 
-#: src/routes/[[lang]]/chat/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/chat/+page.svelte
 msgid "Loading Model"
 msgstr "Laddar modell"
 
@@ -1029,8 +1029,8 @@ msgstr "Transkriptionsmodellen laddas ner till din webbläsare."
 msgid "Loading model... Progress tracking not available in this browser."
 msgstr "Laddar modell... Framståndsspårning inte tillgänglig i denna webbläsare."
 
-#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
+#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Genomsnittlig tokenlängd: ~4 tecken för engelsk text"
@@ -1064,12 +1064,6 @@ msgstr "Laddar om..."
 #: src/routes/[[lang]]/chat/+page.svelte
 msgid "Reload Model"
 msgstr "Ladda om modell"
-
-#~ msgid "Switch to Anthropic"
-#~ msgstr "Växla till Anthropic"
-
-#~ msgid "Switch to OpenAI"
-#~ msgstr "Växla till OpenAI"
 
 #: src/lib/components/common/AdvancedSection.svelte
 msgid "Advanced Parameters"
@@ -1225,8 +1219,8 @@ msgstr "Gemini använder en SentencePiece-tokenizer optimerad för multimodal f�
 msgid "Handles multiple languages and code efficiently"
 msgstr "Hanterar flera språk och kod effektivt"
 
-#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 #: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Count tokens for Gemini models"
 msgstr ""
 
@@ -1242,8 +1236,11 @@ msgstr ""
 msgid "Gemini"
 msgstr ""
 
-#~ msgid "Redirecting to tokenizer..."
-#~ msgstr ""
+#: src/lib/tts/piper-tts.ts
+msgid "Voice 1"
+msgstr ""
 
-#~ msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
-#~ msgstr ""
+#. placeholder {0}: (id as number) + 1
+#: src/lib/tts/piper-tts.ts
+msgid "Voice {0}"
+msgstr ""

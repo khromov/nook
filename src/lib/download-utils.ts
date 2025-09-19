@@ -91,7 +91,7 @@ export async function downloadModelWithProgress(
 	}
 
 	// Get total file size from Content-Length header
-	const contentLength = response.headers.get('Content-Length');
+	const contentLength = /* @wc-ignore */ response.headers.get('Content-Length');
 	const total = contentLength ? parseInt(contentLength, 10) : 0;
 
 	const reader = response.body?.getReader();

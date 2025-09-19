@@ -49,7 +49,7 @@ export class PiperTTS {
 	async textToPhonemes(text: string): Promise<string[][]> {
 		if (this.voiceConfig.phoneme_type === 'text') {
 			// Text phonemes - just return normalized characters
-			return [Array.from(text.normalize('NFD'))];
+			/* @wc-ignore */ return [Array.from(text.normalize('NFD'))];
 		}
 
 		try {

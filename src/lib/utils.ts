@@ -20,10 +20,10 @@ function encodeWAV(samples: Float32Array, rate: number): ArrayBuffer {
 		}
 	};
 
-	writeString(view, 0, 'RIFF');
+	/* @wc-ignore */ writeString(view, 0, 'RIFF');
 	view.setUint32(4, 36 + samples.length * 4, true);
-	writeString(view, 8, 'WAVE');
-	writeString(view, 12, 'fmt ');
+	/* @wc-ignore */ writeString(view, 8, 'WAVE');
+	/* @wc-ignore */ writeString(view, 12, 'fmt ');
 	view.setUint32(16, 16, true);
 	view.setUint16(20, 3, true);
 	view.setUint16(22, 1, true);

@@ -9,7 +9,12 @@ export default defineConfig({
 	adapters: {
 		main: svelte(),
 		js: js({
-			files: ['src/**/+{page,layout}.{js,ts}', 'src/**/+{page,layout}.server.{js,ts}']
+			files: [
+				'src/**/+{page,layout}.{js,ts}',
+				'src/**/+{page,layout}.server.{js,ts}',
+				'src/**/+server.{js,ts}',
+				'src/lib/**/!(*.spec).{js,ts}'
+			]
 		})
 	}
 });

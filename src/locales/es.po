@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:12:14.886Z\n"
-"PO-Revision-Date: 2025-09-19T22:50:58.528Z\n"
+"PO-Revision-Date: 2025-09-19T23:04:44.664Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -553,8 +553,8 @@ msgid "Failed to load transcription model. Please try again."
 msgstr "Error al cargar el modelo de transcripción. Por favor intenta de nuevo."
 
 #: src/lib/components/whisper/WhisperModelSelector.svelte
-#: src/routes/[[lang]]/text-to-speech/+page.svelte
 #: src/routes/[[lang]]/background-remover/+page.svelte
+#: src/routes/[[lang]]/text-to-speech/+page.svelte
 msgid "Retry"
 msgstr "Reintentar"
 
@@ -1039,8 +1039,8 @@ msgstr "Procesando imagen y eliminando fondo..."
 msgid "Processing image {0} of {1}..."
 msgstr "Procesando imagen {0} de {1}..."
 
-#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
+#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Longitud promedio de token: ~4 caracteres para texto en inglés"
@@ -1064,12 +1064,6 @@ msgstr "Claude usa un tokenizador BPE (Byte Pair Encoding) similar a los modelos
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 msgid "Special characters and code may use more tokens"
 msgstr "Los caracteres especiales y el código pueden usar más tokens"
-
-#~ msgid "Switch to Anthropic"
-#~ msgstr "Cambiar a Anthropic"
-
-#~ msgid "Switch to OpenAI"
-#~ msgstr "Cambiar a OpenAI"
 
 #: src/lib/components/common/AdvancedSection.svelte
 msgid "Advanced Parameters"
@@ -1225,8 +1219,8 @@ msgstr "Gemini usa un tokenizador SentencePiece optimizado para comprensión mul
 msgid "Handles multiple languages and code efficiently"
 msgstr "Maneja múltiples idiomas y código eficientemente"
 
-#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 #: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Count tokens for Gemini models"
 msgstr ""
 
@@ -1242,8 +1236,11 @@ msgstr ""
 msgid "Gemini"
 msgstr ""
 
-#~ msgid "Redirecting to tokenizer..."
-#~ msgstr ""
+#: src/lib/tts/piper-tts.ts
+msgid "Voice 1"
+msgstr ""
 
-#~ msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
-#~ msgstr ""
+#. placeholder {0}: (id as number) + 1
+#: src/lib/tts/piper-tts.ts
+msgid "Voice {0}"
+msgstr ""
