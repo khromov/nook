@@ -38,30 +38,6 @@ export function createLocalizedLink(path: string, lang: string): string {
 }
 
 /**
- * Generate navigation links with proper language prefixes
- * @param currentLang - The current language code
- * @returns Array of navigation link objects with localized paths
- */
-/* TODO: This one doesn't work for some reason to translate */
-/*
-export function getLocalizedNavLinks(currentLang: string) {
-	console.log('calling getlocalizednavlin', currentLang);
-	return [
-		{ path: createLocalizedLink('/', currentLang), label: '', icon: 'home' },
-		{ path: createLocalizedLink('/chat', currentLang), label: 'Chat', icon: 'chat' },
-		{ path: createLocalizedLink('/transcribe', currentLang), label: 'Transcribe', icon: 'mic' },
-		{ path: createLocalizedLink('/text-to-speech', currentLang), label: 'TTS', icon: 'speech' },
-		{
-			path: createLocalizedLink('/background-remover', currentLang),
-			label: 'BG Remover',
-			icon: 'image'
-		},
-		{ path: createLocalizedLink('/count-tokens', currentLang), label: 'Tokens', icon: 'calculator' }
-	];
-}
-*/
-
-/**
  * Get the current language from a page store (for use in components)
  * @param page - The page store object from $app/stores
  * @returns The current language code
