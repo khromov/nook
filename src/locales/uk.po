@@ -1222,25 +1222,25 @@ msgstr "Ефективно обробляє декілька мов та код"
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Count tokens for Gemini models"
-msgstr ""
+msgstr "Підрахувати токени для моделей Gemini"
 
 #: src/routes/[[lang]]/count-tokens/+layout.svelte
 msgid "Claude"
-msgstr ""
+msgstr "Claude"
 
 #: src/routes/[[lang]]/count-tokens/+layout.svelte
 msgid "OpenAI"
-msgstr ""
+msgstr "OpenAI"
 
 #: src/routes/[[lang]]/count-tokens/+layout.svelte
 msgid "Gemini"
-msgstr ""
+msgstr "Gemini"
 
 #: src/lib/tts/piper-tts.ts
 msgid "Voice 1"
-msgstr ""
+msgstr "Голос 1"
 
 #. placeholder {0}: (id as number) + 1
 #: src/lib/tts/piper-tts.ts
 msgid "Voice {0}"
-msgstr ""
+msgstr "Голос {0}"
