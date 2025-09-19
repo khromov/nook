@@ -69,7 +69,7 @@
 		background: var(--color-background-main);
 		border: var(--border-brutalist-thick);
 		box-shadow: var(--shadow-brutalist-medium);
-		margin-bottom: 1.5rem;
+		margin-bottom: 0.5rem;
 		overflow: hidden;
 		border-radius: 8px;
 	}
