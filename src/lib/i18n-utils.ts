@@ -72,7 +72,8 @@ export function getCurrentLanguageFromPage(page: { url: { pathname: string } }):
 export function getTokenizerPaths(currentLang: string) {
 	return {
 		openai: createLocalizedLink('/count-tokens/openai-chatgpt', currentLang),
-		anthropic: createLocalizedLink('/count-tokens/anthropic-claude', currentLang)
+		anthropic: createLocalizedLink('/count-tokens/anthropic-claude', currentLang),
+		gemini: createLocalizedLink('/count-tokens/google-gemini', currentLang)
 	};
 }
 

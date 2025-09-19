@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:20:18.035Z\n"
-"PO-Revision-Date: 2025-09-04T18:43:50.893Z\n"
+"PO-Revision-Date: 2025-09-19T22:03:35.351Z\n"
 "Last-Translator: \n"
 "Language: uk\n"
 "Language-Team: \n"
@@ -12,8 +12,8 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 
-#: src/routes/+layout.ts
 #: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/+layout.ts
 msgid "Enclave"
 msgstr "Enclave"
 
@@ -29,8 +29,8 @@ msgstr ""
 msgid "Tool #01"
 msgstr "Інструмент #01"
 
-#: src/routes/[[lang]]/+page.svelte
 #: src/routes/+layout.svelte
+#: src/routes/[[lang]]/+page.svelte
 msgid "Chat"
 msgstr "Чат"
 
@@ -90,8 +90,8 @@ msgstr "Вся обробка відбувається локально у ва�
 msgid "No data is sent to external servers."
 msgstr "Жодні дані не передаються на зовнішні сервери."
 
-#: src/routes/+layout.svelte
 #: src/lib/components/count-tokens/TokenStats.svelte
+#: src/routes/+layout.svelte
 msgid "Tokens"
 msgstr "Токени"
 
@@ -660,6 +660,7 @@ msgstr "Anthropic Claude"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Open Tokenizer"
 msgstr "Відкрити токенізатор"
 
@@ -1005,6 +1006,7 @@ msgstr "Не вдалося завантажити модель"
 
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Середня довжина токена: ~4 символи для англійського тексту"
 
@@ -1144,9 +1146,9 @@ msgstr "Транскрипція Аудіо - Enclave"
 msgid "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
 msgstr "Перетворюйте мовлення на текст за допомогою Whisper AI. Завантажте будь-який аудіофайл та експортуйте як текст або файл субтитрів. Висока точність з підтримкою багатьох форматів та локальною обробкою."
 
+#: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
 msgid "Enclave: Local AI"
 msgstr "Enclave: Локальний AI"
 
@@ -1177,3 +1179,31 @@ msgstr "Налаштування мови - Локальні Інструмен�
 #: src/routes/[[lang]]/og/+page.svelte
 msgid "OpenGraph Generator - Enclave: Local AI"
 msgstr "Генератор OpenGraph - Локальні Інструменти ШІ"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Google Gemini"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Google Gemini Tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "About Gemini's Tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Gemini uses a SentencePiece tokenizer optimized for multimodal understanding"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Handles multiple languages and code efficiently"
+msgstr ""

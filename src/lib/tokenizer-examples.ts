@@ -16,3 +16,8 @@ export const anthropicExamples = [
 	"Hello! I'm Claude, an AI assistant created by Anthropic. I'm here to help with analysis, writing, math, coding, and many other tasks.",
 	...genericExamples
 ];
+
+export const geminiExamples = [
+	"Hello! I'm Gemini, an AI model created by Google. I can help with complex reasoning, coding, creative tasks, and multimodal understanding.",
+	...genericExamples
+];

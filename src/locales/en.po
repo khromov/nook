@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-09-04T18:43:50.852Z\n"
+"PO-Revision-Date: 2025-09-19T22:03:35.341Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -225,8 +225,8 @@ msgstr ""
 msgid "Tool #01"
 msgstr "Tool #01"
 
-#: src/routes/[[lang]]/+page.svelte
 #: src/routes/+layout.svelte
+#: src/routes/[[lang]]/+page.svelte
 msgid "Chat"
 msgstr "Chat"
 
@@ -497,8 +497,8 @@ msgstr "<0/> Raw Tokens ({0})"
 msgid "Type or paste text in the input field above to analyze tokens and character count."
 msgstr "Type or paste text in the input field above to analyze tokens and character count."
 
-#: src/routes/+layout.svelte
 #: src/lib/components/count-tokens/TokenStats.svelte
+#: src/routes/+layout.svelte
 msgid "Tokens"
 msgstr "Tokens"
 
@@ -633,6 +633,7 @@ msgstr ""
 msgid "Anthropic Claude"
 msgstr "Anthropic Claude"
 
+#: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Open Tokenizer"
@@ -1021,6 +1022,7 @@ msgstr "Failed to load model"
 
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Average token length: ~4 characters for English text"
 
@@ -1177,3 +1179,31 @@ msgstr "Language Settings - Enclave"
 #: src/routes/[[lang]]/og/+page.svelte
 msgid "OpenGraph Generator - Enclave: Local AI"
 msgstr "OpenGraph Generator - Enclave: Local AI"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
+msgstr "Count tokens for Gemini models including Pro, Ultra, and Flash"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Google Gemini Tokenizer"
+msgstr "Google Gemini Tokenizer"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
+msgstr "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "About Gemini's Tokenizer"
+msgstr "About Gemini's Tokenizer"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Gemini uses a SentencePiece tokenizer optimized for multimodal understanding"
+msgstr "Gemini uses a SentencePiece tokenizer optimized for multimodal understanding"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Handles multiple languages and code efficiently"
+msgstr "Handles multiple languages and code efficiently"

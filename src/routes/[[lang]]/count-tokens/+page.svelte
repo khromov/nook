@@ -2,6 +2,7 @@
 	import MessageSquareIcon from 'virtual:icons/lucide/message-square';
 	import BrainIcon from 'virtual:icons/lucide/brain';
 	import SparklesIcon from 'virtual:icons/lucide/sparkles';
+	import ShapesIcon from 'virtual:icons/lucide/shapes';
 	import ChevronRightIcon from 'virtual:icons/lucide/chevron-right';
 	import { page } from '$app/stores';
 	import { getCurrentLanguageFromPage, getTokenizerPaths } from '$lib/i18n-utils';
@@ -50,6 +51,23 @@
 				<h2>OpenAI ChatGPT</h2>
 				<p class="card-description">
 					Count tokens for GPT-4, GPT-4o, GPT-3.5 Turbo, and other OpenAI models
+				</p>
+				<div class="card-action">
+					<span>Open Tokenizer</span>
+					<ChevronRightIcon />
+				</div>
+			</div>
+		</a>
+
+		<a href={tokenizerPaths.gemini} class="tokenizer-card gemini-card">
+			<div class="card-decoration"></div>
+			<div class="card-content">
+				<div class="card-icon">
+					<ShapesIcon />
+				</div>
+				<h2>Google Gemini</h2>
+				<p class="card-description">
+					Count tokens for Gemini models including Pro, Ultra, and Flash
 				</p>
 				<div class="card-action">
 					<span>Open Tokenizer</span>
@@ -148,7 +166,7 @@
 
 	.tokenizer-cards {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 2rem;
 		margin-bottom: 3rem;
 	}
@@ -170,6 +188,10 @@
 
 	.tokenizer-card:nth-child(2) {
 		transform: rotate(-0.5deg);
+	}
+
+	.tokenizer-card:nth-child(3) {
+		transform: rotate(0.3deg);
 	}
 
 	.tokenizer-card:hover {
@@ -197,6 +219,13 @@
 		background: var(--color-success);
 		left: -10px;
 		right: auto;
+	}
+
+	.gemini-card .card-decoration {
+		background: var(--color-accent-blue);
+		top: -10px;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	.card-content {
@@ -231,6 +260,10 @@
 
 	.chatgpt-card:hover .card-icon {
 		background: var(--color-success);
+	}
+
+	.gemini-card:hover .card-icon {
+		background: var(--color-accent-blue);
 	}
 
 	.tokenizer-card h2 {

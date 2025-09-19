@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:12:40.444Z\n"
-"PO-Revision-Date: 2025-09-04T18:43:50.892Z\n"
+"PO-Revision-Date: 2025-09-19T22:03:35.350Z\n"
 "Last-Translator: \n"
 "Language: sv\n"
 "Language-Team: \n"
@@ -12,8 +12,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 "MIME-Version: 1.0\n"
 
-#: src/routes/+layout.ts
 #: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/+layout.ts
 msgid "Enclave"
 msgstr "Enclave"
 
@@ -29,8 +29,8 @@ msgstr ""
 msgid "Tool #01"
 msgstr "Verktyg #01"
 
-#: src/routes/[[lang]]/+page.svelte
 #: src/routes/+layout.svelte
+#: src/routes/[[lang]]/+page.svelte
 msgid "Chat"
 msgstr "Chatt"
 
@@ -90,8 +90,8 @@ msgstr "All bearbetning sker lokalt i din webbläsare med WebAssembly."
 msgid "No data is sent to external servers."
 msgstr "Ingen data skickas till externa servrar."
 
-#: src/routes/+layout.svelte
 #: src/lib/components/count-tokens/TokenStats.svelte
+#: src/routes/+layout.svelte
 msgid "Tokens"
 msgstr "Tokens"
 
@@ -667,6 +667,7 @@ msgstr "Anthropic Claude"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Open Tokenizer"
 msgstr "Öppna tokenizer"
 
@@ -1005,6 +1006,7 @@ msgstr "Laddar modell... Framståndsspårning inte tillgänglig i denna webbläs
 
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Genomsnittlig tokenlängd: ~4 tecken för engelsk text"
 
@@ -1144,9 +1146,9 @@ msgstr "Ljudtranskription - Enclave"
 msgid "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
 msgstr "Konvertera tal till text med Whisper AI. Ladda upp vilken ljudfil som helst och exportera som text- eller undertextfil. Hög noggrannhet med flera format och lokal bearbetning."
 
+#: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
 msgid "Enclave: Local AI"
 msgstr "Enclave: Lokal AI"
 
@@ -1177,3 +1179,31 @@ msgstr "Språkinställningar - Lokala AI-verktyg"
 #: src/routes/[[lang]]/og/+page.svelte
 msgid "OpenGraph Generator - Enclave: Local AI"
 msgstr "OpenGraph-generator - Lokala AI-verktyg"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Google Gemini"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Google Gemini Tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "About Gemini's Tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Gemini uses a SentencePiece tokenizer optimized for multimodal understanding"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Handles multiple languages and code efficiently"
+msgstr ""

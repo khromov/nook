@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:41:34.932Z\n"
-"PO-Revision-Date: 2025-09-04T18:43:50.891Z\n"
+"PO-Revision-Date: 2025-09-19T22:03:35.347Z\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: \n"
@@ -12,8 +12,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 "MIME-Version: 1.0\n"
 
-#: src/routes/+layout.ts
 #: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/+layout.ts
 msgid "Enclave"
 msgstr "Enclave"
 
@@ -21,8 +21,8 @@ msgstr "Enclave"
 msgid "Tool #01"
 msgstr "ツール #01"
 
-#: src/routes/[[lang]]/+page.svelte
 #: src/routes/+layout.svelte
+#: src/routes/[[lang]]/+page.svelte
 msgid "Chat"
 msgstr "チャット"
 
@@ -348,8 +348,8 @@ msgstr "録音完了"
 msgid "<0/> Clear Recording"
 msgstr "<0/> 録音をクリア"
 
-#: src/routes/+layout.svelte
 #: src/lib/components/count-tokens/TokenStats.svelte
+#: src/routes/+layout.svelte
 msgid "Tokens"
 msgstr "トークン"
 
@@ -750,6 +750,7 @@ msgstr "Anthropic Claude"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Open Tokenizer"
 msgstr "トークナイザーを開く"
 
@@ -1005,6 +1006,7 @@ msgstr "モデル読み込み中... このブラウザではプログレス追�
 
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
 #: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "平均トークン長: 英語テキストで約4文字"
 
@@ -1144,9 +1146,9 @@ msgstr "音声転写 - Enclave"
 msgid "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
 msgstr "Whisper AIを使用して音声をテキストに変換。任意の音声ファイルをアップロードしてテキストまたは字幕ファイルとしてエクスポート。複数フォーマットとローカル処理により高精度を実現。"
 
+#: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
-#: src/routes/[[lang]]/og/+page.svelte
 msgid "Enclave: Local AI"
 msgstr "Enclave: ローカルAI"
 
@@ -1177,3 +1179,31 @@ msgstr "言語設定 - ローカルAIツール"
 #: src/routes/[[lang]]/og/+page.svelte
 msgid "OpenGraph Generator - Enclave: Local AI"
 msgstr "OpenGraphジェネレーター - ローカルAIツール"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Google Gemini"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Google Gemini Tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Count tokens for Gemini models (Pro, Ultra, Flash) using the official tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "About Gemini's Tokenizer"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Gemini uses a SentencePiece tokenizer optimized for multimodal understanding"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Handles multiple languages and code efficiently"
+msgstr ""
