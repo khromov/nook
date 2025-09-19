@@ -49,7 +49,7 @@ export class PiperTTS {
 	async textToPhonemes(text: string): Promise<string[][]> {
 		if (this.voiceConfig.phoneme_type === 'text') {
 			// Text phonemes - just return normalized characters
-			return [Array.from(text.normalize('NFD'))];
+			/* @wc-ignore */ return [Array.from(text.normalize('NFD'))];
 		}
 
 		try {
@@ -192,7 +192,7 @@ export class PiperTTS {
 	// Get available speakers for multi-speaker models
 	getSpeakers() {
 		if (!this.voiceConfig || this.voiceConfig.num_speakers <= 1) {
-			return [{ id: 0, name: 'Voice 1' }];
+			/* @wc-ignore */ return [{ id: 0, name: 'Voice 1' }];
 		}
 
 		const speakerIdMap = this.voiceConfig.speaker_id_map || {};

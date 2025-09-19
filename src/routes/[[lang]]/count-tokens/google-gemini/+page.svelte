@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { Tiktoken } from 'js-tiktoken';
-	import BrainIcon from 'virtual:icons/lucide/brain';
+	import SparklesIcon from 'virtual:icons/lucide/sparkles';
 	import TokenizerHeader from '$lib/components/count-tokens/TokenizerHeader.svelte';
 	import TextInputSection from '$lib/components/count-tokens/TextInputSection.svelte';
 	import TokenStats from '$lib/components/count-tokens/TokenStats.svelte';
@@ -12,28 +11,23 @@
 	const { data } = $props();
 
 	import { tokenCounterText } from '$lib/stores';
-	import { anthropicExamples } from '$lib/tokenizer-examples';
-	let showRawTokens = $state(false);
-	let encoder: Tiktoken | null = $state(null);
-	let specialTokens: string[] = $state([]);
+	import { geminiExamples } from '$lib/tokenizer-examples';
 
-	// Derived values from text and encoder
+	let tokenizer: any = $state(null);
+
+	// Derived values from text and tokenizer
 	let charCount = $derived($tokenCounterText.length);
-	function sanitizeText(input: string): string {
-		if (!specialTokens || specialTokens.length === 0) return input;
-		let out = input;
-		for (const tok of specialTokens) {
-			if (!tok) continue;
-			out = out.split(tok).join('');
-		}
-		return out;
-	}
 
 	let tokens = $derived.by(() => {
-		if (!encoder || !$tokenCounterText) return [];
+		if (!tokenizer || !$tokenCounterText) return [];
 		try {
-			const sanitized = sanitizeText($tokenCounterText);
-			return encoder.encode(sanitized);
+			const encoded = tokenizer($tokenCounterText);
+			// Handle BigInt64Array from Transformers.js
+			if (encoded.input_ids && encoded.input_ids.data) {
+				// Convert BigInt values to regular numbers
+				return Array.from(encoded.input_ids.data, (bigIntValue) => Number(bigIntValue));
+			}
+			return [];
 		} catch (error) {
 			console.error('Error encoding text:', error);
 			return [];
@@ -41,34 +35,35 @@
 	});
 	let tokenCount = $derived(tokens.length);
 	let decodedTokens = $derived.by(() => {
-		if (!encoder || tokens.length === 0) return [];
+		if (!tokenizer || tokens.length === 0) return [];
 		return tokens.map((tokenId: number) => {
 			try {
-				return encoder!.decode([tokenId]);
-			} catch {
+				// Ensure tokenId is a regular number (should already be from tokens conversion)
+				const decoded = tokenizer.decode([tokenId], { skip_special_tokens: false });
+				return decoded || `[Token ${tokenId}]`;
+			} catch (error) {
+				console.error('Error decoding token:', tokenId, error);
 				return `[Token ${tokenId}]`;
 			}
 		});
 	});
 
-	const exampleTexts = anthropicExamples;
+	const exampleTexts = geminiExamples;
+
+	let showRawTokens = $state(false);
 
 	onMount(() => {
-		if (data.encoder) {
-			encoder = data.encoder;
-			console.log('Encoder loaded successfully');
-		}
-		if (data.specialTokens) {
-			specialTokens = data.specialTokens as string[];
+		if (data.tokenizer) {
+			tokenizer = data.tokenizer;
 		}
 	});
 </script>
 
 <div class="tokenizer-container">
 	<TokenizerHeader
-		icon={BrainIcon}
-		title="Anthropic Claude Tokenizer"
-		description="Count tokens for Claude models (Opus, Sonnet, Haiku) using the official tokenizer"
+		icon={SparklesIcon}
+		title="Google Gemini Tokenizer"
+		description="Count tokens for Gemini models"
 	/>
 
 	<div class="tokenizer-main">
@@ -80,17 +75,17 @@
 				<TokenStats {tokenCount} {charCount} />
 				<RawTokensDisplay {tokens} {decodedTokens} bind:showRawTokens />
 			</div>
-		{:else if $tokenCounterText.length === 0}
+		{:else if tokenizer && $tokenCounterText.length === 0}
 			<EmptyState />
 		{/if}
 	</div>
 
 	<InfoBox
-		title="About Claude's Tokenizer"
+		title="About Gemini's Tokenizer"
 		items={[
-			'Claude uses a BPE (Byte Pair Encoding) tokenizer similar to GPT models',
+			'Gemini uses a SentencePiece tokenizer optimized for multimodal understanding',
 			'Average token length: ~4 characters for English text',
-			'Special characters and code may use more tokens'
+			'Handles multiple languages and code efficiently'
 		]}
 	/>
 </div>

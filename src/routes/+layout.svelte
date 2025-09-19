@@ -14,6 +14,7 @@
 	import CalculatorIcon from 'virtual:icons/lucide/calculator';
 	import GlobeIcon from 'virtual:icons/lucide/globe';
 	import { Toaster } from 'svelte-sonner';
+	import { resolve } from '$app/paths';
 	import { getCurrentLanguage, createLocalizedLink, locales } from '$lib/i18n-utils';
 
 	interface Props {
@@ -90,7 +91,7 @@
 						{#if link.icon === 'home'}
 							<div class="home-item">
 								<a
-									href={link.path}
+									href={resolve(link.path)}
 									class:active={isActive(link.path)}
 									class:home-link={link.icon === 'home'}
 								>
@@ -106,7 +107,7 @@
 						{#each getLocalizedNavLinks(currentLang) as link (link.path)}
 							{#if link.icon !== 'home'}
 								<div>
-									<a href={link.path} class:active={isActive(link.path)}>
+									<a href={resolve(link.path)} class:active={isActive(link.path)}>
 										{#if link.icon === 'chat'}
 											<MessageSquareIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
 										{:else if link.icon === 'mic'}
@@ -129,7 +130,7 @@
 				</li>
 				<li class="home-item language-item">
 					<a
-						href={createLocalizedLink('/language', currentLang)}
+						href={resolve(createLocalizedLink('/language', currentLang))}
 						class="home-link"
 						aria-label="Change language"
 					>

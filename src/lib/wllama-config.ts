@@ -39,7 +39,7 @@ export interface Message {
 }
 
 export function formatFileSize(bytes: number): string {
-	const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+	/* @wc-ignore */ const units = ['B', 'KB', 'MB', 'GB', 'TB'];
 	let size = bytes;
 	let unitIndex = 0;
 

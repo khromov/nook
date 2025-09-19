@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:12:40.444Z\n"
-"PO-Revision-Date: 2025-09-04T18:43:50.892Z\n"
+"PO-Revision-Date: 2025-09-19T23:14:10.212Z\n"
 "Last-Translator: \n"
 "Language: sv\n"
 "Language-Team: \n"
@@ -12,8 +12,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 "MIME-Version: 1.0\n"
 
-#: src/routes/+layout.ts
 #: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/+layout.ts
 msgid "Enclave"
 msgstr "Enclave"
 
@@ -29,8 +29,8 @@ msgstr ""
 msgid "Tool #01"
 msgstr "Verktyg #01"
 
-#: src/routes/[[lang]]/+page.svelte
 #: src/routes/+layout.svelte
+#: src/routes/[[lang]]/+page.svelte
 msgid "Chat"
 msgstr "Chatt"
 
@@ -103,14 +103,17 @@ msgstr "Byt språk"
 msgid "View source on GitHub"
 msgstr "Visa källkod på GitHub"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Original {0}"
 msgstr "Original {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Processed {0}"
 msgstr "Bearbetad {0}"
 
+#. placeholder {0}: fileName
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "Failed {0}"
 msgstr "Misslyckad {0}"
@@ -119,10 +122,12 @@ msgstr "Misslyckad {0}"
 msgid "<0/> Batch Processing Complete!"
 msgstr "<0/> Batchbearbetning klar!"
 
+#. placeholder {0}: successfulResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Successful"
 msgstr "{0} lyckade"
 
+#. placeholder {0}: failedResults.length
 #: src/lib/components/background-remover/BackgroundRemoverBatchResult.svelte
 msgid "{0} Failed"
 msgstr "{0} misslyckade"
@@ -163,6 +168,7 @@ msgstr "Bearbetning misslyckades"
 msgid "Favicon Concept Gallery"
 msgstr "Favicon-konceptgalleri"
 
+#. placeholder {0}: allConcepts.length
 #: src/routes/favicon/+page.svelte
 msgid ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
@@ -187,6 +193,10 @@ msgstr ""
 msgid "<0/> Processing Image"
 msgstr "<0/> Bearbetar bild"
 
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -240,6 +250,8 @@ msgstr "Batchbearbetning"
 msgid "Drop your image here"
 msgstr "Släpp din bild här"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> {0} image{1} selected"
 msgstr "<0/> {0} bild{1} valda"
@@ -269,6 +281,7 @@ msgstr "ELLER"
 msgid "<0/> Try Example Image"
 msgstr "<0/> Testa exempelbild"
 
+#. placeholder {0}: selectedFiles.length
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Selected Images ({0})"
 msgstr "Valda bilder ({0})"
@@ -277,11 +290,15 @@ msgstr "Valda bilder ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> Rensa alla"
 
+#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
 msgstr "{0} MB"
 
+#. placeholder {0}: selectedFiles.length
+#. placeholder {1}: selectedFiles.length === 1 ? '' : 's'
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "<0/> Process {0} Image{1}"
 msgstr "<0/> Bearbeta {0} bild{1}"
@@ -319,6 +336,7 @@ msgstr "Skicka meddelande"
 msgid "<0/> Model responses may not always be accurate."
 msgstr "<0/> Modellsvar är inte alltid korrekta."
 
+#. placeholder {0}: tokenCount
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "<0/> Raw Tokens ({0})"
 msgstr "<0/> Råa tokens ({0})"
@@ -402,6 +420,7 @@ msgstr "Rensa text"
 msgid "Speed:"
 msgstr "Hastighet:"
 
+#. placeholder {0}: speed
 #: src/lib/components/tts/SpeedControl.svelte
 msgid "{0}x"
 msgstr "{0}x"
@@ -466,6 +485,7 @@ msgstr "Hej! Jag är Adam, din pålitliga röstpartner."
 msgid "Hello there! I'm Echo, echoing your thoughts perfectly."
 msgstr "Hej där! Jag är Echo, ekar dina tankar perfekt."
 
+#. placeholder {0}: voiceName.replace(/\s*\(.*?\)\s*/g, '')
 #: src/lib/components/tts/VoiceSelector.svelte
 msgid "Hi! I'm {0}, nice to meet you!"
 msgstr "Hej! Jag är {0}, trevligt att träffas!"
@@ -495,6 +515,7 @@ msgstr "Försöker igen..."
 msgid "Select Language"
 msgstr "Välj språk"
 
+#. placeholder {0}: stepNumber
 #: src/lib/components/common/StepHeader.svelte
 msgid "Step {0}:"
 msgstr "Steg {0}:"
@@ -503,6 +524,7 @@ msgstr "Steg {0}:"
 msgid "<0/> Start Recording"
 msgstr "<0/> Starta inspelning"
 
+#. placeholder {0}: formatTime(recordingTime)
 #: src/lib/components/whisper/AudioRecorder.svelte
 msgid "<0/> Recording... {0}"
 msgstr "<0/> Spelar in... {0}"
@@ -579,9 +601,9 @@ msgstr "Byt modell"
 msgid "Failed to load transcription model. Please try again."
 msgstr "Misslyckades att ladda transkriptionsmodell. Försök igen."
 
+#: src/lib/components/whisper/WhisperModelSelector.svelte
 #: src/routes/[[lang]]/background-remover/+page.svelte
 #: src/routes/[[lang]]/text-to-speech/+page.svelte
-#: src/lib/components/whisper/WhisperModelSelector.svelte
 msgid "Retry"
 msgstr "Försök igen"
 
@@ -667,6 +689,7 @@ msgstr "Anthropic Claude"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Open Tokenizer"
 msgstr "Öppna tokenizer"
 
@@ -706,8 +729,8 @@ msgstr ""
 msgid "Failed to load model. Please check your connection and try again."
 msgstr "Misslyckades att ladda modell. Kontrollera din anslutning och försök igen."
 
-#: src/routes/[[lang]]/chat/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/chat/+page.svelte
 msgid "Loading Model"
 msgstr "Laddar modell"
 
@@ -809,6 +832,7 @@ msgstr "Stor, mycket långsam modell"
 msgid "Generally provides better results"
 msgstr "Ger generellt bättre resultat"
 
+#. placeholder {0}: getAvailableModels().find((m) => m.id === selectedModelId)?.name
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Background Remover ({0})"
 msgstr "Bakgrundsborttagare ({0})"
@@ -946,6 +970,7 @@ msgstr ""
 msgid "Recommended"
 msgstr "Rekommenderad"
 
+#. placeholder {0}: tokens[i]
 #: src/lib/components/count-tokens/RawTokensDisplay.svelte
 msgid "Token ID: {0}"
 msgstr "Token-ID: {0}"
@@ -970,6 +995,7 @@ msgstr "Stoppa förhandsgranskning"
 msgid "Preview voice"
 msgstr "Förhandsgranska röst"
 
+#. placeholder {0}: file.name
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Remove {0}"
 msgstr "Ta bort {0}"
@@ -986,8 +1012,8 @@ msgstr "Laddar cachad modell"
 msgid "Downloading Model"
 msgstr "Laddar ner modell"
 
-#: src/routes/[[lang]]/background-remover/+page.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
+#: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Loading..."
 msgstr "Laddar..."
 
@@ -1004,6 +1030,7 @@ msgid "Loading model... Progress tracking not available in this browser."
 msgstr "Laddar modell... Framståndsspårning inte tillgänglig i denna webbläsare."
 
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
 #: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Genomsnittlig tokenlängd: ~4 tecken för engelsk text"
@@ -1016,6 +1043,8 @@ msgstr "Kod och specialtecken använder vanligtvis fler tokens"
 msgid "Processing image and removing background..."
 msgstr "Bearbetar bild och tar bort bakgrund..."
 
+#. placeholder {0}: currentBatchIndex
+#. placeholder {1}: totalBatchCount
 #: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "Processing image {0} of {1}..."
 msgstr "Bearbetar bild {0} av {1}..."
@@ -1035,14 +1064,6 @@ msgstr "Laddar om..."
 #: src/routes/[[lang]]/chat/+page.svelte
 msgid "Reload Model"
 msgstr "Ladda om modell"
-
-#: src/lib/components/count-tokens/TokenizerHeader.svelte
-msgid "Switch to Anthropic"
-msgstr "Växla till Anthropic"
-
-#: src/lib/components/count-tokens/TokenizerHeader.svelte
-msgid "Switch to OpenAI"
-msgstr "Växla till OpenAI"
 
 #: src/lib/components/common/AdvancedSection.svelte
 msgid "Advanced Parameters"
@@ -1177,3 +1198,45 @@ msgstr "Språkinställningar - Lokala AI-verktyg"
 #: src/routes/[[lang]]/og/+page.svelte
 msgid "OpenGraph Generator - Enclave: Local AI"
 msgstr "OpenGraph-generator - Lokala AI-verktyg"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Google Gemini Tokenizer"
+msgstr "Google Gemini Tokenizer"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "About Gemini's Tokenizer"
+msgstr "Om Geminis Tokenizer"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Gemini uses a SentencePiece tokenizer optimized for multimodal understanding"
+msgstr "Gemini använder en SentencePiece-tokenizer optimerad för multimodal förståelse"
+
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Handles multiple languages and code efficiently"
+msgstr "Hanterar flera språk och kod effektivt"
+
+#: src/routes/[[lang]]/count-tokens/+page.svelte
+#: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+msgid "Count tokens for Gemini models"
+msgstr "Räkna tokens för Gemini-modeller"
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "Claude"
+msgstr "Claude"
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "OpenAI"
+msgstr "OpenAI"
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "Gemini"
+msgstr "Gemini"
+
+#. placeholder {0}: (id as number) + 1
+#: src/lib/tts/piper-tts.ts
+msgid "Voice {0}"
+msgstr "Röst {0}"

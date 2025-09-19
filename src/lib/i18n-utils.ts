@@ -1,4 +1,5 @@
 import { locales } from 'virtual:wuchale/locales';
+import { resolve } from '$app/paths';
 
 /**
  * Extract the current language from a URL pathname
@@ -21,39 +22,20 @@ export function createLocalizedLink(path: string, lang: string): string {
 	// Add trailing slash to all paths except root
 	const pathWithSlash = path === '/' ? path : path.endsWith('/') ? path : `${path}/`;
 
+	let localizedPath: string;
 	if (lang === 'en') {
-		return pathWithSlash; // English uses clean URLs without prefix
+		localizedPath = pathWithSlash; // English uses clean URLs without prefix
+	} else {
+		// Handle root path specially to avoid double slash
+		if (pathWithSlash === '/') {
+			localizedPath = `/${lang}/`;
+		} else {
+			localizedPath = `/${lang}${pathWithSlash}`;
+		}
 	}
-	// Handle root path specially to avoid double slash
-	if (pathWithSlash === '/') {
-		return `/${lang}/`;
-	}
-	return `/${lang}${pathWithSlash}`;
-}
 
-/**
- * Generate navigation links with proper language prefixes
- * @param currentLang - The current language code
- * @returns Array of navigation link objects with localized paths
- */
-/* TODO: This one doesn't work for some reason to translate */
-/*
-export function getLocalizedNavLinks(currentLang: string) {
-	console.log('calling getlocalizednavlin', currentLang);
-	return [
-		{ path: createLocalizedLink('/', currentLang), label: '', icon: 'home' },
-		{ path: createLocalizedLink('/chat', currentLang), label: 'Chat', icon: 'chat' },
-		{ path: createLocalizedLink('/transcribe', currentLang), label: 'Transcribe', icon: 'mic' },
-		{ path: createLocalizedLink('/text-to-speech', currentLang), label: 'TTS', icon: 'speech' },
-		{
-			path: createLocalizedLink('/background-remover', currentLang),
-			label: 'BG Remover',
-			icon: 'image'
-		},
-		{ path: createLocalizedLink('/count-tokens', currentLang), label: 'Tokens', icon: 'calculator' }
-	];
+	return resolve(localizedPath);
 }
-*/
 
 /**
  * Get the current language from a page store (for use in components)
@@ -72,7 +54,8 @@ export function getCurrentLanguageFromPage(page: { url: { pathname: string } }):
 export function getTokenizerPaths(currentLang: string) {
 	return {
 		openai: createLocalizedLink('/count-tokens/openai-chatgpt', currentLang),
-		anthropic: createLocalizedLink('/count-tokens/anthropic-claude', currentLang)
+		anthropic: createLocalizedLink('/count-tokens/anthropic-claude', currentLang),
+		gemini: createLocalizedLink('/count-tokens/google-gemini', currentLang)
 	};
 }
 

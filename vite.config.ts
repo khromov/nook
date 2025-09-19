@@ -3,6 +3,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import Icons from 'unplugin-icons/vite';
 import { wuchale } from '@wuchale/vite-plugin';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
 	plugins: [
@@ -22,7 +23,11 @@ export default defineConfig({
 		Icons({
 			compiler: 'svelte'
 		}),
-		devtoolsJson()
+		devtoolsJson(),
+		visualizer({
+			emitFile: true,
+			filename: 'stats.html'
+		})
 	],
 	optimizeDeps: { exclude: ['@transcribe/shout'] },
 	worker: { format: 'es' },
