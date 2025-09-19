@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:41:34.932Z\n"
-"PO-Revision-Date: 2025-09-19T22:22:32.542Z\n"
+"PO-Revision-Date: 2025-09-19T22:50:58.620Z\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: \n"
@@ -1065,13 +1065,11 @@ msgstr "再読み込み中..."
 msgid "Reload Model"
 msgstr "モデルを再読み込み"
 
-#: src/lib/components/count-tokens/TokenizerHeader.svelte
-msgid "Switch to Anthropic"
-msgstr "Anthropicに切り替え"
+#~ msgid "Switch to Anthropic"
+#~ msgstr "Anthropicに切り替え"
 
-#: src/lib/components/count-tokens/TokenizerHeader.svelte
-msgid "Switch to OpenAI"
-msgstr "OpenAIに切り替え"
+#~ msgid "Switch to OpenAI"
+#~ msgstr "OpenAIに切り替え"
 
 #: src/lib/components/common/AdvancedSection.svelte
 msgid "Advanced Parameters"
@@ -1227,7 +1225,25 @@ msgstr "Geminiはマルチモーダル理解に最適化されたSentencePiece�
 msgid "Handles multiple languages and code efficiently"
 msgstr "複数の言語とコードを効率的に処理"
 
-#: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+#: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Count tokens for Gemini models"
 msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "Claude"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "OpenAI"
+msgstr ""
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "Gemini"
+msgstr ""
+
+#~ msgid "Redirecting to tokenizer..."
+#~ msgstr ""
+
+#~ msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
+#~ msgstr ""

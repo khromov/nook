@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-09-19T22:22:32.541Z\n"
+"PO-Revision-Date: 2025-09-19T22:50:58.383Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1065,13 +1065,11 @@ msgstr "Claude uses a BPE (Byte Pair Encoding) tokenizer similar to GPT models"
 msgid "Special characters and code may use more tokens"
 msgstr "Special characters and code may use more tokens"
 
-#: src/lib/components/count-tokens/TokenizerHeader.svelte
-msgid "Switch to Anthropic"
-msgstr "Switch to Anthropic"
+#~ msgid "Switch to Anthropic"
+#~ msgstr "Switch to Anthropic"
 
-#: src/lib/components/count-tokens/TokenizerHeader.svelte
-msgid "Switch to OpenAI"
-msgstr "Switch to OpenAI"
+#~ msgid "Switch to OpenAI"
+#~ msgstr "Switch to OpenAI"
 
 #: src/lib/components/common/AdvancedSection.svelte
 msgid "Advanced Parameters"
@@ -1227,7 +1225,25 @@ msgstr "Gemini uses a SentencePiece tokenizer optimized for multimodal understan
 msgid "Handles multiple languages and code efficiently"
 msgstr "Handles multiple languages and code efficiently"
 
-#: src/routes/[[lang]]/count-tokens/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+#: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Count tokens for Gemini models"
 msgstr "Count tokens for Gemini models"
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "Claude"
+msgstr "Claude"
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "OpenAI"
+msgstr "OpenAI"
+
+#: src/routes/[[lang]]/count-tokens/+layout.svelte
+msgid "Gemini"
+msgstr "Gemini"
+
+#~ msgid "Redirecting to tokenizer..."
+#~ msgstr "Redirecting to tokenizer..."
+
+#~ msgid "Count tokens for Gemini models including Pro, Ultra, and Flash"
+#~ msgstr "Count tokens for Gemini models including Pro, Ultra, and Flash"
