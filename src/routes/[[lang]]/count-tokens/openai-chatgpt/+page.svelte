@@ -12,7 +12,7 @@
 	const { data } = $props();
 
 	import { tokenCounterText } from '$lib/stores';
-	import { tokenizerExampleTexts } from '$lib/tokenizer-examples';
+	import { openaiExamples } from '$lib/tokenizer-examples';
 
 	let showRawTokens = $state(false);
 	let encoder: Tiktoken | null = $state(null);
@@ -52,7 +52,7 @@
 		});
 	});
 
-	const exampleTexts = tokenizerExampleTexts.openai;
+	const exampleTexts = openaiExamples;
 
 	onMount(() => {
 		if (data.encoder) {

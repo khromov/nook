@@ -12,7 +12,7 @@
 	const { data } = $props();
 
 	import { tokenCounterText } from '$lib/stores';
-	import { tokenizerExampleTexts } from '$lib/tokenizer-examples';
+	import { anthropicExamples } from '$lib/tokenizer-examples';
 	let showRawTokens = $state(false);
 	let encoder: Tiktoken | null = $state(null);
 	let specialTokens: string[] = $state([]);
@@ -51,7 +51,7 @@
 		});
 	});
 
-	const exampleTexts = tokenizerExampleTexts.anthropic;
+	const exampleTexts = anthropicExamples;
 
 	onMount(() => {
 		if (data.encoder) {
