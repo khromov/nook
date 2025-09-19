@@ -54,6 +54,7 @@
 		"phonemizer": "https://github.com/khromov/phonemizer.js/archive/6cef703722c7e867029665df9c85ccaadc4ef19c.tar.gz",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
+		"rollup-plugin-visualizer": "^6.0.3",
 		"subsrt-ts": "^2.1.2",
 		"svelte": "^5.39.2",
 		"svelte-check": "^4.3.1",
