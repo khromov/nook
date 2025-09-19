@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:20:18.035Z\n"
-"PO-Revision-Date: 2025-09-19T23:04:44.665Z\n"
+"PO-Revision-Date: 2025-09-19T23:14:10.213Z\n"
 "Last-Translator: \n"
 "Language: uk\n"
 "Language-Team: \n"
@@ -197,8 +197,8 @@ msgstr "<0/> Обробка зображення"
 #. placeholder {0}: progress
 #. placeholder {0}: progress
 #. placeholder {0}: downloadProgress
-#: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
+#: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 msgid "{0}% Complete"
@@ -1030,8 +1030,8 @@ msgid "Failed to load model"
 msgstr "Не вдалося завантажити модель"
 
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
-#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Середня довжина токена: ~4 символи для англійського тексту"
 
@@ -1235,10 +1235,6 @@ msgstr "OpenAI"
 #: src/routes/[[lang]]/count-tokens/+layout.svelte
 msgid "Gemini"
 msgstr "Gemini"
-
-#: src/lib/tts/piper-tts.ts
-msgid "Voice 1"
-msgstr "Голос 1"
 
 #. placeholder {0}: (id as number) + 1
 #: src/lib/tts/piper-tts.ts

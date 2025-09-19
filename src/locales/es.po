@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:12:14.886Z\n"
-"PO-Revision-Date: 2025-09-19T23:04:44.664Z\n"
+"PO-Revision-Date: 2025-09-19T23:14:10.210Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -1040,8 +1040,8 @@ msgid "Processing image {0} of {1}..."
 msgstr "Procesando imagen {0} de {1}..."
 
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
-#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "Longitud promedio de token: ~4 caracteres para texto en inglés"
 
@@ -1235,10 +1235,6 @@ msgstr "OpenAI"
 #: src/routes/[[lang]]/count-tokens/+layout.svelte
 msgid "Gemini"
 msgstr "Gemini"
-
-#: src/lib/tts/piper-tts.ts
-msgid "Voice 1"
-msgstr "Voz 1"
 
 #. placeholder {0}: (id as number) + 1
 #: src/lib/tts/piper-tts.ts

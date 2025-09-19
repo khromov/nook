@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:41:34.932Z\n"
-"PO-Revision-Date: 2025-09-19T23:04:44.664Z\n"
+"PO-Revision-Date: 2025-09-19T23:14:10.212Z\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: \n"
@@ -152,8 +152,8 @@ msgstr "<0/> 画像処理中"
 msgid "{0}% Complete"
 msgstr "{0}% 完了"
 
-#: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/chat/MessageInput.svelte
+#: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 msgid "Enter"
 msgstr "Enter"
 
@@ -1030,8 +1030,8 @@ msgid "Loading model... Progress tracking not available in this browser."
 msgstr "モデル読み込み中... このブラウザではプログレス追跡は利用できません。"
 
 #: src/routes/[[lang]]/count-tokens/anthropic-claude/+page.svelte
-#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 #: src/routes/[[lang]]/count-tokens/google-gemini/+page.svelte
+#: src/routes/[[lang]]/count-tokens/openai-chatgpt/+page.svelte
 msgid "Average token length: ~4 characters for English text"
 msgstr "平均トークン長: 英語テキストで約4文字"
 
@@ -1235,10 +1235,6 @@ msgstr "OpenAI"
 #: src/routes/[[lang]]/count-tokens/+layout.svelte
 msgid "Gemini"
 msgstr "Gemini"
-
-#: src/lib/tts/piper-tts.ts
-msgid "Voice 1"
-msgstr "音声1"
 
 #. placeholder {0}: (id as number) + 1
 #: src/lib/tts/piper-tts.ts

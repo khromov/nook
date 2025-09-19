@@ -192,7 +192,7 @@ export class PiperTTS {
 	// Get available speakers for multi-speaker models
 	getSpeakers() {
 		if (!this.voiceConfig || this.voiceConfig.num_speakers <= 1) {
-			return [{ id: 0, name: 'Voice 1' }];
+			/* @wc-ignore */ return [{ id: 0, name: 'Voice 1' }];
 		}
 
 		const speakerIdMap = this.voiceConfig.speaker_id_map || {};

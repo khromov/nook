@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-09-19T23:04:44.660Z\n"
+"PO-Revision-Date: 2025-09-19T23:14:10.208Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1235,10 +1235,6 @@ msgstr "OpenAI"
 #: src/routes/[[lang]]/count-tokens/+layout.svelte
 msgid "Gemini"
 msgstr "Gemini"
-
-#: src/lib/tts/piper-tts.ts
-msgid "Voice 1"
-msgstr "Voice 1"
 
 #. placeholder {0}: (id as number) + 1
 #: src/lib/tts/piper-tts.ts
