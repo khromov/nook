@@ -12,6 +12,7 @@
 	const { data } = $props();
 
 	import { tokenCounterText } from '$lib/stores';
+	import { tokenizerExampleTexts } from '$lib/tokenizer-examples';
 	let showRawTokens = $state(false);
 	let encoder: Tiktoken | null = $state(null);
 	let specialTokens: string[] = $state([]);
@@ -50,16 +51,7 @@
 		});
 	});
 
-	// Example texts
-	const exampleTexts = [
-		"Hello! I'm Claude, an AI assistant created by Anthropic. I'm here to help with analysis, writing, math, coding, and many other tasks.",
-		'The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English alphabet at least once.',
-		`function fibonacci(n) {
-  if (n <= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
-}`,
-		'人工智能（Artificial Intelligence，简称AI）是计算机科学的一个分支，旨在创建能够执行通常需要人类智能的任务的系统。'
-	];
+	const exampleTexts = tokenizerExampleTexts.anthropic;
 
 	onMount(() => {
 		if (data.encoder) {
