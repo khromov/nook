@@ -204,7 +204,7 @@ msgstr "Favicon Concept Gallery"
 #: src/routes/favicon/+page.svelte
 msgid ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
-"\t\t\tEnclave application."
+"\t\t\tNook application."
 msgstr ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
 "Nook application."
