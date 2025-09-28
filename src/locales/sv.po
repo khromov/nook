@@ -172,10 +172,10 @@ msgstr "Favicon-konceptgalleri"
 #: src/routes/favicon/+page.svelte
 msgid ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
-"Enclave application."
+"Nook application."
 msgstr ""
 "En samling med {0} fyrkantiga favicon-koncept i 512×512-format, designade för\n"
-"Enclave-applikationen."
+"Nook-applikationen."
 
 #: src/routes/favicon/+page.svelte
 msgid "All concepts are designed at 512×512 pixels with the brutalist design aesthetic in mind."
@@ -765,8 +765,8 @@ msgstr "Chatt • Transkribera • Text till tal • Bakgrundsborttagare • Rä
 #: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/og/+page.svelte
-msgid "enclave.page"
-msgstr "enclave.page"
+msgid "nook.software"
+msgstr "nook.software"
 
 #: src/routes/[[lang]]/og/+page.svelte
 msgid "Layout 2: Split Simple"
@@ -809,8 +809,8 @@ msgid "Run offline: Chat • Transcribe • TTS • Background • Tokens"
 msgstr "Kör offline: Chatt • Transkribera • TTS • Bakgrund • Tokens"
 
 #: src/routes/[[lang]]/language/+page.svelte
-msgid "Change the language settings for the Enclave application"
-msgstr "Ändra språkinställningar för Enclave-applikationen"
+msgid "Change the language settings for the Nook application"
+msgstr "Ändra språkinställningar för Nook-applikationen"
 
 #: src/routes/[[lang]]/language/+page.svelte
 msgid "Language Settings"
@@ -1106,7 +1106,7 @@ msgid "BG Remover"
 msgstr "Bakgrundsborttagare"
 
 #: src/routes/[[lang]]/background-remover/+page.ts
-msgid "Background Remover - Enclave"
+msgid "Background Remover - Nook"
 msgstr "Bakgrundsborttagare - Lokala AI-verktyg"
 
 #: src/routes/[[lang]]/background-remover/+page.ts
@@ -1114,7 +1114,7 @@ msgid "Remove backgrounds from images using AI. Powered by the RMBG v1.4 model f
 msgstr "Ta bort bakgrunder från bilder med AI. Drivs av RMBG v1.4-modellen från BRIA AI för professionella resultat. AI-driven, hög kvalitet."
 
 #: src/routes/[[lang]]/+page.ts
-msgid "Enclave - Private, Offline AI in Your Browser"
+msgid "Nook - Private, Offline AI in Your Browser"
 msgstr "Lokala AI-verktyg - Privat, offline AI i din webbläsare"
 
 #: src/routes/[[lang]]/+page.ts
@@ -1126,7 +1126,7 @@ msgid "Private AI tools that run in your browser"
 msgstr "Privata AI-verktyg som körs i din webbläsare"
 
 #: src/routes/[[lang]]/count-tokens/+page.ts
-msgid "Count LLM Tokens - Enclave"
+msgid "Count LLM Tokens - Nook"
 msgstr "Räkna LLM-tokens - Lokala AI-verktyg"
 
 #: src/routes/[[lang]]/count-tokens/+page.ts
@@ -1134,7 +1134,7 @@ msgid "Calculate token counts for different AI models. Understand context limits
 msgstr "Beräkna tokenantal för olika AI-modeller. Förstå kontextgränser för Claude- och ChatGPT-modeller med våra tokenizer-verktyg."
 
 #: src/routes/[[lang]]/text-to-speech/+page.ts
-msgid "Text to Speech - Enclave"
+msgid "Text to Speech - Nook"
 msgstr "Text till tal - Lokala AI-verktyg"
 
 #: src/routes/[[lang]]/text-to-speech/+page.ts
@@ -1142,15 +1142,15 @@ msgid "Convert text to natural-sounding speech using AI models. Choose from Kitt
 msgstr "Konvertera text till naturligt tal med AI-modeller. Välj mellan Kitten TTS, Piper eller Kokoro-modeller för högkvalitativ röstsyntes, allt körs lokalt i din webbläsare."
 
 #: src/routes/favicon/+page.ts
-msgid "Favicon Concepts - Enclave"
+msgid "Favicon Concepts - Nook"
 msgstr "Favicon-koncept - Lokala AI-verktyg"
 
 #: src/routes/favicon/+page.ts
-msgid "A comprehensive gallery of 31 favicon concept designs in 512×512 format, featuring AI-themed icons, tech patterns, and brutalist design elements for the Enclave application."
-msgstr "En omfattande galleri med 31 favicon-konceptdesigner i 512×512-format, med AI-tema ikoner, teknikmönster och brutalistiska designelement för Enclave-applikationen."
+msgid "A comprehensive gallery of 31 favicon concept designs in 512×512 format, featuring AI-themed icons, tech patterns, and brutalist design elements for the Nook application."
+msgstr "En omfattande galleri med 31 favicon-konceptdesigner i 512×512-format, med AI-tema ikoner, teknikmönster och brutalistiska designelement för Nook-applikationen."
 
 #: src/routes/[[lang]]/chat/+page.ts
-msgid "AI Chat - Enclave"
+msgid "AI Chat - Nook"
 msgstr "AI-chatt - Lokala AI-verktyg"
 
 #: src/routes/[[lang]]/chat/+page.ts
@@ -1158,8 +1158,8 @@ msgid "Chat with Large Language Models like Gemma3, completely on-device thanks 
 msgstr "Chatta med stora språkmodeller som Gemma3, helt lokalt tack vare llama.cpp. Privat, säkert och fungerar offline utan datahantering."
 
 #: src/routes/[[lang]]/transcribe/+page.ts
-msgid "Audio Transcription - Enclave"
-msgstr "Ljudtranskription - Enclave"
+msgid "Audio Transcription - Nook"
+msgstr "Ljudtranskription - Nook"
 
 #: src/routes/[[lang]]/transcribe/+page.ts
 msgid "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
@@ -1168,8 +1168,8 @@ msgstr "Konvertera tal till text med Whisper AI. Ladda upp vilken ljudfil som he
 #: src/routes/[[lang]]/+page.svelte
 #: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/og/+page.svelte
-msgid "Enclave: Local AI"
-msgstr "Enclave: Lokal AI"
+msgid "Nook: Local AI"
+msgstr "Nook: Lokal AI"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Count tokens for Claude models including Claude Opus 4.1, Sonnet 4, and Haiku"
@@ -1192,11 +1192,11 @@ msgstr ""
 "professionella resultat."
 
 #: src/routes/[[lang]]/language/+page.svelte
-msgid "Language Settings - Enclave"
+msgid "Language Settings - Nook"
 msgstr "Språkinställningar - Lokala AI-verktyg"
 
 #: src/routes/[[lang]]/og/+page.svelte
-msgid "OpenGraph Generator - Enclave: Local AI"
+msgid "OpenGraph Generator - Nook: Local AI"
 msgstr "OpenGraph-generator - Lokala AI-verktyg"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte

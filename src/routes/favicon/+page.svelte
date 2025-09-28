@@ -160,7 +160,7 @@
 			name: 'Shield',
 			icon: ShieldIcon,
 			color: '#98fb98',
-			description: 'Enclave security and privacy'
+			description: 'Nook security and privacy'
 		},
 		{
 			name: 'Lock',
@@ -303,7 +303,7 @@
 		<h1>Favicon Concept Gallery</h1>
 		<p>
 			A collection of {allConcepts.length} square favicon concepts in 512×512 format, designed for the
-			Enclave application.
+			Nook application.
 		</p>
 	</div>
 

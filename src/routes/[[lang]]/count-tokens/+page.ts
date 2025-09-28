@@ -7,7 +7,7 @@ export const load: PageLoad = ({ parent }) => {
 		...data,
 		seo: {
 			...data.seo,
-			title: 'Count LLM Tokens - Enclave',
+			title: 'Count LLM Tokens - Nook',
 			description:
 				'Calculate token counts for different AI models. Understand context limits for Claude and ChatGPT models with our tokenizer tools.'
 		}

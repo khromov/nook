@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>OpenGraph Generator - Enclave: Local AI</title>
+	<title>OpenGraph Generator - Nook: Local AI</title>
 </svelte:head>
 
 <CardInterface>
@@ -31,9 +31,9 @@
 						<div class="icon">
 							<BrainIcon />
 						</div>
-						<h1>Enclave: Local AI</h1>
+						<h1>Nook: Local AI</h1>
 						<p>Chat • Transcribe • Text to Speech • Background Remover • Count Tokens</p>
-						<div class="url">enclave.page</div>
+						<div class="url">nook.software</div>
 					</div>
 				</div>
 			</div>
@@ -46,8 +46,8 @@
 						<div class="logo">
 							<RocketIcon />
 						</div>
-						<h1>Enclave: Local AI</h1>
-						<div class="url">enclave.page</div>
+						<h1>Nook: Local AI</h1>
+						<div class="url">nook.software</div>
 					</div>
 					<div class="right">
 						<h2>Private AI in Your Browser</h2>
@@ -73,11 +73,11 @@
 						</div>
 					</div>
 					<div class="main">
-						<h1>Enclave</h1>
+						<h1>Nook</h1>
 						<p>Run offline: Chat • Transcribe • TTS • Background • Tokens</p>
 					</div>
 					<div class="footer">
-						<span class="url">enclave.page</span>
+						<span class="url">nook.software</span>
 					</div>
 				</div>
 			</div>
