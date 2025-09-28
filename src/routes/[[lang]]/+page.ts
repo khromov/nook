@@ -5,7 +5,7 @@ export const load: PageLoad = ({ parent }) => {
 		...data,
 		seo: {
 			...data.seo,
-			title: 'Enclave - Private, Offline AI in Your Browser',
+			title: 'Nook - Private, Offline AI in Your Browser',
 			description:
 				'Free, private AI tools that run entirely in your browser - and even offline! Chat with LLMs, transcribe audio, and remove backgrounds using WebAssembly.'
 		}

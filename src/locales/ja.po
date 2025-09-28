@@ -14,8 +14,8 @@ msgstr ""
 
 #: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/+layout.ts
-msgid "Enclave"
-msgstr "Enclave"
+msgid "Nook"
+msgstr "Nook"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid "Tool #01"
@@ -598,8 +598,8 @@ msgstr "チャット • 文字起こし • 音声合成 • 背景除去 • �
 #: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/og/+page.svelte
-msgid "enclave.page"
-msgstr "enclave.page"
+msgid "nook.software"
+msgstr "nook.software"
 
 #: src/routes/[[lang]]/og/+page.svelte
 msgid "Layout 2: Split Simple"
@@ -825,7 +825,7 @@ msgid "Change language"
 msgstr "言語を変更"
 
 #: src/routes/[[lang]]/language/+page.svelte
-msgid "Change the language settings for the Enclave application"
+msgid "Change the language settings for the Nook application"
 msgstr "ローカルAIツールアプリケーションの言語設定を変更"
 
 #: src/routes/[[lang]]/language/+page.svelte
@@ -873,7 +873,7 @@ msgstr ""
 #: src/routes/favicon/+page.svelte
 msgid ""
 "A collection of {0} square favicon concepts in 512×512 format, designed for the\n"
-"Enclave application."
+"Nook application."
 msgstr ""
 "ローカルAIツールアプリケーション用にデザインされた\n"
 "512×512形式の{0}個の正方形ファビコンコンセプトのコレクション。"
@@ -1110,7 +1110,7 @@ msgid "Private AI tools that run in your browser"
 msgstr "ブラウザで動作するプライベートAIツール"
 
 #: src/routes/[[lang]]/+page.ts
-msgid "Enclave - Private, Offline AI in Your Browser"
+msgid "Nook - Private, Offline AI in Your Browser"
 msgstr "ローカルAIツール - ブラウザ内のプライベート・オフラインAI"
 
 #: src/routes/[[lang]]/+page.ts
@@ -1118,7 +1118,7 @@ msgid "Free, private AI tools that run entirely in your browser - and even offli
 msgstr "ブラウザ内で完全に動作する無料でプライベートなAIツール - オフラインでも利用可能！WebAssemblyを使用してLLMとチャット、音声文字起こし、背景除去が可能です。"
 
 #: src/routes/[[lang]]/background-remover/+page.ts
-msgid "Background Remover - Enclave"
+msgid "Background Remover - Nook"
 msgstr "背景除去 - ローカルAIツール"
 
 #: src/routes/[[lang]]/background-remover/+page.ts
@@ -1126,7 +1126,7 @@ msgid "Remove backgrounds from images using AI. Powered by the RMBG v1.4 model f
 msgstr "AIを使用して画像の背景を除去。BRIA AIのRMBG v1.4モデルによりプロフェッショナルな結果を実現。AI搭載、高品質。"
 
 #: src/routes/[[lang]]/count-tokens/+page.ts
-msgid "Count LLM Tokens - Enclave"
+msgid "Count LLM Tokens - Nook"
 msgstr "LLMトークンカウント - ローカルAIツール"
 
 #: src/routes/[[lang]]/count-tokens/+page.ts
@@ -1134,7 +1134,7 @@ msgid "Calculate token counts for different AI models. Understand context limits
 msgstr "さまざまなAIモデルのトークン数を計算。当社のトークナイザーツールでClaudeとChatGPTモデルのコンテキスト制限を理解できます。"
 
 #: src/routes/[[lang]]/text-to-speech/+page.ts
-msgid "Text to Speech - Enclave"
+msgid "Text to Speech - Nook"
 msgstr "音声合成 - ローカルAIツール"
 
 #: src/routes/[[lang]]/text-to-speech/+page.ts
@@ -1142,15 +1142,15 @@ msgid "Convert text to natural-sounding speech using AI models. Choose from Kitt
 msgstr "AIモデルを使用してテキストを自然な音声に変換。Kitten TTS、Piper、Kokoroモデルから選択して高品質な音声合成を実現、すべてブラウザ内でローカルに動作します。"
 
 #: src/routes/favicon/+page.ts
-msgid "Favicon Concepts - Enclave"
+msgid "Favicon Concepts - Nook"
 msgstr "ファビコンコンセプト - ローカルAIツール"
 
 #: src/routes/favicon/+page.ts
-msgid "A comprehensive gallery of 31 favicon concept designs in 512×512 format, featuring AI-themed icons, tech patterns, and brutalist design elements for the Enclave application."
+msgid "A comprehensive gallery of 31 favicon concept designs in 512×512 format, featuring AI-themed icons, tech patterns, and brutalist design elements for the Nook application."
 msgstr "ローカルAIツールアプリケーション用の512×512形式による31個のファビコンコンセプトデザインの包括的ギャラリー。AIテーマのアイコン、テックパターン、ブルータリストデザイン要素を特徴としています。"
 
 #: src/routes/[[lang]]/chat/+page.ts
-msgid "AI Chat - Enclave"
+msgid "AI Chat - Nook"
 msgstr "AIチャット - ローカルAIツール"
 
 #: src/routes/[[lang]]/chat/+page.ts
@@ -1158,8 +1158,8 @@ msgid "Chat with Large Language Models like Gemma3, completely on-device thanks 
 msgstr "Gemma3などの大規模言語モデルとチャット。llama.cppにより完全にデバイス上で動作。プライベート、セキュア、データ共有なしでオフライン動作。"
 
 #: src/routes/[[lang]]/transcribe/+page.ts
-msgid "Audio Transcription - Enclave"
-msgstr "音声転写 - Enclave"
+msgid "Audio Transcription - Nook"
+msgstr "音声転写 - Nook"
 
 #: src/routes/[[lang]]/transcribe/+page.ts
 msgid "Convert speech to text using Whisper AI. Upload any existing audio file and export as text or subtitle file. High accuracy with multiple formats and local processing."
@@ -1168,8 +1168,8 @@ msgstr "Whisper AIを使用して音声をテキストに変換。任意の音�
 #: src/routes/[[lang]]/+page.svelte
 #: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/[[lang]]/og/+page.svelte
-msgid "Enclave: Local AI"
-msgstr "Enclave: ローカルAI"
+msgid "Nook: Local AI"
+msgstr "Nook: ローカルAI"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte
 msgid "Count tokens for Claude models including Claude Opus 4.1, Sonnet 4, and Haiku"
@@ -1192,11 +1192,11 @@ msgstr ""
 "RMBG v1.4とBEN2モデルから選択。"
 
 #: src/routes/[[lang]]/language/+page.svelte
-msgid "Language Settings - Enclave"
+msgid "Language Settings - Nook"
 msgstr "言語設定 - ローカルAIツール"
 
 #: src/routes/[[lang]]/og/+page.svelte
-msgid "OpenGraph Generator - Enclave: Local AI"
+msgid "OpenGraph Generator - Nook: Local AI"
 msgstr "OpenGraphジェネレーター - ローカルAIツール"
 
 #: src/routes/[[lang]]/count-tokens/+page.svelte

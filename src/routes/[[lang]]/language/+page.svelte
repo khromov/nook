@@ -29,8 +29,8 @@
 </script>
 
 <svelte:head>
-	<title>Language Settings - Enclave</title>
-	<meta name="description" content="Change the language settings for the Enclave application" />
+	<title>Language Settings - Nook</title>
+	<meta name="description" content="Change the language settings for the Nook application" />
 </svelte:head>
 
 <CardInterface>

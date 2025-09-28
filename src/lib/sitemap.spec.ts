@@ -53,11 +53,11 @@ describe('Sitemap XML endpoint', () => {
 		];
 
 		for (const route of toolRoutes) {
-			expect(xml).toContain(`<loc>https://enclave.page${route}/</loc>`);
+			expect(xml).toContain(`<loc>https://nook.software${route}/</loc>`);
 			// Check that this URL has priority 1.0
 			const urlBlock = xml.match(
 				new RegExp(
-					`<url>.*?<loc>https://enclave\\.page${route.replace(/[/]/g, '\\/')}/</loc>.*?</url>`,
+					`<url>.*?<loc>https://nook\\.software${route.replace(/[/]/g, '\\/')}/</loc>.*?</url>`,
 					's'
 				)
 			);
@@ -70,24 +70,24 @@ describe('Sitemap XML endpoint', () => {
 		const xml = await response.text();
 
 		// Check English (clean URLs with trailing slashes)
-		expect(xml).toContain('<loc>https://enclave.page</loc>');
-		expect(xml).toContain('<loc>https://enclave.page/chat/</loc>');
+		expect(xml).toContain('<loc>https://nook.software</loc>');
+		expect(xml).toContain('<loc>https://nook.software/chat/</loc>');
 
 		// Check other languages (with prefixes and trailing slashes)
-		expect(xml).toContain('<loc>https://enclave.page/es/</loc>');
-		expect(xml).toContain('<loc>https://enclave.page/es/chat/</loc>');
-		expect(xml).toContain('<loc>https://enclave.page/ja/transcribe/</loc>');
-		expect(xml).toContain('<loc>https://enclave.page/sv/text-to-speech/</loc>');
-		expect(xml).toContain('<loc>https://enclave.page/uk/background-remover/</loc>');
+		expect(xml).toContain('<loc>https://nook.software/es/</loc>');
+		expect(xml).toContain('<loc>https://nook.software/es/chat/</loc>');
+		expect(xml).toContain('<loc>https://nook.software/ja/transcribe/</loc>');
+		expect(xml).toContain('<loc>https://nook.software/sv/text-to-speech/</loc>');
+		expect(xml).toContain('<loc>https://nook.software/uk/background-remover/</loc>');
 	});
 
 	it('includes count-tokens sub-routes', async () => {
 		const response = await GET({} as any);
 		const xml = await response.text();
 
-		expect(xml).toContain('<loc>https://enclave.page/count-tokens/anthropic-claude/</loc>');
-		expect(xml).toContain('<loc>https://enclave.page/count-tokens/openai-chatgpt/</loc>');
-		expect(xml).toContain('<loc>https://enclave.page/es/count-tokens/anthropic-claude/</loc>');
+		expect(xml).toContain('<loc>https://nook.software/count-tokens/anthropic-claude/</loc>');
+		expect(xml).toContain('<loc>https://nook.software/count-tokens/openai-chatgpt/</loc>');
+		expect(xml).toContain('<loc>https://nook.software/es/count-tokens/anthropic-claude/</loc>');
 	});
 
 	it('sets correct lastmod timestamps', async () => {

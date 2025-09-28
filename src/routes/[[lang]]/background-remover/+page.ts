@@ -7,7 +7,7 @@ export const load: PageLoad = ({ parent }) => {
 		...data,
 		seo: {
 			...data.seo,
-			title: 'Background Remover - Enclave',
+			title: 'Background Remover - Nook',
 			description:
 				'Remove backgrounds from images using AI. Powered by the RMBG v1.4 model from BRIA AI for professional results. AI-powered, high quality.'
 		}
