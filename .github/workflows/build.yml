@@ -51,4 +51,4 @@ jobs:
           server: '${{ secrets.APP_SERVER }}'
           app: 'svelte-local-ai'
           token: '${{ secrets.APP_TOKEN }}'
-          image: 'ghcr.io/khromov/enclave:main'
+          image: 'ghcr.io/khromov/nook:main'

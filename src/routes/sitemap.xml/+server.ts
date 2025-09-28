@@ -5,7 +5,7 @@ import { createLocalizedLink, locales } from '$lib/i18n-utils';
 export const prerender = true;
 
 export const GET: RequestHandler = async () => {
-	const baseUrl = dev ? 'http://localhost:5173' : 'https://enclave.page';
+	const baseUrl = dev ? 'http://localhost:5173' : 'https://nook.software';
 	const now = new Date().toISOString();
 
 	// Define all routes with their priorities

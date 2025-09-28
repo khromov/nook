@@ -14,8 +14,8 @@ msgstr ""
 
 #: src/routes/[[lang]]/og/+page.svelte
 #: src/routes/+layout.ts
-msgid "Enclave"
-msgstr "Enclave"
+msgid "Nook"
+msgstr "Nook"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid ""

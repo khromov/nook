@@ -40,7 +40,7 @@
 		return false;
 	}
 
-	const DEFAULT_TITLE = 'Enclave';
+	const DEFAULT_TITLE = 'Nook';
 
 	const getLocalizedNavLinks = (currentLang: string) => {
 		return [
@@ -139,7 +139,7 @@
 				</li>
 				<li class="home-item github-item">
 					<a
-						href="https://github.com/khromov/enclave"
+						href="https://github.com/khromov/nook"
 						class="home-link"
 						aria-label="View source on GitHub"
 						target="_blank"
