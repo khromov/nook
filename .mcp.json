@@ -1,20 +1,8 @@
 {
 	"mcpServers": {
-		"svelte-llm": {
-			"type": "sse",
-			"url": "https://svelte-llm.stanislav.garden/mcp/sse"
-		},
-		"browsermcp": {
-			"command": "npx",
-			"args": ["-y", "@browsermcp/mcp@latest"]
-		}
-	},
-	"mcpServers_disabled": {
-		"playwright": {
-			"type": "stdio",
-			"command": "npx",
-			"args": ["-y", "@playwright/mcp@latest"],
-			"env": {}
+		"svelte-mcp": {
+			"type": "http",
+			"url": "https://mcp.svelte.dev/mcp"
 		}
 	}
 }
