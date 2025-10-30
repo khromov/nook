@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-09-19T23:14:10.208Z\n"
+"PO-Revision-Date: 2025-10-30T14:33:59.114Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -12,8 +12,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 "MIME-Version: 1.0\n"
 
-#: src/routes/[[lang]]/og/+page.svelte
+#: src/routes/+layout.svelte
 #: src/routes/+layout.ts
+#: src/routes/[[lang]]/og/+page.svelte
 msgid "Nook"
 msgstr "Nook"
 
@@ -57,6 +58,7 @@ msgstr "Model Ready"
 msgid "Failed to load transcription model. Please try again."
 msgstr "Failed to load transcription model. Please try again."
 
+#: src/lib/components/common/ErrorDisplay.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 #: src/routes/[[lang]]/background-remover/+page.svelte
 #: src/routes/[[lang]]/text-to-speech/+page.svelte
@@ -1070,6 +1072,7 @@ msgid "Advanced Parameters"
 msgstr "Advanced Parameters"
 
 #: src/routes/[[lang]]/background-remover/+page.svelte
+#: src/routes/[[lang]]/background-remover/+page.svelte
 msgid "RMBG-1.4"
 msgstr "RMBG-1.4"
 
@@ -1240,3 +1243,340 @@ msgstr "Gemini"
 #: src/lib/tts/piper-tts.ts
 msgid "Voice {0}"
 msgstr "Voice {0}"
+
+#: src/routes/[[lang]]/language/+page.svelte
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "English"
+msgstr "English"
+
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "Spanish"
+msgstr "Spanish"
+
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "Español"
+msgstr "Español"
+
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "Japanese"
+msgstr "Japanese"
+
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "日本語"
+msgstr "日本語"
+
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "Swedish"
+msgstr "Swedish"
+
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "Svenska"
+msgstr "Svenska"
+
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "Ukrainian"
+msgstr "Ukrainian"
+
+#: src/routes/[[lang]]/language/+page.svelte
+msgid "Українська"
+msgstr "Українська"
+
+#: src/routes/[[lang]]/transcribe/+page.svelte
+msgid "Whisper Tiny (q5_1)"
+msgstr "Whisper Tiny (q5_1)"
+
+#: src/routes/[[lang]]/transcribe/+page.svelte
+msgid "Whisper Tiny English (q5_1)"
+msgstr "Whisper Tiny English (q5_1)"
+
+#: src/routes/[[lang]]/transcribe/+page.svelte
+msgid "Whisper Small (q5_1)"
+msgstr "Whisper Small (q5_1)"
+
+#: src/routes/[[lang]]/transcribe/+page.svelte
+msgid "Whisper Small English (q5_1)"
+msgstr "Whisper Small English (q5_1)"
+
+#: src/routes/[[lang]]/transcribe/+page.svelte
+msgid "Whisper Medium (q5_0)"
+msgstr "Whisper Medium (q5_0)"
+
+#: src/routes/[[lang]]/transcribe/+page.svelte
+msgid "Whisper Medium English (q5_0)"
+msgstr "Whisper Medium English (q5_0)"
+
+#: src/routes/[[lang]]/transcribe/+page.svelte
+msgid "Whisper Large (q5_0)"
+msgstr "Whisper Large (q5_0)"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI Brain"
+msgstr "AI Brain"
+
+#: src/routes/favicon/+page.svelte
+msgid "Representing AI intelligence and neural processing"
+msgstr "Representing AI intelligence and neural processing"
+
+#: src/routes/favicon/+page.svelte
+msgid "CPU Processor"
+msgstr "CPU Processor"
+
+#: src/routes/favicon/+page.svelte
+msgid "Computer processing power and AI computation"
+msgstr "Computer processing power and AI computation"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI Robot"
+msgstr "AI Robot"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI assistant and automation"
+msgstr "AI assistant and automation"
+
+#: src/routes/favicon/+page.svelte
+msgid "Circuit Board"
+msgstr "Circuit Board"
+
+#: src/routes/favicon/+page.svelte
+msgid "Technology infrastructure and AI circuits"
+msgstr "Technology infrastructure and AI circuits"
+
+#: src/routes/favicon/+page.svelte
+msgid "Database"
+msgstr "Database"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI data storage and knowledge base"
+msgstr "AI data storage and knowledge base"
+
+#: src/routes/favicon/+page.svelte
+msgid "Chat Bubble"
+msgstr "Chat Bubble"
+
+#: src/routes/favicon/+page.svelte
+msgid "Chat and conversation features"
+msgstr "Chat and conversation features"
+
+#: src/routes/favicon/+page.svelte
+msgid "Microphone"
+msgstr "Microphone"
+
+#: src/routes/favicon/+page.svelte
+msgid "Audio transcription and voice input"
+msgstr "Audio transcription and voice input"
+
+#: src/routes/favicon/+page.svelte
+msgid "Speaker"
+msgstr "Speaker"
+
+#: src/routes/favicon/+page.svelte
+msgid "Text-to-speech and audio output"
+msgstr "Text-to-speech and audio output"
+
+#: src/routes/favicon/+page.svelte
+msgid "Image"
+msgstr "Image"
+
+#: src/routes/favicon/+page.svelte
+msgid "Image processing and background removal"
+msgstr "Image processing and background removal"
+
+#: src/routes/favicon/+page.svelte
+msgid "Network"
+msgstr "Network"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI neural networks and connections"
+msgstr "AI neural networks and connections"
+
+#: src/routes/favicon/+page.svelte
+msgid "Lightning Zap"
+msgstr "Lightning Zap"
+
+#: src/routes/favicon/+page.svelte
+msgid "Fast AI processing and instant results"
+msgstr "Fast AI processing and instant results"
+
+#: src/routes/favicon/+page.svelte
+msgid "Sparkles"
+msgstr "Sparkles"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI magic and enhancement"
+msgstr "AI magic and enhancement"
+
+#: src/routes/favicon/+page.svelte
+msgid "Lightbulb"
+msgstr "Lightbulb"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI insights and intelligence"
+msgstr "AI insights and intelligence"
+
+#: src/routes/favicon/+page.svelte
+msgid "Rocket"
+msgstr "Rocket"
+
+#: src/routes/favicon/+page.svelte
+msgid "Advanced AI technology and innovation"
+msgstr "Advanced AI technology and innovation"
+
+#: src/routes/favicon/+page.svelte
+msgid "Play Button"
+msgstr "Play Button"
+
+#: src/routes/favicon/+page.svelte
+msgid "Media processing and AI activation"
+msgstr "Media processing and AI activation"
+
+#: src/routes/favicon/+page.svelte
+msgid "Settings Gear"
+msgstr "Settings Gear"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI configuration and optimization"
+msgstr "AI configuration and optimization"
+
+#: src/routes/favicon/+page.svelte
+msgid "Eye Vision"
+msgstr "Eye Vision"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI vision and image recognition"
+msgstr "AI vision and image recognition"
+
+#: src/routes/favicon/+page.svelte
+msgid "Shield"
+msgstr "Shield"
+
+#: src/routes/favicon/+page.svelte
+msgid "Nook security and privacy"
+msgstr "Nook security and privacy"
+
+#: src/routes/favicon/+page.svelte
+msgid "Lock"
+msgstr "Lock"
+
+#: src/routes/favicon/+page.svelte
+msgid "Private and secure AI processing"
+msgstr "Private and secure AI processing"
+
+#: src/routes/favicon/+page.svelte
+msgid "Square"
+msgstr "Square"
+
+#: src/routes/favicon/+page.svelte
+msgid "Clean geometric AI interface"
+msgstr "Clean geometric AI interface"
+
+#: src/routes/favicon/+page.svelte
+msgid "Circle"
+msgstr "Circle"
+
+#: src/routes/favicon/+page.svelte
+msgid "Circular AI processing loop"
+msgstr "Circular AI processing loop"
+
+#: src/routes/favicon/+page.svelte
+msgid "Triangle"
+msgstr "Triangle"
+
+#: src/routes/favicon/+page.svelte
+msgid "Directional AI progress"
+msgstr "Directional AI progress"
+
+#: src/routes/favicon/+page.svelte
+msgid "Hexagon"
+msgstr "Hexagon"
+
+#: src/routes/favicon/+page.svelte
+msgid "Tech-style geometric pattern"
+msgstr "Tech-style geometric pattern"
+
+#: src/routes/favicon/+page.svelte
+msgid "Diamond"
+msgstr "Diamond"
+
+#: src/routes/favicon/+page.svelte
+msgid "Premium AI quality"
+msgstr "Premium AI quality"
+
+#: src/routes/favicon/+page.svelte
+msgid "Star"
+msgstr "Star"
+
+#: src/routes/favicon/+page.svelte
+msgid "Featured AI capabilities"
+msgstr "Featured AI capabilities"
+
+#: src/routes/favicon/+page.svelte
+msgid "Neural Network"
+msgstr "Neural Network"
+
+#: src/routes/favicon/+page.svelte
+msgid "Connected neural network nodes"
+msgstr "Connected neural network nodes"
+
+#: src/routes/favicon/+page.svelte
+msgid "Binary Code"
+msgstr "Binary Code"
+
+#: src/routes/favicon/+page.svelte
+msgid "Digital binary pattern"
+msgstr "Digital binary pattern"
+
+#: src/routes/favicon/+page.svelte
+msgid "Grid Matrix"
+msgstr "Grid Matrix"
+
+#: src/routes/favicon/+page.svelte
+msgid "Digital grid matrix pattern"
+msgstr "Digital grid matrix pattern"
+
+#: src/routes/favicon/+page.svelte
+msgid "Waveform Audio"
+msgstr "Waveform Audio"
+
+#: src/routes/favicon/+page.svelte
+msgid "Audio waveform pattern"
+msgstr "Audio waveform pattern"
+
+#: src/routes/favicon/+page.svelte
+msgid "AI Layers"
+msgstr "AI Layers"
+
+#: src/routes/favicon/+page.svelte
+msgid "Layered AI processing"
+msgstr "Layered AI processing"
+
+#: src/routes/favicon/+page.svelte
+msgid "Tech Hexagon"
+msgstr "Tech Hexagon"
+
+#: src/routes/favicon/+page.svelte
+msgid "Futuristic hexagonal design"
+msgstr "Futuristic hexagonal design"
+
+#: src/lib/components/count-tokens/TextInputSection.svelte
+msgid "Enter or paste your text here to count tokens..."
+msgstr "Enter or paste your text here to count tokens..."
+
+#: src/lib/components/count-tokens/EmptyState.svelte
+msgid "Enter some text above to see the token count"
+msgstr "Enter some text above to see the token count"
+
+#: src/lib/components/chat/ModelSelector.svelte
+msgid "Gemma"
+msgstr "Gemma"
+
+#: src/lib/components/chat/ModelSelector.svelte
+msgid "SmolLM2"
+msgstr "SmolLM2"
+
+#: src/lib/components/chat/MessageInput.svelte
+msgid "Type your message..."
+msgstr "Type your message..."
+
+#: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
+msgid "Processing..."
+msgstr "Processing..."
