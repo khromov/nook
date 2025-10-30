@@ -65,7 +65,10 @@
 <svelte:head>
 	<title>{page.data.seo?.title || DEFAULT_TITLE}</title>
 	<meta name="description" content={page.data.seo?.description || ''} />
-	<link rel="canonical" href={page.data.seo?.canonicalUrl || page.url.href} />
+
+	{#if page.data.seo?.url}
+		<link rel="canonical" href={page.data.seo?.url} />
+	{/if}
 
 	<!-- Open Graph meta tags -->
 	<meta property="og:title" content={page.data.seo?.title || DEFAULT_TITLE} />
