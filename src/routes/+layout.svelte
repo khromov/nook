@@ -84,8 +84,27 @@
 	$effect(() => {
 		if (isMobileMenuOpen) {
 			document.body.style.overflow = 'hidden';
+			document.body.style.setProperty('--mobile-menu-overlay', 'rgba(0, 0, 0, 0.5)');
+
+			// Add click handler to close menu when clicking outside (with delay to avoid immediate trigger)
+			const handleOutsideClick = (e: MouseEvent) => {
+				const drawer = document.querySelector('.mobile-menu-drawer');
+				if (drawer && !drawer.contains(e.target as Node)) {
+					closeMobileMenu();
+				}
+			};
+			// Use setTimeout to avoid catching the click that opened the menu
+			const timeoutId = setTimeout(() => {
+				document.addEventListener('click', handleOutsideClick);
+			}, 100);
+
+			return () => {
+				clearTimeout(timeoutId);
+				document.removeEventListener('click', handleOutsideClick);
+			};
 		} else {
 			document.body.style.overflow = '';
+			document.body.style.removeProperty('--mobile-menu-overlay');
 		}
 	});
 </script>
@@ -195,72 +214,71 @@
 			</ul>
 		</nav>
 
-		{#if isMobileMenuOpen}
-			<div class="mobile-menu-backdrop" onclick={closeMobileMenu} role="presentation"></div>
-			<div class="mobile-menu-drawer">
-				<div class="mobile-menu-header">
-					<h2 class="mobile-menu-title">Tools</h2>
-					<button class="mobile-menu-close" onclick={closeMobileMenu} aria-label="Close menu">
-						<XIcon style="width: 24px; height: 24px; stroke-width: 2.5" />
-					</button>
-				</div>
-				<nav class="mobile-menu-nav">
-					{#each getLocalizedNavLinks(currentLang) as link (link.path)}
-						<a
-							href={resolve(link.path)}
-							class="mobile-menu-link"
-							class:active={isActive(link.path)}
-							onclick={closeMobileMenu}
-						>
-							{#if link.icon === 'home'}
-								<HomeIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
-								<span>Home</span>
-							{:else if link.icon === 'chat'}
-								<MessageSquareIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
-								<span>{link.label}</span>
-							{:else if link.icon === 'mic'}
-								<MicIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
-								<span>{link.label}</span>
-							{:else if link.icon === 'speech'}
-								<SpeechIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
-								<span>{link.label}</span>
-							{:else if link.icon === 'image'}
-								<ImageIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
-								<span>{link.label}</span>
-							{:else if link.icon === 'calculator'}
-								<CalculatorIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
-								<span>{link.label}</span>
-							{/if}
-						</a>
-					{/each}
-					<div class="mobile-menu-divider"></div>
-					<a
-						href={resolve(createLocalizedLink('/language', currentLang))}
-						class="mobile-menu-link"
-						onclick={closeMobileMenu}
-					>
-						<GlobeIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
-						<span>Change Language</span>
-					</a>
-					<a
-						href="https://github.com/khromov/nook"
-						class="mobile-menu-link"
-						target="_blank"
-						rel="noopener noreferrer"
-						onclick={closeMobileMenu}
-					>
-						<GithubIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
-						<span>GitHub</span>
-					</a>
-				</nav>
-			</div>
-		{/if}
-
 		<div class="content-wrapper">
 			{@render children?.()}
 		</div>
 	</div>
 </div>
+
+{#if isMobileMenuOpen}
+	<div class="mobile-menu-drawer">
+		<div class="mobile-menu-header">
+			<h2 class="mobile-menu-title">Tools</h2>
+			<button class="mobile-menu-close" onclick={closeMobileMenu} aria-label="Close menu">
+				<XIcon style="width: 24px; height: 24px; stroke-width: 2.5" />
+			</button>
+		</div>
+		<nav class="mobile-menu-nav">
+			{#each getLocalizedNavLinks(currentLang) as link (link.path)}
+				<a
+					href={resolve(link.path)}
+					class="mobile-menu-link"
+					class:active={isActive(link.path)}
+					onclick={closeMobileMenu}
+				>
+					{#if link.icon === 'home'}
+						<HomeIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>Home</span>
+					{:else if link.icon === 'chat'}
+						<MessageSquareIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>{link.label}</span>
+					{:else if link.icon === 'mic'}
+						<MicIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>{link.label}</span>
+					{:else if link.icon === 'speech'}
+						<SpeechIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>{link.label}</span>
+					{:else if link.icon === 'image'}
+						<ImageIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>{link.label}</span>
+					{:else if link.icon === 'calculator'}
+						<CalculatorIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>{link.label}</span>
+					{/if}
+				</a>
+			{/each}
+			<div class="mobile-menu-divider"></div>
+			<a
+				href={resolve(createLocalizedLink('/language', currentLang))}
+				class="mobile-menu-link"
+				onclick={closeMobileMenu}
+			>
+				<GlobeIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+				<span>Change Language</span>
+			</a>
+			<a
+				href="https://github.com/khromov/nook"
+				class="mobile-menu-link"
+				target="_blank"
+				rel="noopener noreferrer"
+				onclick={closeMobileMenu}
+			>
+				<GithubIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+				<span>GitHub</span>
+			</a>
+		</nav>
+	</div>
+{/if}
 
 <Toaster
 	position="bottom-right"
@@ -314,7 +332,20 @@
 			rgba(0, 0, 0, 0.02) 41px
 		);
 		pointer-events: none;
-		z-index: 1;
+		z-index: 0;
+	}
+
+	:global(body)::after {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: var(--mobile-menu-overlay, transparent);
+		pointer-events: none;
+		z-index: 999;
+		transition: background 0.3s ease;
 	}
 
 	@keyframes gradient-shift {
@@ -601,17 +632,6 @@
 		transform: translateY(-2px);
 	}
 
-	.mobile-menu-backdrop {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: rgba(0, 0, 0, 0.5);
-		z-index: 998;
-		animation: fadeIn 0.3s ease;
-	}
-
 	.mobile-menu-drawer {
 		position: fixed;
 		top: 0;
@@ -622,7 +642,7 @@
 		background: var(--color-background-main);
 		border-right: var(--border-brutalist-thick);
 		box-shadow: 8px 0 0 var(--color-border-primary);
-		z-index: 999;
+		z-index: 1001;
 		display: flex;
 		flex-direction: column;
 		animation: slideIn 0.3s ease;
