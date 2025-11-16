@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:20:18.035Z\n"
-"PO-Revision-Date: 2025-11-16T01:32:33.236Z\n"
+"PO-Revision-Date: 2025-11-16T01:53:16.202Z\n"
 "Last-Translator: \n"
 "Language: uk\n"
 "Language-Team: \n"
@@ -91,8 +91,8 @@ msgstr "Вся обробка відбувається локально у ва�
 msgid "No data is sent to external servers."
 msgstr "Жодні дані не передаються на зовнішні сервери."
 
-#: src/routes/+layout.svelte
 #: src/lib/components/count-tokens/TokenStats.svelte
+#: src/routes/+layout.svelte
 msgid "Tokens"
 msgstr "Токени"
 
@@ -196,10 +196,10 @@ msgstr "<0/> Обробка зображення"
 
 #. placeholder {0}: progress
 #. placeholder {0}: progress
-#. placeholder {0}: progress
 #. placeholder {0}: downloadProgress
-#: src/lib/components/common/LoadingProgress.svelte
+#. placeholder {0}: progress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
+#: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 msgid "{0}% Complete"
@@ -273,8 +273,8 @@ msgstr "Обрані зображення ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> Очистити все"
 
-#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
 #. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
+#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
@@ -1584,12 +1584,6 @@ msgstr ""
 #: src/routes/+layout.svelte
 msgid "Escape"
 msgstr ""
-
-#~ msgid "Open menu"
-#~ msgstr ""
-
-#~ msgid "Menu"
-#~ msgstr ""
 
 #: src/routes/+layout.svelte
 msgid "Close menu"
