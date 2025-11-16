@@ -1593,28 +1593,28 @@ msgstr ""
 
 #: src/routes/+layout.svelte
 msgid "Close menu"
-msgstr ""
+msgstr "メニューを閉じる"
 
 #: src/routes/+layout.svelte
 msgid "Home"
-msgstr ""
+msgstr "ホーム"
 
 #: src/routes/+layout.svelte
 msgid "Change Language"
-msgstr ""
+msgstr "言語を変更"
 
 #: src/routes/+layout.svelte
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/routes/+layout.svelte
 msgid "Open tools menu"
-msgstr ""
+msgstr "ツールメニューを開く"
 
 #: src/routes/+layout.svelte
 msgid "Tools"
-msgstr ""
+msgstr "ツール"
 
 #: src/routes/+layout.svelte
 msgid "More tools"
-msgstr ""
+msgstr "その他のツール"

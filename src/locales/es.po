@@ -1593,28 +1593,28 @@ msgstr ""
 
 #: src/routes/+layout.svelte
 msgid "Close menu"
-msgstr ""
+msgstr "Cerrar menú"
 
 #: src/routes/+layout.svelte
 msgid "Home"
-msgstr ""
+msgstr "Inicio"
 
 #: src/routes/+layout.svelte
 msgid "Change Language"
-msgstr ""
+msgstr "Cambiar idioma"
 
 #: src/routes/+layout.svelte
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/routes/+layout.svelte
 msgid "Open tools menu"
-msgstr ""
+msgstr "Abrir menú de herramientas"
 
 #: src/routes/+layout.svelte
 msgid "Tools"
-msgstr ""
+msgstr "Herramientas"
 
 #: src/routes/+layout.svelte
 msgid "More tools"
-msgstr ""
+msgstr "Más herramientas"
