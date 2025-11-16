@@ -194,7 +194,6 @@
 			</ul>
 		</nav>
 
-		<!-- Mobile Menu Overlay -->
 		{#if isMobileMenuOpen}
 			<div class="mobile-menu-backdrop" onclick={closeMobileMenu} role="presentation"></div>
 			<div class="mobile-menu-drawer">
