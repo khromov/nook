@@ -169,6 +169,7 @@
 						aria-expanded={isMobileMenuOpen}
 					>
 						<WrenchIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>More tools</span>
 					</button>
 				</li>
 				<li class="home-item language-item">
@@ -198,7 +199,7 @@
 			<div class="mobile-menu-backdrop" onclick={closeMobileMenu} role="presentation"></div>
 			<div class="mobile-menu-drawer">
 				<div class="mobile-menu-header">
-					<h2 class="mobile-menu-title">Menu</h2>
+					<h2 class="mobile-menu-title">Tools</h2>
 					<button class="mobile-menu-close" onclick={closeMobileMenu} aria-label="Close menu">
 						<XIcon style="width: 24px; height: 24px; stroke-width: 2.5" />
 					</button>
@@ -583,11 +584,16 @@
 		background: var(--color-background-main);
 		cursor: pointer;
 		border-radius: 8px;
-		padding: 0.75rem;
+		padding: 0.75rem 1.25rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		gap: 0.5rem;
 		transition: all 0.2s ease;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		font-weight: 600;
+		font-size: 1rem;
 	}
 
 	.menu-button:hover {
@@ -741,7 +747,8 @@
 		}
 
 		.menu-button {
-			padding: 0.625rem;
+			padding: 0.625rem 1rem;
+			font-size: 0.875rem;
 		}
 
 		/* Show mobile menu button and hide center items on mobile */
@@ -750,6 +757,11 @@
 		}
 
 		.center-items {
+			display: none;
+		}
+
+		.language-item,
+		.github-item {
 			display: none;
 		}
 
