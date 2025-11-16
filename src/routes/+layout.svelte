@@ -575,7 +575,6 @@
 		box-shadow: none;
 	}
 
-	/* Mobile Menu Styles */
 	.menu-button-item {
 		display: none;
 	}
