@@ -85,11 +85,13 @@
 		if (isMobileMenuOpen) {
 			document.body.style.overflow = 'hidden';
 			document.body.style.setProperty('--mobile-menu-overlay', 'rgba(0, 0, 0, 0.5)');
+			document.body.style.setProperty('--mobile-menu-overlay-events', 'auto');
 
 			// Add click handler to close menu when clicking outside (with delay to avoid immediate trigger)
 			const handleOutsideClick = (e: MouseEvent) => {
 				const drawer = document.querySelector('.mobile-menu-drawer');
 				if (drawer && !drawer.contains(e.target as Node)) {
+					e.stopPropagation();
 					closeMobileMenu();
 				}
 			};
@@ -105,6 +107,7 @@
 		} else {
 			document.body.style.overflow = '';
 			document.body.style.removeProperty('--mobile-menu-overlay');
+			document.body.style.removeProperty('--mobile-menu-overlay-events');
 		}
 	});
 </script>
@@ -343,7 +346,7 @@
 		right: 0;
 		bottom: 0;
 		background: var(--mobile-menu-overlay, transparent);
-		pointer-events: none;
+		pointer-events: var(--mobile-menu-overlay-events, none);
 		z-index: 999;
 		transition: background 0.3s ease;
 	}
