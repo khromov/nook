@@ -8,8 +8,17 @@ export const load = (async () => {
 		};
 	} else {
 		try {
-			const { AutoTokenizer } = await import('@huggingface/transformers');
-			const tokenizer = await AutoTokenizer.from_pretrained('Xenova/gemma-tokenizer');
+			const { AutoTokenizer, env } = await import('@huggingface/transformers');
+
+			// Configure transformers.js to use local files instead of Huggingface
+			env.allowLocalModels = true;
+			env.allowRemoteModels = false;
+			env.localModelPath = '/gemma-tokenizer/';
+			if (env.backends.onnx.wasm) {
+				env.backends.onnx.wasm.numThreads = 1;
+			}
+
+			const tokenizer = await AutoTokenizer.from_pretrained('/gemma-tokenizer');
 			return {
 				tokenizer
 			};
