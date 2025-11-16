@@ -14,7 +14,8 @@ This is a browser-based AI chat and transcription application that runs entirely
 ### Core Commands
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production (with OPFS enabled by default)
+- `npm run build` - Build for production (with OPFS enabled by default, uses adapter-node)
+- `npm run build:static` - Build static version for production (uses adapter-static)
 - `npm run preview` - Preview production build
 - `npm run check` - Type check with svelte-check
 - `npm run check:watch` - Type check in watch mode
@@ -28,6 +29,12 @@ This is a browser-based AI chat and transcription application that runs entirely
 
 - `npm run test` - Run unit tests once
 - `npm run test:unit` - Run unit tests in watch mode
+
+### Translation Commands (Wuchale)
+
+- `npm run wc` or `npx wuchale` - Extract translatable strings and update .po files
+- `npm run wcs` or `npx wuchale status` - Check translation status
+- `npm run wcc` or `npx wuchale --clean` - Clean translation files
 
 ### Docker Commands
 
@@ -96,8 +103,9 @@ Key persisted stores:
 - TypeScript used throughout the codebase
 - ESLint configuration includes Svelte-specific rules
 - Prettier for code formatting
-- Uses SvelteKit's adapter-node for production builds
-- Express server with health check endpoint at `/_health`
+- Supports both adapter-node (default) and adapter-static (via ADAPTER env var)
+- Express server with health check endpoint at `/_health` (adapter-node only)
+- Bundle strategy set to 'single' in svelte.config.js for optimized output
 
 ### ONNX Runtime Web Integration
 
@@ -112,11 +120,13 @@ Key persisted stores:
 
 - Uses **Wuchale** for internationalization with support for multiple languages
 - Configured locales: `en` (default), `es`, `ja`, `sv`, `uk` (defined in `wuchale.config.js`)
+- Two adapters configured: `svelte()` for .svelte components and `js()` for TypeScript/JavaScript files
 - Route structure uses optional `[[lang]]` parameter for language-specific URLs
 - Language detection in `hooks.server.ts` extracts language from URL path, defaults to 'en'
 - Language switching available at `/language` page with cards for each supported locale
 - All internal navigation links should include language prefix to maintain language context
-- Language context is available via URL path parsing in components
+- Translation files are located in `src/locales/` as .po files (Gettext format)
+- Tracking script injection is handled in `hooks.server.ts` via `transformPageChunk` (disabled in dev mode)
 
 ### Application Features
 
@@ -124,6 +134,7 @@ Key persisted stores:
 - **Transcribe**: Speech-to-text using Whisper AI with subtitle export capabilities
 - **Text-to-Speech**: Voice synthesis with multiple TTS models and WebGPU acceleration
 - **Background Remover**: AI-powered background removal for images
+- **Count Tokens**: Token counting for OpenAI (ChatGPT), Anthropic (Claude), and Google (Gemini) models
 - All features run entirely client-side without external server dependencies
 
 ## Environment Variables
