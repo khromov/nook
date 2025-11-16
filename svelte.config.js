@@ -1,6 +1,8 @@
-//import adapter from '@sveltejs/adapter-static';
-import adapter from '@sveltejs/adapter-node';
+import adapterStatic from '@sveltejs/adapter-static';
+import adapterNode from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+
+const adapter = process.env.ADAPTER === 'static' ? adapterStatic : adapterNode;
 
 const config = {
 	preprocess: vitePreprocess(),
