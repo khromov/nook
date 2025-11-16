@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-10-30T14:33:59.114Z\n"
+"PO-Revision-Date: 2025-11-16T01:53:16.193Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -98,8 +98,8 @@ msgstr "Demo File"
 msgid "Listen →"
 msgstr "Listen →"
 
-#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
 #. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
+#. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
@@ -144,8 +144,8 @@ msgstr "<0/> Transcribing Audio"
 
 #. placeholder {0}: progress
 #. placeholder {0}: progress
-#. placeholder {0}: progress
 #. placeholder {0}: downloadProgress
+#. placeholder {0}: progress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -518,8 +518,8 @@ msgstr "<0/> Raw Tokens ({0})"
 msgid "Type or paste text in the input field above to analyze tokens and character count."
 msgstr "Type or paste text in the input field above to analyze tokens and character count."
 
-#: src/routes/+layout.svelte
 #: src/lib/components/count-tokens/TokenStats.svelte
+#: src/routes/+layout.svelte
 msgid "Tokens"
 msgstr "Tokens"
 
@@ -1580,3 +1580,35 @@ msgstr "Type your message..."
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 msgid "Processing..."
 msgstr "Processing..."
+
+#: src/routes/+layout.svelte
+msgid "Escape"
+msgstr "Escape"
+
+#: src/routes/+layout.svelte
+msgid "Close menu"
+msgstr "Close menu"
+
+#: src/routes/+layout.svelte
+msgid "Home"
+msgstr "Home"
+
+#: src/routes/+layout.svelte
+msgid "Change Language"
+msgstr "Change Language"
+
+#: src/routes/+layout.svelte
+msgid "GitHub"
+msgstr "GitHub"
+
+#: src/routes/+layout.svelte
+msgid "Open tools menu"
+msgstr "Open tools menu"
+
+#: src/routes/+layout.svelte
+msgid "Tools"
+msgstr "Tools"
+
+#: src/routes/+layout.svelte
+msgid "More tools"
+msgstr "More tools"
