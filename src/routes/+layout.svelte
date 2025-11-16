@@ -13,7 +13,7 @@
 	import SpeechIcon from 'virtual:icons/lucide/speech';
 	import CalculatorIcon from 'virtual:icons/lucide/calculator';
 	import GlobeIcon from 'virtual:icons/lucide/globe';
-	import MenuIcon from 'virtual:icons/lucide/menu';
+	import WrenchIcon from 'virtual:icons/lucide/wrench';
 	import XIcon from 'virtual:icons/lucide/x';
 	import { Toaster } from 'svelte-sonner';
 	import { resolve } from '$app/paths';
@@ -166,10 +166,10 @@
 					<button
 						class="home-link menu-button"
 						onclick={toggleMobileMenu}
-						aria-label="Open menu"
+						aria-label="Open tools menu"
 						aria-expanded={isMobileMenuOpen}
 					>
-						<MenuIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<WrenchIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
 					</button>
 				</li>
 				<li class="home-item language-item">
@@ -463,7 +463,8 @@
 	}
 
 	.language-item .home-link,
-	.github-item .home-link {
+	.github-item .home-link,
+	.menu-button-item .menu-button {
 		border: var(--border-brutalist-thick);
 		box-shadow: var(--shadow-brutalist-medium);
 	}
@@ -584,8 +585,12 @@
 	.menu-button {
 		background: var(--color-background-main);
 		cursor: pointer;
-		border: var(--border-brutalist-thick);
-		box-shadow: var(--shadow-brutalist-medium);
+		border-radius: 8px;
+		padding: 0.75rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s ease;
 	}
 
 	.menu-button:hover {
@@ -738,6 +743,10 @@
 			padding: 0.625rem !important;
 		}
 
+		.menu-button {
+			padding: 0.625rem;
+		}
+
 		/* Show mobile menu button and hide center items on mobile */
 		.menu-button-item {
 			display: block;
@@ -772,7 +781,8 @@
 		}
 
 		.language-item .home-link,
-		.github-item .home-link {
+		.github-item .home-link,
+		.menu-button-item .menu-button {
 			border: var(--border-brutalist-thin);
 			box-shadow: var(--shadow-brutalist-small);
 		}
@@ -797,7 +807,8 @@
 		}
 
 		.language-item .home-link,
-		.github-item .home-link {
+		.github-item .home-link,
+		.menu-button-item .menu-button {
 			border: var(--border-brutalist-thin);
 			box-shadow: var(--shadow-brutalist-small);
 		}

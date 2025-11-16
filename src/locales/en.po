@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-11-16T01:20:33.949Z\n"
+"PO-Revision-Date: 2025-11-16T01:26:10.902Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1585,9 +1585,8 @@ msgstr "Processing..."
 msgid "Escape"
 msgstr "Escape"
 
-#: src/routes/+layout.svelte
-msgid "Open menu"
-msgstr "Open menu"
+#~ msgid "Open menu"
+#~ msgstr "Open menu"
 
 #: src/routes/+layout.svelte
 msgid "Menu"
@@ -1608,3 +1607,7 @@ msgstr "Change Language"
 #: src/routes/+layout.svelte
 msgid "GitHub"
 msgstr "GitHub"
+
+#: src/routes/+layout.svelte
+msgid "Open tools menu"
+msgstr "Open tools menu"
