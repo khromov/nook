@@ -81,7 +81,6 @@
 		}
 	}
 
-	// Prevent body scroll when mobile menu is open
 	$effect(() => {
 		if (isMobileMenuOpen) {
 			document.body.style.overflow = 'hidden';
