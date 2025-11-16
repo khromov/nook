@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2025-10-30T14:33:59.114Z\n"
+"PO-Revision-Date: 2025-11-16T01:20:33.949Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1580,3 +1580,31 @@ msgstr "Type your message..."
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 msgid "Processing..."
 msgstr "Processing..."
+
+#: src/routes/+layout.svelte
+msgid "Escape"
+msgstr "Escape"
+
+#: src/routes/+layout.svelte
+msgid "Open menu"
+msgstr "Open menu"
+
+#: src/routes/+layout.svelte
+msgid "Menu"
+msgstr "Menu"
+
+#: src/routes/+layout.svelte
+msgid "Close menu"
+msgstr "Close menu"
+
+#: src/routes/+layout.svelte
+msgid "Home"
+msgstr "Home"
+
+#: src/routes/+layout.svelte
+msgid "Change Language"
+msgstr "Change Language"
+
+#: src/routes/+layout.svelte
+msgid "GitHub"
+msgstr "GitHub"

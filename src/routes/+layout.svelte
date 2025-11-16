@@ -13,6 +13,8 @@
 	import SpeechIcon from 'virtual:icons/lucide/speech';
 	import CalculatorIcon from 'virtual:icons/lucide/calculator';
 	import GlobeIcon from 'virtual:icons/lucide/globe';
+	import MenuIcon from 'virtual:icons/lucide/menu';
+	import XIcon from 'virtual:icons/lucide/x';
 	import { Toaster } from 'svelte-sonner';
 	import { resolve } from '$app/paths';
 	import { getCurrentLanguage, createLocalizedLink, locales } from '$lib/i18n-utils';
@@ -60,6 +62,33 @@
 			}
 		];
 	};
+
+	// Mobile menu state
+	let isMobileMenuOpen = $state(false);
+
+	function toggleMobileMenu() {
+		isMobileMenuOpen = !isMobileMenuOpen;
+	}
+
+	function closeMobileMenu() {
+		isMobileMenuOpen = false;
+	}
+
+	// Handle escape key to close menu
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && isMobileMenuOpen) {
+			closeMobileMenu();
+		}
+	}
+
+	// Prevent body scroll when mobile menu is open
+	$effect(() => {
+		if (isMobileMenuOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+	});
 </script>
 
 <svelte:head>
@@ -84,6 +113,8 @@
 	<meta name="twitter:description" content={page.data.seo?.description || ''} />
 	<meta name="twitter:image" content={page.data.seo?.ogImage || ''} />
 </svelte:head>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <div class="app-wrapper">
 	<div class="container" class:fullWidth={page.url.pathname === '/og'}>
@@ -131,6 +162,16 @@
 						{/each}
 					</div>
 				</li>
+				<li class="home-item menu-button-item">
+					<button
+						class="home-link menu-button"
+						onclick={toggleMobileMenu}
+						aria-label="Open menu"
+						aria-expanded={isMobileMenuOpen}
+					>
+						<MenuIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+					</button>
+				</li>
 				<li class="home-item language-item">
 					<a
 						href={resolve(createLocalizedLink('/language', currentLang))}
@@ -153,6 +194,68 @@
 				</li>
 			</ul>
 		</nav>
+
+		<!-- Mobile Menu Overlay -->
+		{#if isMobileMenuOpen}
+			<div class="mobile-menu-backdrop" onclick={closeMobileMenu} role="presentation"></div>
+			<div class="mobile-menu-drawer">
+				<div class="mobile-menu-header">
+					<h2 class="mobile-menu-title">Menu</h2>
+					<button class="mobile-menu-close" onclick={closeMobileMenu} aria-label="Close menu">
+						<XIcon style="width: 24px; height: 24px; stroke-width: 2.5" />
+					</button>
+				</div>
+				<nav class="mobile-menu-nav">
+					{#each getLocalizedNavLinks(currentLang) as link (link.path)}
+						<a
+							href={resolve(link.path)}
+							class="mobile-menu-link"
+							class:active={isActive(link.path)}
+							onclick={closeMobileMenu}
+						>
+							{#if link.icon === 'home'}
+								<HomeIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+								<span>Home</span>
+							{:else if link.icon === 'chat'}
+								<MessageSquareIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+								<span>{link.label}</span>
+							{:else if link.icon === 'mic'}
+								<MicIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+								<span>{link.label}</span>
+							{:else if link.icon === 'speech'}
+								<SpeechIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+								<span>{link.label}</span>
+							{:else if link.icon === 'image'}
+								<ImageIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+								<span>{link.label}</span>
+							{:else if link.icon === 'calculator'}
+								<CalculatorIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+								<span>{link.label}</span>
+							{/if}
+						</a>
+					{/each}
+					<div class="mobile-menu-divider"></div>
+					<a
+						href={resolve(createLocalizedLink('/language', currentLang))}
+						class="mobile-menu-link"
+						onclick={closeMobileMenu}
+					>
+						<GlobeIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>Change Language</span>
+					</a>
+					<a
+						href="https://github.com/khromov/nook"
+						class="mobile-menu-link"
+						target="_blank"
+						rel="noopener noreferrer"
+						onclick={closeMobileMenu}
+					>
+						<GithubIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
+						<span>GitHub</span>
+					</a>
+				</nav>
+			</div>
+		{/if}
 
 		<div class="content-wrapper">
 			{@render children?.()}
@@ -473,6 +576,144 @@
 		box-shadow: none;
 	}
 
+	/* Mobile Menu Styles */
+	.menu-button-item {
+		display: none;
+	}
+
+	.menu-button {
+		background: var(--color-background-main);
+		cursor: pointer;
+		border: var(--border-brutalist-thick);
+		box-shadow: var(--shadow-brutalist-medium);
+	}
+
+	.menu-button:hover {
+		background: var(--color-gradient-gold);
+		transform: translateY(-2px);
+	}
+
+	.mobile-menu-backdrop {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 998;
+		animation: fadeIn 0.3s ease;
+	}
+
+	.mobile-menu-drawer {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 280px;
+		max-width: 85vw;
+		background: var(--color-background-main);
+		border-right: var(--border-brutalist-thick);
+		box-shadow: 8px 0 0 var(--color-border-primary);
+		z-index: 999;
+		display: flex;
+		flex-direction: column;
+		animation: slideIn 0.3s ease;
+		overflow-y: auto;
+	}
+
+	@keyframes slideIn {
+		from {
+			transform: translateX(-100%);
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+
+	.mobile-menu-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1.5rem 1.25rem;
+		border-bottom: var(--border-brutalist-thick);
+		background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-warning) 100%);
+	}
+
+	.mobile-menu-title {
+		margin: 0;
+		font-size: 1.5rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		color: var(--color-text-primary);
+	}
+
+	.mobile-menu-close {
+		background: var(--color-background-main);
+		border: var(--border-brutalist-thick);
+		border-radius: 8px;
+		padding: 0.5rem;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s ease;
+		box-shadow: var(--shadow-brutalist-small);
+	}
+
+	.mobile-menu-close:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-brutalist-medium);
+	}
+
+	.mobile-menu-close:active {
+		transform: translateY(0);
+		box-shadow: var(--shadow-brutalist-small);
+	}
+
+	.mobile-menu-nav {
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+		gap: 0.5rem;
+	}
+
+	.mobile-menu-link {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem 1.25rem;
+		text-decoration: none;
+		color: var(--color-text-primary);
+		font-weight: 600;
+		font-size: 1rem;
+		background: var(--color-background-main);
+		border: var(--border-brutalist-thick);
+		border-radius: 8px;
+		transition: all 0.2s ease;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		box-shadow: var(--shadow-brutalist-small);
+	}
+
+	.mobile-menu-link:hover {
+		background: var(--color-gradient-gold);
+		transform: translateX(4px);
+		box-shadow: var(--shadow-brutalist-medium);
+	}
+
+	.mobile-menu-link.active {
+		background: var(--color-primary);
+		border-color: var(--color-border-primary);
+		box-shadow: var(--shadow-brutalist-medium);
+	}
+
+	.mobile-menu-divider {
+		height: 2px;
+		background: var(--color-border-primary);
+		margin: 0.5rem 0;
+	}
+
 	/* Responsive adjustments */
 	@media (max-width: 600px) {
 		.container {
@@ -495,6 +736,15 @@
 
 		.home-link {
 			padding: 0.625rem !important;
+		}
+
+		/* Show mobile menu button and hide center items on mobile */
+		.menu-button-item {
+			display: block;
+		}
+
+		.center-items {
+			display: none;
 		}
 
 		:global(.toolbar) {
