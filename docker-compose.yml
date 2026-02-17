@@ -1,0 +1,16 @@
+services:
+  nook:
+    build:
+      context: .
+      args:
+        # Empty string makes all model URLs relative (same-origin), eliminating CORS.
+        # Download models first: node scripts/download-models.js
+        PUBLIC_BASE_MODEL_URL: ''
+    ports:
+      - '3000:3000'
+    environment:
+      # Path inside the container where local models are mounted.
+      - LOCAL_MODELS_PATH=/app/models
+    volumes:
+      # Mount the downloaded models directory into the container.
+      - ./local-models:/app/models
