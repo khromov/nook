@@ -16,7 +16,7 @@ https://nook.software
 - **Text-to-Speech** - Voice synthesis with Kitten TTS, Piper, and Kokoro models
 - **Background Remover** - AI-powered background removal
 
-## Running Locally
+## Running Locally for development
 
 1. Clone the repository
 
@@ -50,6 +50,20 @@ https://nook.software
 npm run build
 ```
 
+## Self-hosting with local models
+
+To serve models from your own machine instead of the CDN:
+
+```bash
+# Download models (omit flags to download everything)
+npm run download-models
+
+# Build and run
+npm run build && node server.js
+```
+
+The server automatically detects the `./local-models` directory and serves from there. If it's absent, model requests redirect to the CDN.
+
 ## Using Docker
 
 ```bash
@@ -58,6 +72,13 @@ docker build -t nook .
 
 # Run the container
 docker run -p 3000:3000 nook
+```
+
+To use local models with Docker, download them first and use Docker Compose which mounts `./local-models` automatically:
+
+```bash
+npm run download-models
+docker compose up --build
 ```
 
 ## How It Works

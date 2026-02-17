@@ -27,3 +27,6 @@ codebase.md
 # ONNX Runtime files (generated from npm packages)
 /static/onnx-runtime/
 /static/transformers/
+
+# Locally downloaded model files (for self-hosted Docker deployments)
+/local-models/

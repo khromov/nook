@@ -1,0 +1,9 @@
+services:
+  nook:
+    build:
+      context: .
+    ports:
+      - '3000:3000'
+    volumes:
+      # Mount downloaded models into the container. Server auto-detects this directory.
+      - ./local-models:/app/local-models
