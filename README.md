@@ -56,7 +56,7 @@ To serve models from your own machine instead of the CDN:
 
 ```bash
 # Download models (omit flags to download everything)
-npm run download-models -- --skip-tts --skip-whisper --skip-bgremoval
+npm run download-models
 
 # Build and run
 npm run build && node server.js
@@ -72,6 +72,13 @@ docker build -t nook .
 
 # Run the container
 docker run -p 3000:3000 nook
+```
+
+To use local models with Docker, download them first and use Docker Compose which mounts `./local-models` automatically:
+
+```bash
+npm run download-models
+docker compose up --build
 ```
 
 ## How It Works
