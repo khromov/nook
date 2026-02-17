@@ -2,12 +2,8 @@ services:
   nook:
     build:
       context: .
-      args:
-        # Set to true to serve models from same origin instead of CDN.
-        # Download models first: node scripts/download-models.js
-        PUBLIC_LOCAL_MODE: 'true'
     ports:
       - '3000:3000'
     volumes:
-      # Mount the downloaded models directory into the container.
+      # Mount downloaded models into the container. Server auto-detects this directory.
       - ./local-models:/app/local-models

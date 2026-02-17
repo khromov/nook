@@ -28,7 +28,6 @@ jobs:
         run: npm run build
         env:
           PUBLIC_DISABLE_OPFS: false
-          PUBLIC_LOCAL_MODE: false
 
       - name: Get main branch bundle sizes
         id: main_sizes
@@ -56,7 +55,6 @@ jobs:
         run: npm run build
         env:
           PUBLIC_DISABLE_OPFS: false
-          PUBLIC_LOCAL_MODE: false
 
       - name: Get PR branch bundle sizes
         id: pr_sizes

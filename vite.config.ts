@@ -6,6 +6,15 @@ import { wuchale } from '@wuchale/vite-plugin';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
+	server: {
+		proxy: {
+			// In dev, proxy /models to CDN so relative model URLs work without a local-models dir.
+			'/models': {
+				target: 'https://sta-public.fra1.cdn.digitaloceanspaces.com',
+				changeOrigin: true
+			}
+		}
+	},
 	plugins: [
 		{
 			name: 'configure-response-headers',

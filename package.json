@@ -6,7 +6,6 @@
 	"scripts": {
 		"dev": "npm run copy-wasm && vite dev",
 		"build": "npm run copy-wasm && PUBLIC_DISABLE_OPFS=false vite build",
-		"build:local": "npm run copy-wasm && PUBLIC_DISABLE_OPFS=false PUBLIC_LOCAL_MODE=true vite build",
 		"build:static": "npm run copy-wasm && PUBLIC_DISABLE_OPFS=false ADAPTER=static vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync && husky",

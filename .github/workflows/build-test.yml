@@ -26,4 +26,3 @@ jobs:
         run: npm run build
         env:
           PUBLIC_DISABLE_OPFS: false
-          PUBLIC_LOCAL_MODE: false
