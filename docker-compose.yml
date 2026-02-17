@@ -3,14 +3,11 @@ services:
     build:
       context: .
       args:
-        # Empty string makes all model URLs relative (same-origin), eliminating CORS.
+        # Set to true to serve models from same origin instead of CDN.
         # Download models first: node scripts/download-models.js
-        PUBLIC_BASE_MODEL_URL: ''
+        PUBLIC_LOCAL_MODE: 'true'
     ports:
       - '3000:3000'
-    environment:
-      # Path inside the container where local models are mounted.
-      - LOCAL_MODELS_PATH=/app/models
     volumes:
       # Mount the downloaded models directory into the container.
-      - ./local-models:/app/models
+      - ./local-models:/app/local-models
