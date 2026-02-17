@@ -5,7 +5,6 @@
 	import ShapesIcon from 'virtual:icons/lucide/shapes';
 	import ChevronRightIcon from 'virtual:icons/lucide/chevron-right';
 	import { page } from '$app/stores';
-	import { resolve } from '$app/paths';
 	import { getCurrentLanguageFromPage, getTokenizerPaths } from '$lib/i18n-utils';
 
 	// Get current language and create localized tokenizer paths
@@ -26,7 +25,7 @@
 	</div>
 
 	<div class="tokenizer-cards">
-		<a href={resolve(tokenizerPaths.anthropic)} class="tokenizer-card claude-card">
+		<a href={tokenizerPaths.anthropic} class="tokenizer-card claude-card">
 			<div class="card-decoration"></div>
 			<div class="card-content">
 				<div class="card-icon">
@@ -43,7 +42,7 @@
 			</div>
 		</a>
 
-		<a href={resolve(tokenizerPaths.openai)} class="tokenizer-card chatgpt-card">
+		<a href={tokenizerPaths.openai} class="tokenizer-card chatgpt-card">
 			<div class="card-decoration"></div>
 			<div class="card-content">
 				<div class="card-icon">
@@ -60,7 +59,7 @@
 			</div>
 		</a>
 
-		<a href={resolve(tokenizerPaths.gemini)} class="tokenizer-card gemini-card">
+		<a href={tokenizerPaths.gemini} class="tokenizer-card gemini-card">
 			<div class="card-decoration"></div>
 			<div class="card-content">
 				<div class="card-icon">

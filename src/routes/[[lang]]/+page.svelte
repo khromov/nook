@@ -5,7 +5,6 @@
 	import SpeechIcon from 'virtual:icons/lucide/speech';
 	import CalculatorIcon from 'virtual:icons/lucide/calculator';
 	import { page } from '$app/stores';
-	import { resolve } from '$app/paths';
 	import { getCurrentLanguageFromPage, createLocalizedLink } from '$lib/i18n-utils';
 
 	// Get current language and create localized links
@@ -30,7 +29,7 @@
 		</header>
 
 		<div class="feature-grid">
-			<a href={resolve(chatLink)} class="feature-card chat-card">
+			<a href={chatLink} class="feature-card chat-card">
 				<div class="card-number">Tool #01</div>
 				<div class="card-content">
 					<div class="icon-container">
@@ -43,7 +42,7 @@
 				</div>
 			</a>
 
-			<a href={resolve(transcribeLink)} class="feature-card transcribe-card">
+			<a href={transcribeLink} class="feature-card transcribe-card">
 				<div class="card-number">Tool #02</div>
 				<div class="card-content">
 					<div class="icon-container">
@@ -57,7 +56,7 @@
 				</div>
 			</a>
 
-			<a href={resolve(ttsLink)} class="feature-card tts-card">
+			<a href={ttsLink} class="feature-card tts-card">
 				<div class="card-number">Tool #03</div>
 				<div class="card-content">
 					<div class="icon-container">
@@ -71,7 +70,7 @@
 				</div>
 			</a>
 
-			<a href={resolve(backgroundLink)} class="feature-card background-card">
+			<a href={backgroundLink} class="feature-card background-card">
 				<div class="card-number">Tool #04</div>
 				<div class="card-content">
 					<div class="icon-container">
@@ -85,7 +84,7 @@
 				</div>
 			</a>
 
-			<a href={resolve(tokensLink)} class="feature-card tokens-card">
+			<a href={tokensLink} class="feature-card tokens-card">
 				<div class="card-number">Tool #05</div>
 				<div class="card-content">
 					<div class="icon-container">

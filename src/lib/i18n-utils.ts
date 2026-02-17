@@ -34,7 +34,9 @@ export function createLocalizedLink(path: string, lang: string): string {
 		}
 	}
 
-	return resolve(localizedPath);
+	// Type assertion needed because resolve() has strict route typing
+	// but we're dynamically building valid routes
+	return resolve(localizedPath as any);
 }
 
 /**
