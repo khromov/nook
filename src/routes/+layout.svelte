@@ -16,7 +16,6 @@
 	import WrenchIcon from 'virtual:icons/lucide/wrench';
 	import XIcon from 'virtual:icons/lucide/x';
 	import { Toaster } from 'svelte-sonner';
-	import { resolve } from '$app/paths';
 	import { getCurrentLanguage, createLocalizedLink, locales } from '$lib/i18n-utils';
 
 	interface Props {
@@ -138,7 +137,7 @@
 <svelte:window onkeydown={handleKeydown} />
 
 <div class="app-wrapper">
-	<div class="container" class:fullWidth={page.url.pathname === '/og'}>
+	<div class="container" class:fullWidth={page.url.pathname.endsWith('/og')}>
 		<nav class="main-nav">
 			<ul>
 				<li class="nav-left">
@@ -146,7 +145,7 @@
 						{#if link.icon === 'home'}
 							<div class="home-item">
 								<a
-									href={resolve(link.path)}
+									href={link.path}
 									class:active={isActive(link.path)}
 									class:home-link={link.icon === 'home'}
 								>
@@ -162,7 +161,7 @@
 						{#each getLocalizedNavLinks(currentLang) as link (link.path)}
 							{#if link.icon !== 'home'}
 								<div>
-									<a href={resolve(link.path)} class:active={isActive(link.path)}>
+									<a href={link.path} class:active={isActive(link.path)}>
 										{#if link.icon === 'chat'}
 											<MessageSquareIcon style="width: 20px; height: 20px; stroke-width: 2.5" />
 										{:else if link.icon === 'mic'}
@@ -196,7 +195,7 @@
 				</li>
 				<li class="home-item language-item">
 					<a
-						href={resolve(createLocalizedLink('/language', currentLang))}
+						href={createLocalizedLink('/language', currentLang)}
 						class="home-link"
 						aria-label="Change language"
 					>
@@ -234,7 +233,7 @@
 		<nav class="mobile-menu-nav">
 			{#each getLocalizedNavLinks(currentLang) as link (link.path)}
 				<a
-					href={resolve(link.path)}
+					href={link.path}
 					class="mobile-menu-link"
 					class:active={isActive(link.path)}
 					onclick={closeMobileMenu}
@@ -262,7 +261,7 @@
 			{/each}
 			<div class="mobile-menu-divider"></div>
 			<a
-				href={resolve(createLocalizedLink('/language', currentLang))}
+				href={createLocalizedLink('/language', currentLang)}
 				class="mobile-menu-link"
 				onclick={closeMobileMenu}
 			>

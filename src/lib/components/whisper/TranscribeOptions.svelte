@@ -4,7 +4,6 @@
 	import MusicIcon from 'virtual:icons/lucide/music';
 	import FolderIcon from 'virtual:icons/lucide/folder';
 	import MicIcon from 'virtual:icons/lucide/mic';
-	import { resolve } from '$app/paths';
 
 	interface Props {
 		transcribeMode: 'demo' | 'upload' | 'record';
@@ -86,7 +85,7 @@
 			/>
 			<div class="option-content">
 				<strong>Demo File</strong>
-				<small><a href={resolve('/rich.mp3')} target="_blank">Listen →</a></small>
+				<small><a href="/rich.mp3" target="_blank">Listen →</a></small>
 			</div>
 		</label>
 	</div>
