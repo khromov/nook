@@ -37,7 +37,7 @@
 		"@iconify-json/lucide": "^1.2.91",
 		"@sveltejs/adapter-node": "^5.5.3",
 		"@sveltejs/adapter-static": "^3.0.10",
-		"@sveltejs/kit": "^2.52.0",
+		"@sveltejs/kit": "^2.53.0",
 		"@transcribe/transcriber": "^3.0.1",
 		"@webgpu/types": "^0.1.69",
 		"@wllama/wllama": "github:khromov/wllama#cache-reset-fix-2",
