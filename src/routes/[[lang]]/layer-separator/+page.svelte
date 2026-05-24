@@ -17,6 +17,7 @@
 
 	import MaskCanvas from '$lib/components/layer-separator/MaskCanvas.svelte';
 	import DepthHistogram from '$lib/components/layer-separator/DepthHistogram.svelte';
+	import SamPicker from '$lib/components/layer-separator/SamPicker.svelte';
 	import {
 		depthToMasks,
 		depthHistogram,
@@ -25,6 +26,14 @@
 		resizeThresholds
 	} from '$lib/layer-separator/masks';
 	import { grayscaleToBlobUrl, downloadBlobUrl } from '$lib/layer-separator/canvas';
+	import {
+		loadSam,
+		encodeImage,
+		predictMask,
+		type SamCore,
+		type SamSession
+	} from '$lib/layer-separator/sam';
+	import type { LayerOverride } from '$lib/layer-separator/types';
 
 	type DepthOutput = { depth: RawImage };
 	type DepthPipeline = (input: string) => Promise<DepthOutput>;
@@ -51,12 +60,31 @@
 
 	let layerCount = $state(3);
 	let thresholds = $state<number[]>(evenThresholds(3));
+	// Per-layer overrides, parallel to layers (overridesByLayer[i] applies to layer i).
+	let overridesByLayer = $state<LayerOverride[][]>([[], [], []]);
+
+	// SAM state
+	let samCore = $state<SamCore | null>(null);
+	let samSession = $state<SamSession | null>(null);
+	let samStatus = $state<'idle' | 'loading' | 'encoding' | 'ready' | 'error'>('idle');
+	let samLoadProgress = $state(0);
+	let samErrorMessage = $state('');
+	let editingLayerIndex = $state<number | null>(null);
+	let pendingMask = $state<Uint8Array | null>(null);
+	let lastClick = $state<{ x: number; y: number } | null>(null);
+	let isPredicting = $state(false);
 
 	const histogram = $derived.by(() =>
 		depthData ? depthHistogram(depthData) : new Uint32Array(256)
 	);
 
-	const layers = $derived.by(() => layersFromThresholds(thresholds));
+	const layers = $derived.by(() => {
+		const base = layersFromThresholds(thresholds);
+		for (let i = 0; i < base.length; i++) {
+			base[i].overrides = overridesByLayer[i] ?? [];
+		}
+		return base;
+	});
 
 	const masks = $derived.by(() => {
 		if (!depthData) return [];
@@ -122,8 +150,11 @@
 					? depthRaw.data
 					: new Uint8Array(depthRaw.data as ArrayLike<number>);
 
-			// Reset thresholds to even cuts for the new image.
+			// Reset per-image state.
 			thresholds = evenThresholds(layerCount);
+			overridesByLayer = Array.from({ length: layerCount }, () => []);
+			samSession = null;
+			cancelEdit();
 		} catch (err) {
 			console.error('Processing error:', err);
 			error = true;
@@ -132,6 +163,94 @@
 			isProcessing = false;
 			await releaseWakeLock();
 		}
+	}
+
+	async function ensureSamReady() {
+		if (!originalImageUrl) return;
+		if (samStatus === 'idle' || samStatus === 'error') {
+			samStatus = 'loading';
+			samLoadProgress = 0;
+			samErrorMessage = '';
+			try {
+				if (!samCore) {
+					samCore = await loadSam((pct) => (samLoadProgress = pct));
+				}
+				samStatus = 'encoding';
+				samSession = await encodeImage(samCore, originalImageUrl);
+				samStatus = 'ready';
+			} catch (err) {
+				console.error('SAM load/encode error:', err);
+				samStatus = 'error';
+				samErrorMessage =
+					'Failed to load the segmentation model. Check your connection and try again.';
+			}
+			return;
+		}
+		// Already loaded, but session may be stale (different image).
+		if (samStatus === 'ready' && !samSession && samCore) {
+			samStatus = 'encoding';
+			try {
+				samSession = await encodeImage(samCore, originalImageUrl);
+				samStatus = 'ready';
+			} catch (err) {
+				console.error('SAM encode error:', err);
+				samStatus = 'error';
+				samErrorMessage = 'Failed to prepare the image for segmentation.';
+			}
+		}
+	}
+
+	async function enterEdit(layerIndex: number) {
+		editingLayerIndex = layerIndex;
+		pendingMask = null;
+		lastClick = null;
+		await ensureSamReady();
+	}
+
+	function cancelEdit() {
+		editingLayerIndex = null;
+		pendingMask = null;
+		lastClick = null;
+		isPredicting = false;
+	}
+
+	async function handleSamClick(x: number, y: number) {
+		if (!samSession || editingLayerIndex === null) return;
+		lastClick = { x, y };
+		isPredicting = true;
+		try {
+			const result = await predictMask(samSession, x, y);
+			// Verify resolution matches depth resolution (should be the same — both at original image size).
+			if (result.width !== depthW || result.height !== depthH) {
+				console.warn('SAM mask resolution mismatch', result.width, result.height, depthW, depthH);
+			}
+			pendingMask = result.mask;
+		} catch (err) {
+			console.error('SAM prediction failed:', err);
+			pendingMask = null;
+		} finally {
+			isPredicting = false;
+		}
+	}
+
+	function acceptOverride() {
+		if (editingLayerIndex === null || !pendingMask) return;
+		const idx = editingLayerIndex;
+		const next = overridesByLayer.map((arr, i) =>
+			i === idx ? [...arr, { source: 'sam-override', mask: pendingMask! } as LayerOverride] : arr
+		);
+		overridesByLayer = next;
+		cancelEdit();
+	}
+
+	function rejectPending() {
+		pendingMask = null;
+	}
+
+	function removeOverride(layerIdx: number, overrideIdx: number) {
+		overridesByLayer = overridesByLayer.map((arr, i) =>
+			i === layerIdx ? arr.filter((_, j) => j !== overrideIdx) : arr
+		);
 	}
 
 	function handleFile(e: Event) {
@@ -148,7 +267,13 @@
 
 	function setLayerCount(n: number) {
 		thresholds = resizeThresholds(thresholds, n);
+		// Keep overrides for layers that still exist; new layers get empty arrays.
+		const next: LayerOverride[][] = [];
+		for (let i = 0; i < n; i++) next.push(overridesByLayer[i] ?? []);
+		overridesByLayer = next;
 		layerCount = n;
+		// If we were editing a layer that no longer exists, cancel.
+		if (editingLayerIndex !== null && editingLayerIndex >= n) cancelEdit();
 	}
 
 	function onThresholdsChange(next: number[]) {
@@ -179,6 +304,9 @@
 		}
 		originalImageUrl = null;
 		thresholds = evenThresholds(layerCount);
+		overridesByLayer = Array.from({ length: layerCount }, () => []);
+		samSession = null;
+		cancelEdit();
 		error = false;
 	}
 
@@ -283,8 +411,93 @@
 					</p>
 				</SectionCard>
 
+				<SectionCard rotation={0.15} animationDelay={0.15}>
+					<StepHeader stepNumber={4} title="Refine with object clicks" backgroundColor="#ff69b4" />
+					<p class="hint">
+						Depth gets some objects wrong (e.g. the building grouped with the foreground leaves).
+						Click <strong>Add object</strong> on a layer, then click that object on the image — a segmentation
+						model picks out the shape and forces it into the layer you chose.
+					</p>
+
+					<div class="layer-overrides">
+						{#each layers as layer, i (i)}
+							{@const isFar = i === 0}
+							{@const isNear = i === layers.length - 1}
+							<div class="layer-row" class:active={editingLayerIndex === i}>
+								<div class="layer-row-label">
+									Layer {i + 1}
+									<span class="depth-range">depth {layer.depthMin}–{layer.depthMax}</span>
+									{#if isFar}<span class="tag">farthest</span>{:else if isNear}<span class="tag"
+											>nearest</span
+										>{/if}
+								</div>
+								<div class="layer-row-overrides">
+									{#each overridesByLayer[i] ?? [] as ov, j (j)}
+										<span class="override-chip" title={ov.source}>
+											Object {j + 1}
+											<button
+												class="chip-remove"
+												aria-label="Remove object {j + 1} from layer {i + 1}"
+												onclick={() => removeOverride(i, j)}
+											>
+												×
+											</button>
+										</span>
+									{/each}
+								</div>
+								<button
+									class="add-override-btn"
+									onclick={() => enterEdit(i)}
+									disabled={editingLayerIndex !== null && editingLayerIndex !== i}
+								>
+									{editingLayerIndex === i ? 'Editing…' : '+ Add object'}
+								</button>
+							</div>
+						{/each}
+					</div>
+
+					{#if editingLayerIndex !== null}
+						<div class="sam-editor">
+							{#if samStatus === 'loading'}
+								<p>Loading segmentation model… {samLoadProgress}%</p>
+							{:else if samStatus === 'encoding'}
+								<p>Preparing image…</p>
+							{:else if samStatus === 'error'}
+								<p class="sam-error">
+									{samErrorMessage}
+									<button onclick={() => enterEdit(editingLayerIndex!)}>Retry</button>
+								</p>
+							{:else if samStatus === 'ready' && originalImageUrl}
+								<p class="sam-instr">
+									Click anywhere on the image to pick an object for <strong
+										>Layer {editingLayerIndex + 1}</strong
+									>.
+								</p>
+								<SamPicker
+									imageUrl={originalImageUrl}
+									{pendingMask}
+									maskWidth={depthW}
+									maskHeight={depthH}
+									{lastClick}
+									{isPredicting}
+									onPick={handleSamClick}
+								/>
+								<div class="sam-actions">
+									{#if pendingMask}
+										<ActionButton onClick={acceptOverride} variant="success">
+											Accept (assign to layer {editingLayerIndex + 1})
+										</ActionButton>
+										<button class="link-btn" onclick={rejectPending}>Try another point</button>
+									{/if}
+									<button class="link-btn" onclick={cancelEdit}>Cancel</button>
+								</div>
+							{/if}
+						</div>
+					{/if}
+				</SectionCard>
+
 				<SectionCard rotation={0.1} animationDelay={0.2}>
-					<StepHeader stepNumber={4} title="Cumulative Masks" />
+					<StepHeader stepNumber={5} title="Cumulative Masks" />
 					<p class="hint">
 						{masks.length} mask{masks.length === 1 ? '' : 's'} for {layers.length} layers. Mask k is BLACK
 						where layers 1..k live; the frontmost layer has no mask.
@@ -393,6 +606,119 @@
 		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 		gap: 1.5rem;
 		margin-top: 1rem;
+	}
+	.layer-overrides {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		margin: 1rem 0;
+	}
+	.layer-row {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.5rem 0.75rem;
+		border: 2px solid #000;
+		background: #fff;
+		flex-wrap: wrap;
+	}
+	.layer-row.active {
+		background: #ffe5f1;
+		border-color: #ff69b4;
+	}
+	.layer-row-label {
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		font-size: 0.875rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	.tag {
+		font-size: 0.7rem;
+		color: #555;
+		background: #f0f0f0;
+		padding: 0.1rem 0.4rem;
+		text-transform: lowercase;
+		letter-spacing: 0;
+		font-weight: 600;
+	}
+	.depth-range {
+		font-size: 0.7rem;
+		color: #888;
+		font-weight: 400;
+		text-transform: none;
+		letter-spacing: 0;
+		font-family: monospace;
+	}
+	.layer-row-overrides {
+		display: flex;
+		gap: 0.4rem;
+		flex-wrap: wrap;
+		flex: 1;
+	}
+	.override-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.2rem 0.5rem;
+		background: #ff69b4;
+		color: #000;
+		border: 2px solid #000;
+		font-size: 0.75rem;
+		font-weight: 700;
+	}
+	.chip-remove {
+		background: none;
+		border: none;
+		font-size: 1.1rem;
+		font-weight: 700;
+		cursor: pointer;
+		padding: 0;
+		line-height: 1;
+		color: #000;
+	}
+	.add-override-btn {
+		padding: 0.4rem 0.75rem;
+		background: #98fb98;
+		border: 2px solid #000;
+		font-weight: 700;
+		cursor: pointer;
+		font-family: inherit;
+		box-shadow: 3px 3px 0 #000;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+	.add-override-btn:not(:disabled):hover {
+		transform: translate(-1px, -1px);
+		box-shadow: 4px 4px 0 #000;
+	}
+	.add-override-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+	.sam-editor {
+		margin-top: 1rem;
+		padding: 1rem;
+		border: 3px dashed #ff69b4;
+		background: #fff;
+	}
+	.sam-instr {
+		font-weight: 600;
+		margin: 0 0 0.75rem;
+	}
+	.sam-error {
+		color: #800;
+		font-weight: 600;
+	}
+	.sam-actions {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		margin-top: 0.75rem;
+		flex-wrap: wrap;
 	}
 	figure {
 		margin: 0;

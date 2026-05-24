@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:12:14.886Z\n"
-"PO-Revision-Date: 2026-05-24T20:49:28.020Z\n"
+"PO-Revision-Date: 2026-05-24T21:24:47.820Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -558,6 +558,7 @@ msgstr "Error al cargar el modelo de transcripción. Por favor intenta de nuevo.
 #: src/lib/components/common/ErrorDisplay.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 #: src/routes/[[lang]]/background-remover/+page.svelte
+#: src/routes/[[lang]]/layer-separator/+page.svelte
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 #: src/routes/[[lang]]/text-to-speech/+page.svelte
 msgid "Retry"
@@ -1746,4 +1747,89 @@ msgstr ""
 msgid ""
 "{0} mask{1} for {2} layers. Mask k is BLACK\n"
 "where layers 1..k live; the frontmost layer has no mask."
+msgstr ""
+
+#~ msgid "Click to pick an object"
+#~ msgstr ""
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "Predicting mask"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Refine with object clicks"
+msgstr ""
+
+#~ msgid ""
+#~ "Depth gets some objects wrong (e.g. the building grouped with the foreground leaves).\n"
+#~ "Click <0>Add object</0> on a layer, then click that object on the image — a\n"
+#~ "segmentation model picks out the shape and forces it into the layer you chose."
+#~ msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "farthest"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "nearest"
+msgstr ""
+
+#~ msgid "Layer {0} <0/>"
+#~ msgstr ""
+
+#. placeholder {0}: j + 1
+#. placeholder {1}: i + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Remove object {0} from layer {1}"
+msgstr ""
+
+#. placeholder {0}: j + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Object {0} <0>×</0>"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Editing…"
+msgstr ""
+
+#. placeholder {0}: samLoadProgress
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Loading segmentation model… {0}%"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Preparing image…"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
+msgstr ""
+
+#. placeholder {0}: editingLayerIndex + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Accept (assign to layer {0})"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Try another point"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Cancel"
+msgstr ""
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "Click on the object you want to assign to this layer"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid ""
+"Depth gets some objects wrong (e.g. the building grouped with the foreground leaves).\n"
+"Click <0>Add object</0> on a layer, then click that object on the image — a segmentation\n"
+"model picks out the shape and forces it into the layer you chose."
+msgstr ""
+
+#. placeholder {0}: i + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
 msgstr ""
