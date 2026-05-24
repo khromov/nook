@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:41:34.932Z\n"
-"PO-Revision-Date: 2025-11-16T01:53:16.199Z\n"
+"PO-Revision-Date: 2026-05-24T20:35:55.719Z\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: \n"
@@ -107,6 +107,8 @@ msgstr "処理前"
 
 #: src/lib/components/background-remover/BackgroundRemoverResult.svelte
 #: src/lib/components/background-remover/BackgroundRemoverResult.svelte
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+#: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Original "
 msgstr "オリジナル "
 
@@ -470,6 +472,7 @@ msgstr "文字起こしモデルの読み込みに失敗しました。もう一
 #: src/lib/components/common/ErrorDisplay.svelte
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 #: src/routes/[[lang]]/background-remover/+page.svelte
+#: src/routes/[[lang]]/layer-separator/+page.svelte
 #: src/routes/[[lang]]/text-to-speech/+page.svelte
 msgid "Retry"
 msgstr "再試行"
@@ -652,6 +655,7 @@ msgid "The AI model is being downloaded and initialized. This may take a few mom
 msgstr "AIモデルをダウンロードして初期化しています。しばらくお待ちください。"
 
 #: src/routes/[[lang]]/background-remover/+page.svelte
+#: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Restart"
 msgstr "リスタート"
 
@@ -676,6 +680,7 @@ msgid "Upload Images"
 msgstr "画像をアップロード"
 
 #: src/routes/[[lang]]/background-remover/+page.svelte
+#: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Try Again"
 msgstr "もう一度試す"
 
@@ -1016,6 +1021,7 @@ msgstr "モデルをダウンロード中"
 
 #: src/lib/components/whisper/WhisperModelSelector.svelte
 #: src/routes/[[lang]]/background-remover/+page.svelte
+#: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Loading..."
 msgstr "読み込み中..."
 
@@ -1612,3 +1618,76 @@ msgstr "ツール"
 #: src/routes/+layout.svelte
 msgid "More tools"
 msgstr "その他のツール"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Loading Depth Model"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Downloading Depth Anything V2 (~100 MB). Cached after first load."
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Layer Separator (Depth Anything V2 small)"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Upload Image"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Choose an image <0/>"
+msgstr ""
+
+#. placeholder {0}: LAYER_COUNT - 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid ""
+"Depth model runs locally in your browser. Output is {0} cumulative B&W masks\n"
+"at source resolution, ready to drop into Photoshop as layer masks."
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Running depth estimation and building masks…"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Source & Depth"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Depth map (white = near)"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Depth map"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Download depth map"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Cumulative Layer Masks"
+msgstr ""
+
+#. placeholder {0}: maskUrls.length
+#. placeholder {1}: maskUrls.length === 1 ? '' : 's'
+#. placeholder {2}: LAYER_COUNT
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid ""
+"{0} mask{1} for {2} layers. Mask k\n"
+"is BLACK where layers 1..k live (apply it to extract those layers in Photoshop); the frontmost\n"
+"layer has no mask — it's what remains."
+msgstr ""
+
+#. placeholder {0}: i + 1
+#. placeholder {0}: i + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Mask {0}"
+msgstr ""
+
+#. placeholder {0}: i + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Download mask {0}"
+msgstr ""
