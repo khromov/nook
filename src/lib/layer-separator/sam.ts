@@ -84,15 +84,29 @@ export async function predictMask(
 	let best = 0;
 	for (let i = 1; i < numMasks; i++) if (scores[i] > scores[best]) best = i;
 
-	// post_process_masks returns masks[batch][prompt] — for 1 batch / 1 prompt: masks[0][0].
-	// That tensor has dims [numMasks, H, W] with data interleaved as numMasks * pixel + maskIdx.
-	const tensor = masks[0][0];
+	// Probe the actual shape — transformers.js has shifted post_process_masks shape between versions.
+	console.log('[SAM] pred_masks.dims:', pred_masks.dims, 'data length:', pred_masks.data?.length);
+	console.log('[SAM] masks structure:', {
+		topLevel: Array.isArray(masks) ? `array len ${masks.length}` : typeof masks,
+		first: masks[0],
+		firstIsArray: Array.isArray(masks[0])
+	});
+
+	// Robust unwrapping: descend through nested arrays until we hit a tensor (has .dims).
+	let tensor = masks[0];
+	while (Array.isArray(tensor)) tensor = tensor[0];
+
 	const dims = tensor.dims as number[];
+	console.log('[SAM] tensor dims:', dims, 'data length:', tensor.data.length, 'scores:', scores);
+
 	const H = dims[dims.length - 2];
 	const W = dims[dims.length - 1];
 	const data = tensor.data as Uint8Array | Int8Array;
+	const expectedLen = numMasks * H * W;
+	console.log('[SAM] H:', H, 'W:', W, 'expected len:', expectedLen, 'actual:', data.length);
 
 	const bin = new Uint8Array(H * W);
+	// Try interleaved layout: numMasks * pixel + maskIdx
 	for (let i = 0; i < H * W; i++) {
 		bin[i] = data[i * numMasks + best] ? 255 : 0;
 	}
