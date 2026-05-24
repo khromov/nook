@@ -117,3 +117,51 @@ export function depthHistogram(depth: Uint8Array): Uint32Array {
 	for (let i = 0; i < depth.length; i++) hist[depth[i]]++;
 	return hist;
 }
+
+/**
+ * Adjust an existing threshold array to a new layer count without losing the
+ * user's positions where possible.
+ *
+ * - Growing: split the widest gap in half, repeatedly, until the array has
+ *   targetCount-1 entries.
+ * - Shrinking: drop the cut nearest to its closer neighbor (smallest local
+ *   change), repeatedly, until the array has targetCount-1 entries.
+ */
+export function resizeThresholds(current: number[], targetCount: number): number[] {
+	if (targetCount < 2) return [];
+	const targetCutCount = targetCount - 1;
+	const cuts = [...current];
+
+	while (cuts.length < targetCutCount) {
+		const bounds = [DEPTH_MIN, ...cuts, DEPTH_MAX];
+		let widestGap = 0;
+		let widestIdx = 0;
+		for (let i = 0; i < bounds.length - 1; i++) {
+			const gap = bounds[i + 1] - bounds[i];
+			if (gap > widestGap) {
+				widestGap = gap;
+				widestIdx = i;
+			}
+		}
+		const newCut = Math.round((bounds[widestIdx] + bounds[widestIdx + 1]) / 2);
+		cuts.splice(widestIdx, 0, newCut);
+	}
+
+	while (cuts.length > targetCutCount) {
+		const bounds = [DEPTH_MIN, ...cuts, DEPTH_MAX];
+		let smallestNeighbor = Infinity;
+		let removeIdx = 0;
+		for (let i = 0; i < cuts.length; i++) {
+			const leftGap = cuts[i] - bounds[i];
+			const rightGap = bounds[i + 2] - cuts[i];
+			const closeness = Math.min(leftGap, rightGap);
+			if (closeness < smallestNeighbor) {
+				smallestNeighbor = closeness;
+				removeIdx = i;
+			}
+		}
+		cuts.splice(removeIdx, 1);
+	}
+
+	return cuts;
+}

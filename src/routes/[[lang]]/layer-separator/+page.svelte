@@ -21,7 +21,8 @@
 		depthToMasks,
 		depthHistogram,
 		evenThresholds,
-		layersFromThresholds
+		layersFromThresholds,
+		resizeThresholds
 	} from '$lib/layer-separator/masks';
 	import { grayscaleToBlobUrl, downloadBlobUrl } from '$lib/layer-separator/canvas';
 
@@ -146,8 +147,8 @@
 	}
 
 	function setLayerCount(n: number) {
+		thresholds = resizeThresholds(thresholds, n);
 		layerCount = n;
-		thresholds = evenThresholds(n);
 	}
 
 	function onThresholdsChange(next: number[]) {

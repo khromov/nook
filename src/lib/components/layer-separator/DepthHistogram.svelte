@@ -12,6 +12,22 @@
 	let containerEl: HTMLDivElement | undefined = $state();
 	let containerWidth = $state(0);
 	let activeIndex = $state<number | null>(null);
+	let rafId: number | null = null;
+	let pendingThresholds: number[] | null = null;
+
+	function flushPending() {
+		rafId = null;
+		if (pendingThresholds) {
+			const next = pendingThresholds;
+			pendingThresholds = null;
+			onChange(next);
+		}
+	}
+
+	function scheduleChange(next: number[]) {
+		pendingThresholds = next;
+		if (rafId === null) rafId = requestAnimationFrame(flushPending);
+	}
 
 	// sqrt scale so a few dominant bins don't squash everything else flat
 	const maxBin = $derived.by(() => {
@@ -45,9 +61,10 @@
 		const upper =
 			activeIndex < thresholds.length - 1 ? thresholds[activeIndex + 1] - minSpacing : 255;
 		d = Math.max(lower, Math.min(upper, d));
+		if (d === thresholds[activeIndex]) return;
 		const next = [...thresholds];
 		next[activeIndex] = d;
-		onChange(next);
+		scheduleChange(next);
 	}
 
 	function endDrag(e: PointerEvent) {
@@ -55,6 +72,11 @@
 		const target = e.target as Element;
 		if (target.hasPointerCapture(e.pointerId)) target.releasePointerCapture(e.pointerId);
 		activeIndex = null;
+		// Flush any pending update so the final position commits immediately.
+		if (rafId !== null) {
+			cancelAnimationFrame(rafId);
+			flushPending();
+		}
 	}
 </script>
 

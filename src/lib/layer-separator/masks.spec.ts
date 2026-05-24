@@ -6,7 +6,8 @@ import {
 	depthToMasks,
 	evenThresholds,
 	layersFromThresholds,
-	depthHistogram
+	depthHistogram,
+	resizeThresholds
 } from './masks';
 
 describe('evenLayers', () => {
@@ -145,6 +146,54 @@ describe('layersFromThresholds', () => {
 		expect(layers).toHaveLength(2);
 		expect(layers[0].depthMax).toBe(128);
 		expect(layers[1].depthMin).toBe(128);
+	});
+});
+
+describe('resizeThresholds', () => {
+	it('returns empty for target < 2 layers', () => {
+		expect(resizeThresholds([100], 1)).toEqual([]);
+	});
+
+	it('returns unchanged when target matches current', () => {
+		expect(resizeThresholds([85, 170], 3)).toEqual([85, 170]);
+	});
+
+	it('preserves user cuts when growing', () => {
+		const grown = resizeThresholds([30, 180], 4);
+		expect(grown).toHaveLength(3);
+		expect(grown).toContain(30);
+		expect(grown).toContain(180);
+	});
+
+	it('splits the widest gap when growing', () => {
+		// gaps: [0..30]=30, [30..180]=150, [180..256]=76 → widest is 150
+		// new cut should be at (30+180)/2 = 105
+		const grown = resizeThresholds([30, 180], 4);
+		expect(grown).toContain(105);
+	});
+
+	it('shrinks by dropping the cut nearest to its closest neighbor', () => {
+		// cuts at [30, 80, 200]: cut 30's closeness=30 (left edge), 80's=50, 200's=56.
+		// 30 is smallest, so it gets removed.
+		const shrunk = resizeThresholds([30, 80, 200], 3);
+		expect(shrunk).toEqual([80, 200]);
+	});
+
+	it('growing then shrinking back may not restore exactly (closeness heuristic)', () => {
+		// [50, 150] → grown to 4: split widest gap [150..256] → [50, 150, 203]
+		// Shrunk to 3: cut 50 has closeness=50, cut 150 has closeness=53, cut 203 has 53.
+		// Smallest is 50, so 50 is removed.
+		const grown = resizeThresholds([50, 150], 4);
+		const shrunk = resizeThresholds(grown, 3);
+		expect(shrunk).toEqual([150, 203]);
+	});
+
+	it("user's drag survives growth (chain: even 3 → drag → grow to 5)", () => {
+		// User adjusts thresholds from even [85, 170] to dragged [30, 170], then grows to 5.
+		const result = resizeThresholds([30, 170], 5);
+		expect(result).toHaveLength(4);
+		expect(result).toContain(30);
+		expect(result).toContain(170);
 	});
 });
 
