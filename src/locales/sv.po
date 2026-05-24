@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:12:40.444Z\n"
-"PO-Revision-Date: 2026-05-24T21:24:47.822Z\n"
+"PO-Revision-Date: 2026-05-24T21:45:38.464Z\n"
 "Last-Translator: \n"
 "Language: sv\n"
 "Language-Team: \n"
@@ -1801,18 +1801,14 @@ msgstr ""
 msgid "Preparing image…"
 msgstr ""
 
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
-msgstr ""
+#~ msgid "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
+#~ msgstr ""
 
-#. placeholder {0}: editingLayerIndex + 1
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Accept (assign to layer {0})"
-msgstr ""
+#~ msgid "Accept (assign to layer {0})"
+#~ msgstr ""
 
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Try another point"
-msgstr ""
+#~ msgid "Try another point"
+#~ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Cancel"
@@ -1832,4 +1828,25 @@ msgstr ""
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
+msgstr ""
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid ""
+"Click anywhere on the image to build a mask for <0>Layer {0}</0>. Each click refines the previous\n"
+"result."
+msgstr ""
+
+#. placeholder {0}: pickedPoints.length
+#. placeholder {1}: pickedPoints.length === 1 ? '' : 's'
+#. placeholder {2}: editingLayerIndex + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Accept ({0} point{1} → layer {2})"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Clear points"
 msgstr ""

@@ -31,7 +31,8 @@
 		encodeImage,
 		predictMask,
 		type SamCore,
-		type SamSession
+		type SamSession,
+		type SamPoint
 	} from '$lib/layer-separator/sam';
 	import type { LayerOverride } from '$lib/layer-separator/types';
 
@@ -71,7 +72,7 @@
 	let samErrorMessage = $state('');
 	let editingLayerIndex = $state<number | null>(null);
 	let pendingMask = $state<Uint8Array | null>(null);
-	let lastClick = $state<{ x: number; y: number } | null>(null);
+	let pickedPoints = $state<SamPoint[]>([]);
 	let isPredicting = $state(false);
 
 	const histogram = $derived.by(() =>
@@ -203,24 +204,31 @@
 	async function enterEdit(layerIndex: number) {
 		editingLayerIndex = layerIndex;
 		pendingMask = null;
-		lastClick = null;
+		pickedPoints = [];
 		await ensureSamReady();
 	}
 
 	function cancelEdit() {
 		editingLayerIndex = null;
 		pendingMask = null;
-		lastClick = null;
+		pickedPoints = [];
 		isPredicting = false;
 	}
 
-	async function handleSamClick(x: number, y: number) {
+	async function handleSamClick(x: number, y: number, label: 0 | 1) {
 		if (!samSession || editingLayerIndex === null) return;
-		lastClick = { x, y };
+		pickedPoints = [...pickedPoints, { x, y, label }];
+		await runPrediction();
+	}
+
+	async function runPrediction() {
+		if (!samSession || pickedPoints.length === 0) {
+			pendingMask = null;
+			return;
+		}
 		isPredicting = true;
 		try {
-			const result = await predictMask(samSession, x, y);
-			// Verify resolution matches depth resolution (should be the same — both at original image size).
+			const result = await predictMask(samSession, pickedPoints);
 			if (result.width !== depthW || result.height !== depthH) {
 				console.warn('SAM mask resolution mismatch', result.width, result.height, depthW, depthH);
 			}
@@ -243,7 +251,8 @@
 		cancelEdit();
 	}
 
-	function rejectPending() {
+	function clearPoints() {
+		pickedPoints = [];
 		pendingMask = null;
 	}
 
@@ -469,25 +478,28 @@
 								</p>
 							{:else if samStatus === 'ready' && originalImageUrl}
 								<p class="sam-instr">
-									Click anywhere on the image to pick an object for <strong
-										>Layer {editingLayerIndex + 1}</strong
-									>.
+									Click anywhere on the image to build a mask for
+									<strong>Layer {editingLayerIndex + 1}</strong>. Each click refines the previous
+									result.
 								</p>
 								<SamPicker
 									imageUrl={originalImageUrl}
 									{pendingMask}
 									maskWidth={depthW}
 									maskHeight={depthH}
-									{lastClick}
+									points={pickedPoints}
 									{isPredicting}
 									onPick={handleSamClick}
 								/>
 								<div class="sam-actions">
 									{#if pendingMask}
 										<ActionButton onClick={acceptOverride} variant="success">
-											Accept (assign to layer {editingLayerIndex + 1})
+											Accept ({pickedPoints.length} point{pickedPoints.length === 1 ? '' : 's'}
+											→ layer {editingLayerIndex + 1})
 										</ActionButton>
-										<button class="link-btn" onclick={rejectPending}>Try another point</button>
+									{/if}
+									{#if pickedPoints.length > 0}
+										<button class="link-btn" onclick={clearPoints}>Clear points</button>
 									{/if}
 									<button class="link-btn" onclick={cancelEdit}>Cancel</button>
 								</div>

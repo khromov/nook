@@ -1,12 +1,14 @@
 <script lang="ts">
+	import type { SamPoint } from '$lib/layer-separator/sam';
+
 	interface Props {
 		imageUrl: string;
 		pendingMask: Uint8Array | null;
 		maskWidth: number;
 		maskHeight: number;
-		lastClick: { x: number; y: number } | null;
+		points: SamPoint[];
 		isPredicting: boolean;
-		onPick: (x: number, y: number) => void;
+		onPick: (x: number, y: number, label: 0 | 1) => void;
 		overlayColor?: string;
 	}
 
@@ -15,7 +17,7 @@
 		pendingMask,
 		maskWidth,
 		maskHeight,
-		lastClick,
+		points,
 		isPredicting,
 		onPick,
 		overlayColor = '255, 105, 180'
@@ -31,7 +33,9 @@
 		const displayY = e.clientY - rect.top;
 		const x = (displayX / rect.width) * imgEl.naturalWidth;
 		const y = (displayY / rect.height) * imgEl.naturalHeight;
-		onPick(Math.round(x), Math.round(y));
+		// Shift = subtract (background), normal = add (foreground)
+		const label: 0 | 1 = e.shiftKey ? 0 : 1;
+		onPick(Math.round(x), Math.round(y), label);
 	}
 
 	$effect(() => {
@@ -69,17 +73,23 @@
 		{#if pendingMask}
 			<canvas class="overlay" bind:this={overlayCanvasEl} aria-hidden="true"></canvas>
 		{/if}
-		{#if lastClick && imgEl}
-			<span
-				class="click-dot"
-				style:left="{(lastClick.x / imgEl.naturalWidth) * 100}%"
-				style:top="{(lastClick.y / imgEl.naturalHeight) * 100}%"
-			></span>
+		{#if imgEl}
+			{#each points as p, i (i)}
+				<span
+					class="click-dot"
+					class:bg={p.label === 0}
+					style:left="{(p.x / imgEl.naturalWidth) * 100}%"
+					style:top="{(p.y / imgEl.naturalHeight) * 100}%"
+				></span>
+			{/each}
 		{/if}
 		{#if isPredicting}
 			<div class="spinner" aria-label="Predicting mask">…</div>
 		{/if}
 	</div>
+	<p class="hint">
+		<strong>Click</strong> = add to mask · <strong>Shift+click</strong> = remove from mask
+	</p>
 </div>
 
 <style>
@@ -122,6 +132,9 @@
 		pointer-events: none;
 		box-shadow: 0 0 0 2px #fff;
 	}
+	.click-dot.bg {
+		background: #6090ff;
+	}
 	.spinner {
 		position: absolute;
 		top: 50%;
@@ -135,5 +148,10 @@
 	}
 	.picker.predicting img {
 		cursor: wait;
+	}
+	.hint {
+		font-size: 0.8rem;
+		color: #555;
+		margin: 0;
 	}
 </style>

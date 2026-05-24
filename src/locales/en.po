@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2026-05-24T21:24:47.818Z\n"
+"PO-Revision-Date: 2026-05-24T21:45:38.456Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1819,18 +1819,14 @@ msgstr "Loading segmentation model… {0}%"
 msgid "Preparing image…"
 msgstr "Preparing image…"
 
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
-msgstr "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
+#~ msgid "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
+#~ msgstr "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
 
-#. placeholder {0}: editingLayerIndex + 1
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Accept (assign to layer {0})"
-msgstr "Accept (assign to layer {0})"
+#~ msgid "Accept (assign to layer {0})"
+#~ msgstr "Accept (assign to layer {0})"
 
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Try another point"
-msgstr "Try another point"
+#~ msgid "Try another point"
+#~ msgstr "Try another point"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Cancel"
@@ -1854,3 +1850,26 @@ msgstr ""
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
 msgstr "Layer {0} <0>depth {0}–{1}</0> <1/>"
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
+msgstr "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid ""
+"Click anywhere on the image to build a mask for <0>Layer {0}</0>. Each click refines the previous\n"
+"result."
+msgstr ""
+"Click anywhere on the image to build a mask for <0>Layer {0}</0>. Each click refines the previous\n"
+"result."
+
+#. placeholder {0}: pickedPoints.length
+#. placeholder {1}: pickedPoints.length === 1 ? '' : 's'
+#. placeholder {2}: editingLayerIndex + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Accept ({0} point{1} → layer {2})"
+msgstr "Accept ({0} point{1} → layer {2})"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Clear points"
+msgstr "Clear points"

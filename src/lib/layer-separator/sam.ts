@@ -43,6 +43,13 @@ export async function encodeImage(core: SamCore, imageUrl: string): Promise<SamS
 	};
 }
 
+export interface SamPoint {
+	x: number;
+	y: number;
+	/** 1 = foreground (include in mask), 0 = background (exclude). */
+	label: 0 | 1;
+}
+
 export interface SamPrediction {
 	mask: Uint8Array; // binary 0/255 at session resolution
 	width: number;
@@ -51,21 +58,27 @@ export interface SamPrediction {
 }
 
 /**
- * Run a single-point prompt and return the best of the 3 candidate masks.
+ * Run a multi-point prompt and return the best of the 3 candidate masks.
  * Coords are in original-image pixel space (NOT model/reshaped space).
  */
-export async function predictMask(
-	session: SamSession,
-	x: number,
-	y: number
-): Promise<SamPrediction> {
+export async function predictMask(session: SamSession, points: SamPoint[]): Promise<SamPrediction> {
+	if (points.length === 0) throw new Error('predictMask requires at least one point');
+
 	const [origH, origW] = session.processed.original_sizes[0];
 	const [reshapedH, reshapedW] = session.processed.reshaped_input_sizes[0];
-	const px = (x / origW) * reshapedW;
-	const py = (y / origH) * reshapedH;
 
-	const input_points = new Tensor('float32', [px, py], [1, 1, 1, 2]);
-	const input_labels = new Tensor('int64', [1n], [1, 1, 1]);
+	const n = points.length;
+	const coords = new Float32Array(n * 2);
+	const labels = new BigInt64Array(n);
+	for (let i = 0; i < n; i++) {
+		const p = points[i];
+		coords[i * 2] = (p.x / origW) * reshapedW;
+		coords[i * 2 + 1] = (p.y / origH) * reshapedH;
+		labels[i] = BigInt(p.label);
+	}
+
+	const input_points = new Tensor('float32', coords, [1, 1, n, 2]);
+	const input_labels = new Tensor('int64', labels, [1, 1, n]);
 
 	const { pred_masks, iou_scores } = await session.core.model({
 		...session.embeddings,
