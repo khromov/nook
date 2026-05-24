@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2026-05-24T20:35:55.710Z\n"
+"PO-Revision-Date: 2026-05-24T20:49:28.018Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1639,18 +1639,15 @@ msgstr "Upload Image"
 msgid "Choose an image <0/>"
 msgstr "Choose an image <0/>"
 
-#. placeholder {0}: LAYER_COUNT - 1
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid ""
-"Depth model runs locally in your browser. Output is {0} cumulative B&W masks\n"
-"at source resolution, ready to drop into Photoshop as layer masks."
-msgstr ""
-"Depth model runs locally in your browser. Output is {0} cumulative B&W masks\n"
-"at source resolution, ready to drop into Photoshop as layer masks."
+#~ msgid ""
+#~ "Depth model runs locally in your browser. Output is {0} cumulative B&W masks\n"
+#~ "at source resolution, ready to drop into Photoshop as layer masks."
+#~ msgstr ""
+#~ "Depth model runs locally in your browser. Output is {0} cumulative B&W masks\n"
+#~ "at source resolution, ready to drop into Photoshop as layer masks."
 
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Running depth estimation and building masks…"
-msgstr "Running depth estimation and building masks…"
+#~ msgid "Running depth estimation and building masks…"
+#~ msgstr "Running depth estimation and building masks…"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Source & Depth"
@@ -1668,26 +1665,19 @@ msgstr "Depth map"
 msgid "Download depth map"
 msgstr "Download depth map"
 
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Cumulative Layer Masks"
-msgstr "Cumulative Layer Masks"
+#~ msgid "Cumulative Layer Masks"
+#~ msgstr "Cumulative Layer Masks"
 
-#. placeholder {0}: maskUrls.length
-#. placeholder {1}: maskUrls.length === 1 ? '' : 's'
-#. placeholder {2}: LAYER_COUNT
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid ""
-"{0} mask{1} for {2} layers. Mask k\n"
-"is BLACK where layers 1..k live (apply it to extract those layers in Photoshop); the frontmost\n"
-"layer has no mask — it's what remains."
-msgstr ""
-"{0} mask{1} for {2} layers. Mask k\n"
-"is BLACK where layers 1..k live (apply it to extract those layers in Photoshop); the frontmost\n"
-"layer has no mask — it's what remains."
+#~ msgid ""
+#~ "{0} mask{1} for {2} layers. Mask k\n"
+#~ "is BLACK where layers 1..k live (apply it to extract those layers in Photoshop); the frontmost\n"
+#~ "layer has no mask — it's what remains."
+#~ msgstr ""
+#~ "{0} mask{1} for {2} layers. Mask k\n"
+#~ "is BLACK where layers 1..k live (apply it to extract those layers in Photoshop); the frontmost\n"
+#~ "layer has no mask — it's what remains."
 
 #. placeholder {0}: i + 1
-#. placeholder {0}: i + 1
-#: src/routes/[[lang]]/layer-separator/+page.svelte
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Mask {0}"
 msgstr "Mask {0}"
@@ -1696,3 +1686,79 @@ msgstr "Mask {0}"
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download mask {0}"
 msgstr "Download mask {0}"
+
+#~ msgid ""
+#~ "Output is N-1 cumulative B&W masks at source resolution, ready to drop into\n"
+#~ "Photoshop as layer masks."
+#~ msgstr ""
+#~ "Output is N-1 cumulative B&W masks at source resolution, ready to drop into\n"
+#~ "Photoshop as layer masks."
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Running depth estimation…"
+msgstr "Running depth estimation…"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Layers & Thresholds"
+msgstr "Layers & Thresholds"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Layers:"
+msgstr "Layers:"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid ""
+"Drag the markers on the histogram to adjust where layers split. Each cut is the depth\n"
+"value where the layer boundary sits (0 = far, 255 = near)."
+msgstr ""
+"Drag the markers on the histogram to adjust where layers split. Each cut is the depth\n"
+"value where the layer boundary sits (0 = far, 255 = near)."
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Cumulative Masks"
+msgstr "Cumulative Masks"
+
+#~ msgid ""
+#~ "{0} mask{1} for {2} layers. Mask k is\n"
+#~ "BLACK where layers 1..k live; the frontmost layer has no mask."
+#~ msgstr ""
+#~ "{0} mask{1} for {2} layers. Mask k is\n"
+#~ "BLACK where layers 1..k live; the frontmost layer has no mask."
+
+#. placeholder {0}: i + 1
+#. placeholder {1}: i + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Mask {0} — covers layers 1–{1}"
+msgstr "Mask {0} — covers layers 1–{1}"
+
+#: src/lib/components/layer-separator/MaskCanvas.svelte
+msgid "Mask"
+msgstr "Mask"
+
+#: src/lib/components/layer-separator/DepthHistogram.svelte
+msgid "Depth histogram with draggable layer thresholds"
+msgstr "Depth histogram with draggable layer thresholds"
+
+#. placeholder {0}: i + 1
+#: src/lib/components/layer-separator/DepthHistogram.svelte
+msgid "Threshold {0}"
+msgstr "Threshold {0}"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid ""
+"Output is N-1 cumulative B&W masks at source resolution, ready to drop into Photoshop\n"
+"as layer masks."
+msgstr ""
+"Output is N-1 cumulative B&W masks at source resolution, ready to drop into Photoshop\n"
+"as layer masks."
+
+#. placeholder {0}: masks.length
+#. placeholder {1}: masks.length === 1 ? '' : 's'
+#. placeholder {2}: layers.length
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid ""
+"{0} mask{1} for {2} layers. Mask k is BLACK\n"
+"where layers 1..k live; the frontmost layer has no mask."
+msgstr ""
+"{0} mask{1} for {2} layers. Mask k is BLACK\n"
+"where layers 1..k live; the frontmost layer has no mask."

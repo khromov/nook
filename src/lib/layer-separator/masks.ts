@@ -81,3 +81,39 @@ export function buildCumulativeMasks(pixelLayers: Uint8Array, layerCount: number
 export function depthToMasks(depth: Uint8Array, layers: Layer[]): Uint8Array[] {
 	return buildCumulativeMasks(assignPixelsToLayers(depth, layers), layers.length);
 }
+
+/**
+ * Build the initial threshold cuts for `layerCount` evenly-spaced layers.
+ * Returns `layerCount - 1` cuts in 1..255.
+ */
+export function evenThresholds(layerCount: number): number[] {
+	if (layerCount < 2) return [];
+	const out: number[] = [];
+	for (let i = 1; i < layerCount; i++) out.push(Math.round((i * DEPTH_MAX) / layerCount));
+	return out;
+}
+
+/**
+ * Construct layers from explicit threshold cuts (length = layerCount - 1).
+ * Cuts must be sorted ascending and within [1, 255].
+ */
+export function layersFromThresholds(thresholds: number[]): Layer[] {
+	const layers: Layer[] = [];
+	let prev = DEPTH_MIN;
+	for (const t of thresholds) {
+		if (t <= prev) throw new Error('thresholds must be strictly ascending');
+		layers.push({ depthMin: prev, depthMax: t, overrides: [] });
+		prev = t;
+	}
+	layers.push({ depthMin: prev, depthMax: DEPTH_MAX, overrides: [] });
+	return layers;
+}
+
+/**
+ * Build a 256-bin histogram of depth values (count per depth bin).
+ */
+export function depthHistogram(depth: Uint8Array): Uint32Array {
+	const hist = new Uint32Array(256);
+	for (let i = 0; i < depth.length; i++) hist[depth[i]]++;
+	return hist;
+}

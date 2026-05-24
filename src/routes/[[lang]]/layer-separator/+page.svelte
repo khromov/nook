@@ -15,7 +15,14 @@
 	import ErrorDisplay from '$lib/components/common/ErrorDisplay.svelte';
 	import { useWakeLock } from '$lib/wakeLock.svelte';
 
-	import { depthToMasks, evenLayers } from '$lib/layer-separator/masks';
+	import MaskCanvas from '$lib/components/layer-separator/MaskCanvas.svelte';
+	import DepthHistogram from '$lib/components/layer-separator/DepthHistogram.svelte';
+	import {
+		depthToMasks,
+		depthHistogram,
+		evenThresholds,
+		layersFromThresholds
+	} from '$lib/layer-separator/masks';
 	import { grayscaleToBlobUrl, downloadBlobUrl } from '$lib/layer-separator/canvas';
 
 	type DepthOutput = { depth: RawImage };
@@ -23,7 +30,8 @@
 	type ProgressEvent = { status: string; progress?: number };
 
 	const MODEL_ID = 'onnx-community/depth-anything-v2-small';
-	const LAYER_COUNT = 3;
+	const MIN_LAYERS = 2;
+	const MAX_LAYERS = 5;
 
 	let isModelLoaded = $state(false);
 	let isLoadingModel = $state(false);
@@ -33,12 +41,28 @@
 	let errorMessage = $state('');
 
 	let originalImageUrl = $state<string | null>(null);
-	let depthMapUrl = $state<string | null>(null);
-	let maskUrls = $state<string[]>([]);
 	let sourceFileName = $state<string>('image');
 
-	let depthEstimator: DepthPipeline | null = null;
+	// Source-of-truth depth data after inference.
+	let depthData = $state<Uint8Array | null>(null);
+	let depthW = $state(0);
+	let depthH = $state(0);
 
+	let layerCount = $state(3);
+	let thresholds = $state<number[]>(evenThresholds(3));
+
+	const histogram = $derived.by(() =>
+		depthData ? depthHistogram(depthData) : new Uint32Array(256)
+	);
+
+	const layers = $derived.by(() => layersFromThresholds(thresholds));
+
+	const masks = $derived.by(() => {
+		if (!depthData) return [];
+		return depthToMasks(depthData, layers);
+	});
+
+	let depthEstimator: DepthPipeline | null = null;
 	const { requestWakeLock, releaseWakeLock, setupWakeLock } = useWakeLock();
 
 	onMount(() => {
@@ -47,7 +71,6 @@
 		}
 		env.remoteHost = 'https://huggingface.co/';
 		env.remotePathTemplate = '{model}/resolve/{revision}/';
-
 		const cleanup = setupWakeLock(() => isProcessing || isLoadingModel);
 		loadModel();
 		return cleanup;
@@ -88,29 +111,18 @@
 			isProcessing = true;
 			error = false;
 			await requestWakeLock();
-			revokeMaskUrls();
 
 			const out = await depthEstimator(imageUrl);
 			const depthRaw = out.depth;
-			const w = depthRaw.width;
-			const h = depthRaw.height;
-			// depth-estimation returns a single-channel image; .data is length w*h.
-			const depthData =
+			depthW = depthRaw.width;
+			depthH = depthRaw.height;
+			depthData =
 				depthRaw.data instanceof Uint8Array
 					? depthRaw.data
 					: new Uint8Array(depthRaw.data as ArrayLike<number>);
 
-			const layers = evenLayers(LAYER_COUNT);
-			const masks = depthToMasks(depthData, layers);
-
-			if (depthMapUrl) URL.revokeObjectURL(depthMapUrl);
-			depthMapUrl = await grayscaleToBlobUrl(depthData, w, h);
-
-			const urls: string[] = [];
-			for (const mask of masks) {
-				urls.push(await grayscaleToBlobUrl(mask, w, h));
-			}
-			maskUrls = urls;
+			// Reset thresholds to even cuts for the new image.
+			thresholds = evenThresholds(layerCount);
 		} catch (err) {
 			console.error('Processing error:', err);
 			error = true;
@@ -133,29 +145,39 @@
 		processImage(url);
 	}
 
-	function downloadMask(index: number) {
-		downloadBlobUrl(maskUrls[index], `${sourceFileName}_mask_${index + 1}.png`);
+	function setLayerCount(n: number) {
+		layerCount = n;
+		thresholds = evenThresholds(n);
 	}
 
-	function downloadDepth() {
-		if (depthMapUrl) downloadBlobUrl(depthMapUrl, `${sourceFileName}_depth.png`);
+	function onThresholdsChange(next: number[]) {
+		thresholds = next;
 	}
 
-	function revokeMaskUrls() {
-		for (const url of maskUrls) URL.revokeObjectURL(url);
-		maskUrls = [];
+	async function downloadMask(index: number) {
+		if (!depthData) return;
+		const url = await grayscaleToBlobUrl(masks[index], depthW, depthH);
+		downloadBlobUrl(url, `${sourceFileName}_mask_${index + 1}.png`);
+		// Revoke after the click handler so the download has time to start.
+		setTimeout(() => URL.revokeObjectURL(url), 5000);
+	}
+
+	async function downloadDepth() {
+		if (!depthData) return;
+		const url = await grayscaleToBlobUrl(depthData, depthW, depthH);
+		downloadBlobUrl(url, `${sourceFileName}_depth.png`);
+		setTimeout(() => URL.revokeObjectURL(url), 5000);
 	}
 
 	function reset() {
-		revokeMaskUrls();
-		if (depthMapUrl) {
-			URL.revokeObjectURL(depthMapUrl);
-			depthMapUrl = null;
-		}
+		depthData = null;
+		depthW = 0;
+		depthH = 0;
 		if (originalImageUrl && originalImageUrl.startsWith('blob:')) {
 			URL.revokeObjectURL(originalImageUrl);
 		}
 		originalImageUrl = null;
+		thresholds = evenThresholds(layerCount);
 		error = false;
 	}
 
@@ -165,8 +187,6 @@
 	}
 
 	onDestroy(() => {
-		revokeMaskUrls();
-		if (depthMapUrl) URL.revokeObjectURL(depthMapUrl);
 		if (originalImageUrl && originalImageUrl.startsWith('blob:')) {
 			URL.revokeObjectURL(originalImageUrl);
 		}
@@ -193,13 +213,13 @@
 {:else}
 	<CardInterface>
 		<Toolbar modelInfo="Layer Separator (Depth Anything V2 small)" ModelIcon={ImageIcon}>
-			{#if originalImageUrl}
+			{#if depthData}
 				<ActionButton onClick={reset} variant="danger" Icon={RefreshCcwIcon}>Restart</ActionButton>
 			{/if}
 		</Toolbar>
 
 		<ContentArea>
-			{#if !originalImageUrl}
+			{#if !depthData}
 				<SectionCard rotation={-0.1} animationDelay={0}>
 					<StepHeader stepNumber={1} title="Upload Image" backgroundColor="#98fb98" />
 					<div class="upload">
@@ -208,22 +228,22 @@
 							<input type="file" accept="image/*" onchange={handleFile} disabled={isProcessing} />
 						</label>
 						<p class="hint">
-							Depth model runs locally in your browser. Output is {LAYER_COUNT - 1} cumulative B&W masks
-							at source resolution, ready to drop into Photoshop as layer masks.
+							Output is N-1 cumulative B&W masks at source resolution, ready to drop into Photoshop
+							as layer masks.
 						</p>
 					</div>
 				</SectionCard>
 			{/if}
 
 			{#if isProcessing}
-				<div class="processing">Running depth estimation and building masks…</div>
+				<div class="processing">Running depth estimation…</div>
 			{/if}
 
 			{#if error}
 				<ErrorDisplay message={errorMessage} buttonText="Try Again" onRetry={retry} />
 			{/if}
 
-			{#if originalImageUrl && !isProcessing && maskUrls.length > 0}
+			{#if depthData && originalImageUrl && !isProcessing}
 				<SectionCard rotation={0.2} animationDelay={0}>
 					<StepHeader stepNumber={2} title="Source & Depth" />
 					<div class="grid">
@@ -233,26 +253,46 @@
 						</figure>
 						<figure>
 							<figcaption>Depth map (white = near)</figcaption>
-							{#if depthMapUrl}
-								<img src={depthMapUrl} alt="Depth map" />
-								<button class="link-btn" onclick={downloadDepth}>Download depth map</button>
-							{/if}
+							<MaskCanvas mask={depthData} width={depthW} height={depthH} alt="Depth map" />
+							<button class="link-btn" onclick={downloadDepth}>Download depth map</button>
 						</figure>
 					</div>
 				</SectionCard>
 
 				<SectionCard rotation={-0.2} animationDelay={0.1}>
-					<StepHeader stepNumber={3} title="Cumulative Layer Masks" backgroundColor="#ffd93d" />
+					<StepHeader stepNumber={3} title="Layers & Thresholds" backgroundColor="#ffd93d" />
+
+					<div class="layer-count">
+						<span class="layer-count-label">Layers:</span>
+						{#each Array.from({ length: MAX_LAYERS - MIN_LAYERS + 1 }, (_, i) => MIN_LAYERS + i) as n (n)}
+							<button
+								class="count-btn"
+								class:active={layerCount === n}
+								onclick={() => setLayerCount(n)}
+							>
+								{n}
+							</button>
+						{/each}
+					</div>
+
+					<DepthHistogram {histogram} {thresholds} onChange={onThresholdsChange} />
 					<p class="hint">
-						{maskUrls.length} mask{maskUrls.length === 1 ? '' : 's'} for {LAYER_COUNT} layers. Mask k
-						is BLACK where layers 1..k live (apply it to extract those layers in Photoshop); the frontmost
-						layer has no mask — it's what remains.
+						Drag the markers on the histogram to adjust where layers split. Each cut is the depth
+						value where the layer boundary sits (0 = far, 255 = near).
+					</p>
+				</SectionCard>
+
+				<SectionCard rotation={0.1} animationDelay={0.2}>
+					<StepHeader stepNumber={4} title="Cumulative Masks" />
+					<p class="hint">
+						{masks.length} mask{masks.length === 1 ? '' : 's'} for {layers.length} layers. Mask k is BLACK
+						where layers 1..k live; the frontmost layer has no mask.
 					</p>
 					<div class="masks-grid">
-						{#each maskUrls as url, i (i)}
+						{#each masks as mask, i (i)}
 							<figure>
-								<figcaption>Mask {i + 1}</figcaption>
-								<img src={url} alt="Mask {i + 1}" />
+								<figcaption>Mask {i + 1} — covers layers 1–{i + 1}</figcaption>
+								<MaskCanvas {mask} width={depthW} height={depthH} alt="Mask {i + 1}" />
 								<ActionButton onClick={() => downloadMask(i)} Icon={DownloadIcon}>
 									Download mask {i + 1}
 								</ActionButton>
@@ -272,8 +312,6 @@
 		align-items: center;
 		gap: 2rem;
 		margin: 2rem 0;
-		width: 100%;
-		box-sizing: border-box;
 	}
 	.upload {
 		display: flex;
@@ -305,6 +343,7 @@
 		text-align: center;
 		font-size: 0.9rem;
 		line-height: 1.5;
+		margin: 1rem auto;
 	}
 	.processing {
 		text-align: center;
@@ -316,6 +355,37 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 1.5rem;
 		margin-top: 1rem;
+	}
+	.layer-count {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin-bottom: 1rem;
+	}
+	.layer-count-label {
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		font-size: 0.875rem;
+	}
+	.count-btn {
+		min-width: 2.5rem;
+		padding: 0.4rem 0.6rem;
+		background: #f0f0f0;
+		border: 2px solid #000;
+		font-weight: 700;
+		cursor: pointer;
+		font-family: inherit;
+		box-shadow: 3px 3px 0 #000;
+	}
+	.count-btn:hover {
+		transform: translate(-1px, -1px);
+		box-shadow: 4px 4px 0 #000;
+	}
+	.count-btn.active {
+		background: #ffd93d;
 	}
 	.masks-grid {
 		display: grid;

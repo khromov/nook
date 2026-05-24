@@ -1,5 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { evenLayers, assignPixelsToLayers, buildCumulativeMasks, depthToMasks } from './masks';
+import {
+	evenLayers,
+	assignPixelsToLayers,
+	buildCumulativeMasks,
+	depthToMasks,
+	evenThresholds,
+	layersFromThresholds,
+	depthHistogram
+} from './masks';
 
 describe('evenLayers', () => {
 	it('rejects fewer than 2 layers', () => {
@@ -101,5 +109,58 @@ describe('depthToMasks (integration)', () => {
 		// pixel layers: [0, 1, 2]
 		expect(Array.from(masks[0])).toEqual([0, 255, 255]);
 		expect(Array.from(masks[1])).toEqual([0, 0, 255]);
+	});
+});
+
+describe('evenThresholds', () => {
+	it('returns layerCount - 1 cuts', () => {
+		expect(evenThresholds(2)).toHaveLength(1);
+		expect(evenThresholds(3)).toHaveLength(2);
+		expect(evenThresholds(5)).toHaveLength(4);
+	});
+
+	it('matches evenLayers boundaries', () => {
+		const layers = evenLayers(4);
+		const cuts = evenThresholds(4);
+		expect(cuts).toEqual(layers.slice(0, -1).map((l) => l.depthMax));
+	});
+});
+
+describe('layersFromThresholds', () => {
+	it('produces layers that partition 0..256', () => {
+		const layers = layersFromThresholds([50, 150]);
+		expect(layers).toHaveLength(3);
+		expect(layers[0]).toMatchObject({ depthMin: 0, depthMax: 50 });
+		expect(layers[1]).toMatchObject({ depthMin: 50, depthMax: 150 });
+		expect(layers[2]).toMatchObject({ depthMin: 150, depthMax: 256 });
+	});
+
+	it('rejects non-ascending thresholds', () => {
+		expect(() => layersFromThresholds([100, 100])).toThrow();
+		expect(() => layersFromThresholds([100, 50])).toThrow();
+	});
+
+	it('works with a single threshold (2 layers)', () => {
+		const layers = layersFromThresholds([128]);
+		expect(layers).toHaveLength(2);
+		expect(layers[0].depthMax).toBe(128);
+		expect(layers[1].depthMin).toBe(128);
+	});
+});
+
+describe('depthHistogram', () => {
+	it('counts pixel occurrences per depth bin', () => {
+		const depth = new Uint8Array([0, 0, 128, 128, 128, 255]);
+		const hist = depthHistogram(depth);
+		expect(hist.length).toBe(256);
+		expect(hist[0]).toBe(2);
+		expect(hist[128]).toBe(3);
+		expect(hist[255]).toBe(1);
+		expect(hist[42]).toBe(0);
+	});
+
+	it('returns all zeros for empty depth', () => {
+		const hist = depthHistogram(new Uint8Array(0));
+		expect(Array.from(hist)).toEqual(Array(256).fill(0));
 	});
 });
