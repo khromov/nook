@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { SamPoint } from '$lib/layer-separator/sam';
+	import ZoomInIcon from 'virtual:icons/lucide/zoom-in';
+	import ZoomOutIcon from 'virtual:icons/lucide/zoom-out';
 
 	interface Props {
 		imageUrl: string;
@@ -25,17 +27,34 @@
 
 	let imgEl: HTMLImageElement | undefined = $state();
 	let overlayCanvasEl: HTMLCanvasElement | undefined = $state();
+	let zoom = $state(1);
+
+	const ZOOM_LEVELS = [1, 1.5, 2, 3, 4];
 
 	function handleClick(e: MouseEvent) {
 		if (!imgEl) return;
 		const rect = imgEl.getBoundingClientRect();
 		const displayX = e.clientX - rect.left;
 		const displayY = e.clientY - rect.top;
+		// rect.width already reflects the zoom, so this stays correct at any zoom.
 		const x = (displayX / rect.width) * imgEl.naturalWidth;
 		const y = (displayY / rect.height) * imgEl.naturalHeight;
-		// Shift = subtract (background), normal = add (foreground)
 		const label: 0 | 1 = e.shiftKey ? 0 : 1;
 		onPick(Math.round(x), Math.round(y), label);
+	}
+
+	function zoomIn() {
+		const idx = ZOOM_LEVELS.indexOf(zoom);
+		if (idx < ZOOM_LEVELS.length - 1) zoom = ZOOM_LEVELS[idx + 1];
+	}
+
+	function zoomOut() {
+		const idx = ZOOM_LEVELS.indexOf(zoom);
+		if (idx > 0) zoom = ZOOM_LEVELS[idx - 1];
+	}
+
+	function fitZoom() {
+		zoom = 1;
 	}
 
 	$effect(() => {
@@ -60,35 +79,57 @@
 </script>
 
 <div class="picker" class:predicting={isPredicting}>
-	<div class="image-wrap">
-		<!-- svelte-ignore a11y_click_events_have_key_events -->
-		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-		<img
-			bind:this={imgEl}
-			src={imageUrl}
-			alt="Click on the object you want to assign to this layer"
-			onclick={handleClick}
-			draggable="false"
-		/>
-		{#if pendingMask}
-			<canvas class="overlay" bind:this={overlayCanvasEl} aria-hidden="true"></canvas>
-		{/if}
-		{#if imgEl}
-			{#each points as p, i (i)}
-				<span
-					class="click-dot"
-					class:bg={p.label === 0}
-					style:left="{(p.x / imgEl.naturalWidth) * 100}%"
-					style:top="{(p.y / imgEl.naturalHeight) * 100}%"
-				></span>
-			{/each}
-		{/if}
-		{#if isPredicting}
-			<div class="spinner" aria-label="Predicting mask">…</div>
-		{/if}
+	<div class="zoom-bar">
+		<button
+			class="zoom-btn"
+			onclick={zoomOut}
+			disabled={zoom === ZOOM_LEVELS[0]}
+			aria-label="Zoom out"
+		>
+			<ZoomOutIcon />
+		</button>
+		<button class="zoom-btn fit" onclick={fitZoom} aria-label="Fit to width">{zoom}×</button>
+		<button
+			class="zoom-btn"
+			onclick={zoomIn}
+			disabled={zoom === ZOOM_LEVELS[ZOOM_LEVELS.length - 1]}
+			aria-label="Zoom in"
+		>
+			<ZoomInIcon />
+		</button>
+	</div>
+	<div class="scroll-container">
+		<div class="image-wrap" style:width="{zoom * 100}%">
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+			<img
+				bind:this={imgEl}
+				src={imageUrl}
+				alt="Click on the object you want to assign to this layer"
+				onclick={handleClick}
+				draggable="false"
+			/>
+			{#if pendingMask}
+				<canvas class="overlay" bind:this={overlayCanvasEl} aria-hidden="true"></canvas>
+			{/if}
+			{#if imgEl}
+				{#each points as p, i (i)}
+					<span
+						class="click-dot"
+						class:bg={p.label === 0}
+						style:left="{(p.x / imgEl.naturalWidth) * 100}%"
+						style:top="{(p.y / imgEl.naturalHeight) * 100}%"
+					></span>
+				{/each}
+			{/if}
+			{#if isPredicting}
+				<div class="spinner" aria-label="Predicting mask">…</div>
+			{/if}
+		</div>
 	</div>
 	<p class="hint">
-		<strong>Click</strong> = add to mask · <strong>Shift+click</strong> = remove from mask
+		<strong>Click</strong> add · <strong>Shift+click</strong> subtract · zoom &amp; scroll to refine small
+		areas
 	</p>
 </div>
 
@@ -98,12 +139,48 @@
 		flex-direction: column;
 		gap: 0.5rem;
 	}
-	.image-wrap {
-		position: relative;
-		display: inline-block;
+	.zoom-bar {
+		display: flex;
+		gap: 0.25rem;
+		align-items: center;
+	}
+	.zoom-btn {
+		padding: 0.3rem 0.6rem;
+		background: #f0f0f0;
+		border: 2px solid #000;
+		font-weight: 700;
+		cursor: pointer;
+		font-family: inherit;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 2rem;
+	}
+	.zoom-btn:hover:not(:disabled) {
+		background: #ffd93d;
+	}
+	.zoom-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+	.zoom-btn.fit {
+		min-width: 3rem;
+		font-size: 0.85rem;
+	}
+	.zoom-btn :global(svg) {
+		width: 1rem;
+		height: 1rem;
+	}
+	.scroll-container {
+		max-height: 80vh;
+		overflow: auto;
 		border: 2px solid #000;
 		background: #fff;
-		max-width: 100%;
+	}
+	.image-wrap {
+		position: relative;
+		display: block;
+		width: 100%;
 	}
 	img {
 		display: block;

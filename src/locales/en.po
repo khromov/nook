@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2026-05-24T21:45:38.456Z\n"
+"PO-Revision-Date: 2026-05-24T21:48:07.209Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1851,9 +1851,8 @@ msgstr ""
 msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
 msgstr "Layer {0} <0>depth {0}–{1}</0> <1/>"
 
-#: src/lib/components/layer-separator/SamPicker.svelte
-msgid "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
-msgstr "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
+#~ msgid "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
+#~ msgstr "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
@@ -1873,3 +1872,30 @@ msgstr "Accept ({0} point{1} → layer {2})"
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Clear points"
 msgstr "Clear points"
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "Zoom out"
+msgstr "Zoom out"
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "Fit to width"
+msgstr "Fit to width"
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "Zoom in"
+msgstr "Zoom in"
+
+#~ msgid ""
+#~ "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine\n"
+#~ "small areas"
+#~ msgstr ""
+#~ "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine\n"
+#~ "small areas"
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid ""
+"<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine small\n"
+"areas"
+msgstr ""
+"<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine small\n"
+"areas"
