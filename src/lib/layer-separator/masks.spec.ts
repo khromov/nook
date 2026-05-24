@@ -172,27 +172,17 @@ describe('resizeThresholds', () => {
 		expect(grown).toContain(105);
 	});
 
-	it('shrinks by dropping the cut nearest to its closest neighbor', () => {
-		// cuts at [30, 80, 200]: cut 30's closeness=30 (left edge), 80's=50, 200's=56.
-		// 30 is smallest, so it gets removed.
-		const shrunk = resizeThresholds([30, 80, 200], 3);
-		expect(shrunk).toEqual([80, 200]);
+	it('shrinks by always dropping the foreground (highest) cut', () => {
+		expect(resizeThresholds([30, 80, 200], 3)).toEqual([30, 80]);
+		expect(resizeThresholds([51, 102, 154, 205], 4)).toEqual([51, 102, 154]);
+		expect(resizeThresholds([30, 100, 150, 213], 3)).toEqual([30, 100]);
 	});
 
-	it('growing then shrinking back may not restore exactly (closeness heuristic)', () => {
-		// [50, 150] → grown to 4: split widest gap [150..256] → [50, 150, 203]
-		// Shrunk to 3: cut 50 has closeness=50, cut 150 has closeness=53, cut 203 has 53.
-		// Smallest is 50, so 50 is removed.
+	it('grow-then-shrink restores original when the new cut went to the right', () => {
+		// [50, 150] → grown to 4: widest gap is [150..256], new cut at 203 → [50, 150, 203]
+		// Shrunk to 3: pops 203 → [50, 150] ✓
 		const grown = resizeThresholds([50, 150], 4);
-		const shrunk = resizeThresholds(grown, 3);
-		expect(shrunk).toEqual([150, 203]);
-	});
-
-	it('shrinking even cuts drops from the foreground end (tie-break to rightmost)', () => {
-		// evenThresholds(5) = [51, 102, 154, 205]; all closenesses tie at 51 or 52.
-		// Should drop 205 first, not 51.
-		const shrunk = resizeThresholds(evenThresholds(5), 4);
-		expect(shrunk).toEqual([51, 102, 154]);
+		expect(resizeThresholds(grown, 3)).toEqual([50, 150]);
 	});
 
 	it("user's drag survives growth (chain: even 3 → drag → grow to 5)", () => {

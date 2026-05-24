@@ -123,9 +123,10 @@ export function depthHistogram(depth: Uint8Array): Uint32Array {
  * user's positions where possible.
  *
  * - Growing: split the widest gap in half, repeatedly, until the array has
- *   targetCount-1 entries.
- * - Shrinking: drop the cut nearest to its closer neighbor (smallest local
- *   change), repeatedly, until the array has targetCount-1 entries.
+ *   targetCount-1 entries. Existing cuts are always preserved.
+ * - Shrinking: always drop the foreground-most cut (highest depth). Predictable
+ *   regardless of cut positions; matches the mental model that reducing layers
+ *   "merges from the front."
  */
 export function resizeThresholds(current: number[], targetCount: number): number[] {
 	if (targetCount < 2) return [];
@@ -148,21 +149,7 @@ export function resizeThresholds(current: number[], targetCount: number): number
 	}
 
 	while (cuts.length > targetCutCount) {
-		const bounds = [DEPTH_MIN, ...cuts, DEPTH_MAX];
-		let smallestNeighbor = Infinity;
-		let removeIdx = 0;
-		for (let i = 0; i < cuts.length; i++) {
-			const leftGap = cuts[i] - bounds[i];
-			const rightGap = bounds[i + 2] - cuts[i];
-			const closeness = Math.min(leftGap, rightGap);
-			// `<=` so ties resolve to the higher (rightmost) cut — equal-spaced
-			// shrinks should drop the nearest-foreground cut, not the farthest-sky one.
-			if (closeness <= smallestNeighbor) {
-				smallestNeighbor = closeness;
-				removeIdx = i;
-			}
-		}
-		cuts.splice(removeIdx, 1);
+		cuts.pop();
 	}
 
 	return cuts;
