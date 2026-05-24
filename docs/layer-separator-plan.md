@@ -29,8 +29,8 @@ For N layers numbered back-to-front (1 = farthest):
 2. **Output contract is the masks, not a composite.** N−1 cumulative B&W PNGs at source resolution, downloadable individually and as a zip.
 3. **Depth-map-plus-threshold is the only viable MVP path.** Mental model the user picks up: "the model gives a depth map, you slide the cutoffs."
 4. **User controls layer count and cutoffs.** Even with perfect depth, "how many layers" is an artistic decision. Sliders are the escape hatch when depth quality is mediocre.
-5. **MVP excludes user scribbles / clicks.** Deferred. But the layer data model (array of `{threshold, mask, source}` per layer) must leave room for `source: 'depth-threshold' | 'sam-prompt' | 'paint'` so Phase 5 doesn't require restructuring.
-6. **Stylized-painting quality is not guaranteed.** UI must frame depth output as a starting point — show the raw depth map alongside masks; thresholds are "rough cut, adjust to taste." No overselling automatic results.
+5. **SAM-based per-object reassignment is in the MVP.** Phase 1 validation showed depth models reliably mislabel objects on stylized art (depth ≠ semantic layer membership — e.g. a low rectangular building gets pushed forward by photo priors). A depth-only MVP would produce wrong groupings the user can't fix without leaving the app. The user clicks an object → SAM generates a clean mask → that mask is forcibly assigned to a chosen layer, overriding the depth threshold for that region. SlimSAM (`Xenova/slimsam-77-uniform`, ~40 MB) is the model. The layer data model is `{thresholdRange, overrides: SamMask[], source: 'depth-threshold' | 'sam-override'}`.
+6. **Stylized-painting quality is not guaranteed from depth alone.** UI must frame depth output as a starting point — show the raw depth map alongside masks; thresholds are "rough cut, adjust to taste, click-to-reassign for misgrouped objects."
 7. **Fit existing patterns.** Lives under `src/routes/[[lang]]/layer-separator/+page.svelte` and `src/lib/components/layer-separator/`. Reuses `CardInterface`, `Toolbar`, `SectionCard`, `StepHeader`, `LoadingProgress`, `ErrorDisplay`, the wake-lock hook, the model-card and upload patterns from background-remover. All UI strings wrapped for Wuchale. New menu entry on home page.
 8. **Memory hygiene.** Full-resolution depth maps and per-layer mask canvases are heavy; revoke object URLs eagerly and dispose `RawImage` outputs, following the background-remover pattern.
 9. **`npm run checks` clean before any phase is done.**
@@ -41,18 +41,22 @@ For N layers numbered back-to-front (1 = farthest):
 
 Drop the model into a throwaway page, run it on `pipe_small.png` (and ideally 1–2 other ink samples), eyeball the depth map. If completely useless, stop and revisit (SAM-only flow becomes the MVP). Decide here whether `small` or `base` ships as default — affects download size messaging.
 
-### Phase 2 — Single-image pipeline + mask math
+### Phase 2 — Single-image depth pipeline + mask math
 
-Upload → depth inference → threshold-to-N-cumulative-masks → download. Hardcode threshold count initially. The thresholding/mask-compositing logic (depth float → ordered binary masks at source resolution) is the one piece of non-trivial logic in this feature — unit-test it (project uses Vitest).
+Upload → depth inference → threshold-to-N-cumulative-masks → download. Hardcode threshold count initially. Build the layer data model defined in constraint 5 (depth thresholds + per-layer SAM-override slot, even if the SAM slot is empty in this phase). The thresholding/mask-compositing logic (depth float → ordered binary masks at source resolution, with override masks taking precedence) is the one piece of non-trivial logic — unit-test it (project uses Vitest).
 
 ### Phase 3 — Interactive thresholding UI
 
-Depth-map preview + histogram + N−1 draggable cutoffs + live mask thumbnails + layer-count control. The bulk of UX work and the main lever that compensates for imperfect depth output.
+Depth-map preview + histogram + N−1 draggable cutoffs + live mask thumbnails + layer-count control. The main lever that compensates for imperfect depth output.
 
-### Phase 4 — Polish
+### Phase 4 — SAM-based per-object reassignment
 
-Model selection (small vs base), single-image download + zip-all-masks, Wuchale i18n strings, mobile layout, home-page card.
+Load SlimSAM. UI: user clicks a layer to "edit", then clicks on the original image. SlimSAM proposes a mask; user accepts/rejects. Accepted masks become overrides for that layer (forcibly painted into the layer's mask, regardless of depth threshold). Multiple overrides per layer supported. Without this, depth-only output is wrong on stylized art and the user can't fix it in-app.
 
-### Phase 5 — Deferred: user-guided layer authoring
+### Phase 5 — Polish
 
-SAM (SlimSAM) with click prompts to define or refine a single layer, and/or a brush canvas. Phase 2's data model must accommodate this without rework.
+Depth model selection (small vs base), single-image download + zip-all-masks, Wuchale i18n strings, mobile layout, home-page card.
+
+### Phase 6 — Deferred
+
+Free-form brush as a third source (`source: 'paint'`) for cases SAM can't grab cleanly. Multi-image batch mode.
