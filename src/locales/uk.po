@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:20:18.035Z\n"
-"PO-Revision-Date: 2026-05-24T21:48:07.215Z\n"
+"PO-Revision-Date: 2026-05-24T21:51:15.973Z\n"
 "Last-Translator: \n"
 "Language: uk\n"
 "Language-Team: \n"
@@ -1871,4 +1871,12 @@ msgstr ""
 msgid ""
 "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine small\n"
 "areas"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Remove the last point (⌘Z)"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Undo last point"
 msgstr ""

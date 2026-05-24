@@ -277,6 +277,24 @@
 		pendingMask = null;
 	}
 
+	async function undoLastPoint() {
+		if (pickedPoints.length === 0) return;
+		pickedPoints = pickedPoints.slice(0, -1);
+		await runPrediction();
+	}
+
+	$effect(() => {
+		if (editingLayerIndex === null) return;
+		function onKeyDown(e: KeyboardEvent) {
+			if ((e.metaKey || e.ctrlKey) && !e.shiftKey && e.key === 'z') {
+				e.preventDefault();
+				undoLastPoint();
+			}
+		}
+		window.addEventListener('keydown', onKeyDown);
+		return () => window.removeEventListener('keydown', onKeyDown);
+	});
+
 	function removeOverride(layerIdx: number, overrideIdx: number) {
 		overridesByLayer = overridesByLayer.map((arr, i) =>
 			i === layerIdx ? arr.filter((_, j) => j !== overrideIdx) : arr
@@ -520,6 +538,13 @@
 										</ActionButton>
 									{/if}
 									{#if pickedPoints.length > 0}
+										<button
+											class="link-btn"
+											onclick={undoLastPoint}
+											title="Remove the last point (⌘Z)"
+										>
+											Undo last point
+										</button>
 										<button class="link-btn" onclick={clearPoints}>Clear points</button>
 									{/if}
 									<button class="link-btn" onclick={cancelEdit}>Cancel</button>
