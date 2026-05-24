@@ -80,20 +80,21 @@ export async function predictMask(
 	);
 
 	const scores = iou_scores.data as Float32Array;
+	const numMasks = scores.length;
 	let best = 0;
-	for (let i = 1; i < 3; i++) if (scores[i] > scores[best]) best = i;
+	for (let i = 1; i < numMasks; i++) if (scores[i] > scores[best]) best = i;
 
-	const tensor = masks[0]; // dims [1, 3, H, W], data is interleaved per pixel
+	// post_process_masks returns masks[batch][prompt] — for 1 batch / 1 prompt: masks[0][0].
+	// That tensor has dims [numMasks, H, W] with data interleaved as numMasks * pixel + maskIdx.
+	const tensor = masks[0][0];
 	const dims = tensor.dims as number[];
-	const H = dims[2];
-	const W = dims[3];
-	const data = tensor.data as Uint8Array | Int8Array | BigInt64Array;
+	const H = dims[dims.length - 2];
+	const W = dims[dims.length - 1];
+	const data = tensor.data as Uint8Array | Int8Array;
 
 	const bin = new Uint8Array(H * W);
 	for (let i = 0; i < H * W; i++) {
-		// boolean tensor packed as one value per element; interleaved 3 candidates per pixel
-		const v = data[i * 3 + best];
-		bin[i] = v ? 255 : 0;
+		bin[i] = data[i * numMasks + best] ? 255 : 0;
 	}
 	return { mask: bin, width: W, height: H, score: scores[best] };
 }
