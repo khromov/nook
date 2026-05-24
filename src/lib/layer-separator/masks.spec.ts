@@ -188,6 +188,13 @@ describe('resizeThresholds', () => {
 		expect(shrunk).toEqual([150, 203]);
 	});
 
+	it('shrinking even cuts drops from the foreground end (tie-break to rightmost)', () => {
+		// evenThresholds(5) = [51, 102, 154, 205]; all closenesses tie at 51 or 52.
+		// Should drop 205 first, not 51.
+		const shrunk = resizeThresholds(evenThresholds(5), 4);
+		expect(shrunk).toEqual([51, 102, 154]);
+	});
+
 	it("user's drag survives growth (chain: even 3 → drag → grow to 5)", () => {
 		// User adjusts thresholds from even [85, 170] to dragged [30, 170], then grows to 5.
 		const result = resizeThresholds([30, 170], 5);

@@ -155,7 +155,9 @@ export function resizeThresholds(current: number[], targetCount: number): number
 			const leftGap = cuts[i] - bounds[i];
 			const rightGap = bounds[i + 2] - cuts[i];
 			const closeness = Math.min(leftGap, rightGap);
-			if (closeness < smallestNeighbor) {
+			// `<=` so ties resolve to the higher (rightmost) cut — equal-spaced
+			// shrinks should drop the nearest-foreground cut, not the farthest-sky one.
+			if (closeness <= smallestNeighbor) {
 				smallestNeighbor = closeness;
 				removeIdx = i;
 			}
