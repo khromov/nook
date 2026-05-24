@@ -61,6 +61,11 @@
 
 	let layerCount = $state(3);
 	let thresholds = $state<number[]>(evenThresholds(3));
+	// Debounced copy of thresholds that drives the (expensive) mask recomputation.
+	// Lets the histogram markers drag smoothly without waiting for masks to redraw on
+	// every frame. Commits ~150ms after the last threshold change.
+	let committedThresholds = $state<number[]>(evenThresholds(3));
+	const COMMIT_DELAY_MS = 150;
 	// Per-layer overrides, parallel to layers (overridesByLayer[i] applies to layer i).
 	let overridesByLayer = $state<LayerOverride[][]>([[], [], []]);
 
@@ -80,11 +85,27 @@
 	);
 
 	const layers = $derived.by(() => {
-		const base = layersFromThresholds(thresholds);
+		const base = layersFromThresholds(committedThresholds);
 		for (let i = 0; i < base.length; i++) {
 			base[i].overrides = overridesByLayer[i] ?? [];
 		}
 		return base;
+	});
+
+	let commitTimer: ReturnType<typeof setTimeout> | null = null;
+	$effect(() => {
+		const snapshot = thresholds;
+		if (commitTimer) clearTimeout(commitTimer);
+		commitTimer = setTimeout(() => {
+			committedThresholds = [...snapshot];
+			commitTimer = null;
+		}, COMMIT_DELAY_MS);
+		return () => {
+			if (commitTimer) {
+				clearTimeout(commitTimer);
+				commitTimer = null;
+			}
+		};
 	});
 
 	const masks = $derived.by(() => {
