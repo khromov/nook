@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:12:40.444Z\n"
-"PO-Revision-Date: 2026-05-25T18:06:40.548Z\n"
+"PO-Revision-Date: 2026-05-25T18:09:42.691Z\n"
 "Last-Translator: \n"
 "Language: sv\n"
 "Language-Team: \n"
@@ -196,8 +196,8 @@ msgstr "<0/> Bearbetar bild"
 
 #. placeholder {0}: progress
 #. placeholder {0}: progress
-#. placeholder {0}: downloadProgress
 #. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -293,8 +293,8 @@ msgstr "Valda bilder ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> Rensa alla"
 
-#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
@@ -1622,22 +1622,22 @@ msgstr "Fler verktyg"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Loading Depth Model"
-msgstr ""
+msgstr "Laddar djupmodell"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Downloading Depth Anything V2 (~100 MB). Cached after first load."
-msgstr ""
+msgstr "Laddar ner Depth Anything V2 (~100 MB). Cachas efter första laddningen."
 
 #~ msgid "Layer Separator (Depth Anything V2 small)"
 #~ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Upload Image"
-msgstr ""
+msgstr "Ladda upp bild"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Choose an image <0/>"
-msgstr ""
+msgstr "Välj en bild <0/>"
 
 #~ msgid ""
 #~ "Depth model runs locally in your browser. Output is {0} cumulative B&W masks\n"
@@ -1649,19 +1649,19 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Source & Depth"
-msgstr ""
+msgstr "Original och djup"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth map (white = near)"
-msgstr ""
+msgstr "Djupkarta (vit = nära)"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth map"
-msgstr ""
+msgstr "Djupkarta"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download depth map"
-msgstr ""
+msgstr "Ladda ner djupkarta"
 
 #~ msgid "Cumulative Layer Masks"
 #~ msgstr ""
@@ -1675,12 +1675,12 @@ msgstr ""
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Mask {0}"
-msgstr ""
+msgstr "Mask {0}"
 
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download mask {0}"
-msgstr ""
+msgstr "Ladda ner mask {0}"
 
 #~ msgid ""
 #~ "Output is N-1 cumulative B&W masks at source resolution, ready to drop into\n"
@@ -1689,25 +1689,27 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Running depth estimation…"
-msgstr ""
+msgstr "Kör djupuppskattning…"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layers & Thresholds"
-msgstr ""
+msgstr "Lager och trösklar"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layers:"
-msgstr ""
+msgstr "Lager:"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
 "Drag the markers on the histogram to adjust where layers split. Each cut is the depth\n"
 "value where the layer boundary sits (0 = far, 255 = near)."
 msgstr ""
+"Dra markörerna på histogrammet för att justera var lagren delas.\n"
+"Varje snitt är djupvärdet där lagergränsen ligger (0 = långt bort, 255 = nära)."
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Cumulative Masks"
-msgstr ""
+msgstr "Kumulativa masker"
 
 #~ msgid ""
 #~ "{0} mask{1} for {2} layers. Mask k is\n"
@@ -1718,26 +1720,28 @@ msgstr ""
 #. placeholder {1}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Mask {0} — covers layers 1–{1}"
-msgstr ""
+msgstr "Mask {0} — täcker lager 1–{1}"
 
 #: src/lib/components/layer-separator/MaskCanvas.svelte
 msgid "Mask"
-msgstr ""
+msgstr "Mask"
 
 #: src/lib/components/layer-separator/DepthHistogram.svelte
 msgid "Depth histogram with draggable layer thresholds"
-msgstr ""
+msgstr "Djuphistogram med dragbara lagertrösklar"
 
 #. placeholder {0}: i + 1
 #: src/lib/components/layer-separator/DepthHistogram.svelte
 msgid "Threshold {0}"
-msgstr ""
+msgstr "Tröskel {0}"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
 "Output is N-1 cumulative B&W masks at source resolution, ready to drop into Photoshop\n"
 "as layer masks."
 msgstr ""
+"Resultatet är N-1 kumulativa svartvita masker i källans upplösning,\n"
+"redo att användas som lagermasker i Photoshop."
 
 #. placeholder {0}: masks.length
 #. placeholder {1}: masks.length === 1 ? '' : 's'
@@ -1747,17 +1751,19 @@ msgid ""
 "{0} mask{1} for {2} layers. Mask k is BLACK\n"
 "where layers 1..k live; the frontmost layer has no mask."
 msgstr ""
+"{0} mask{1} för {2} lager. Mask k är SVART\n"
+"där lager 1..k finns; det främsta lagret saknar mask."
 
 #~ msgid "Click to pick an object"
 #~ msgstr ""
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Predicting mask"
-msgstr ""
+msgstr "Förutsäger mask"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Refine with object clicks"
-msgstr ""
+msgstr "Förfina med objektklick"
 
 #~ msgid ""
 #~ "Depth gets some objects wrong (e.g. the building grouped with the foreground leaves).\n"
@@ -1767,11 +1773,11 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "farthest"
-msgstr ""
+msgstr "längst bort"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "nearest"
-msgstr ""
+msgstr "närmast"
 
 #~ msgid "Layer {0} <0/>"
 #~ msgstr ""
@@ -1780,25 +1786,25 @@ msgstr ""
 #. placeholder {1}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Remove object {0} from layer {1}"
-msgstr ""
+msgstr "Ta bort objekt {0} från lager {1}"
 
 #. placeholder {0}: j + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Object {0} <0>×</0>"
-msgstr ""
+msgstr "Objekt {0} <0>×</0>"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Editing…"
-msgstr ""
+msgstr "Redigerar…"
 
 #. placeholder {0}: samLoadProgress
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Loading segmentation model… {0}%"
-msgstr ""
+msgstr "Laddar segmenteringsmodell… {0}%"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Preparing image…"
-msgstr ""
+msgstr "Förbereder bild…"
 
 #~ msgid "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
 #~ msgstr ""
@@ -1811,11 +1817,11 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Click on the object you want to assign to this layer"
-msgstr ""
+msgstr "Klicka på objektet du vill tilldela detta lager"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
@@ -1823,6 +1829,9 @@ msgid ""
 "Click <0>Add object</0> on a layer, then click that object on the image — a segmentation\n"
 "model picks out the shape and forces it into the layer you chose."
 msgstr ""
+"Djup tolkar vissa objekt fel (t.ex. byggnaden grupperad med löven i förgrunden).\n"
+"Klicka på <0>Lägg till objekt</0> på ett lager och klicka sedan på det objektet i bilden —\n"
+"en segmenteringsmodell plockar ut formen och tvingar in den i det lager du valde."
 
 #~ msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
 #~ msgstr ""
@@ -1835,29 +1844,31 @@ msgid ""
 "Click anywhere on the image to build a mask for <0>Layer {0}</0>. Each click refines the previous\n"
 "result."
 msgstr ""
+"Klicka var som helst på bilden för att bygga en mask för <0>Lager {0}</0>.\n"
+"Varje klick förfinar föregående resultat."
 
 #. placeholder {0}: pickedPoints.length
 #. placeholder {1}: pickedPoints.length === 1 ? '' : 's'
 #. placeholder {2}: editingLayerIndex + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Accept ({0} point{1} → layer {2})"
-msgstr ""
+msgstr "Godkänn ({0} punkt{1} → lager {2})"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Clear points"
-msgstr ""
+msgstr "Rensa punkter"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Zoom out"
-msgstr ""
+msgstr "Zooma ut"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Fit to width"
-msgstr ""
+msgstr "Anpassa till bredd"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Zoom in"
-msgstr ""
+msgstr "Zooma in"
 
 #~ msgid ""
 #~ "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine\n"
@@ -1869,59 +1880,63 @@ msgid ""
 "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine small\n"
 "areas"
 msgstr ""
+"<0>Klick</0> lägg till · <1>Shift+klick</1> ta bort · zooma & rulla\n"
+"för att förfina små områden"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Remove the last point (⌘Z)"
-msgstr ""
+msgstr "Ta bort sista punkten (⌘Z)"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Undo last point"
-msgstr ""
+msgstr "Ångra sista punkten"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid "Layer Separator"
-msgstr ""
+msgstr "Lagerseparator"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid ""
 "Split a landscape or painting into depth-ordered layers. Uses Depth Anything V2 + SAM\n"
 "clicks to produce Photoshop-ready B&W layer masks."
 msgstr ""
+"Dela ett landskap eller en målning i djupordnade lager. Använder Depth Anything V2 + SAM-klick\n"
+"för att producera svartvita lagermasker för Photoshop."
 
 #: src/routes/[[lang]]/+page.svelte
 msgid "Tool #06"
-msgstr ""
+msgstr "Verktyg #06"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download all as zip"
-msgstr ""
+msgstr "Ladda ner allt som zip"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Anything V2 small"
-msgstr ""
+msgstr "Depth Anything V2 small"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Faster, good for most images"
-msgstr ""
+msgstr "Snabbare, bra för de flesta bilder"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Anything V2 base"
-msgstr ""
+msgstr "Depth Anything V2 base"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Slower, sharper edges"
-msgstr ""
+msgstr "Långsammare, skarpare kanter"
 
 #. placeholder {0}: selectedDepthModelName
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer Separator ({0})"
-msgstr ""
+msgstr "Lagerseparator ({0})"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Model"
-msgstr ""
+msgstr "Djupmodell"
 
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer {0}"
-msgstr ""
+msgstr "Lager {0}"

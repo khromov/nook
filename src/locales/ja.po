@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-24T22:41:34.932Z\n"
-"PO-Revision-Date: 2026-05-25T18:06:40.546Z\n"
+"PO-Revision-Date: 2026-05-25T18:09:42.690Z\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "Language-Team: \n"
@@ -146,8 +146,8 @@ msgstr "<0/> 画像処理中"
 
 #. placeholder {0}: progress
 #. placeholder {0}: progress
-#. placeholder {0}: downloadProgress
 #. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -192,8 +192,8 @@ msgstr "選択された画像 ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> すべてクリア"
 
-#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
@@ -1622,22 +1622,22 @@ msgstr "その他のツール"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Loading Depth Model"
-msgstr ""
+msgstr "深度モデルを読み込み中"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Downloading Depth Anything V2 (~100 MB). Cached after first load."
-msgstr ""
+msgstr "Depth Anything V2をダウンロード中 (~100 MB)。初回読み込み後はキャッシュされます。"
 
 #~ msgid "Layer Separator (Depth Anything V2 small)"
 #~ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Upload Image"
-msgstr ""
+msgstr "画像をアップロード"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Choose an image <0/>"
-msgstr ""
+msgstr "画像を選択 <0/>"
 
 #~ msgid ""
 #~ "Depth model runs locally in your browser. Output is {0} cumulative B&W masks\n"
@@ -1649,19 +1649,19 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Source & Depth"
-msgstr ""
+msgstr "元画像と深度"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth map (white = near)"
-msgstr ""
+msgstr "深度マップ (白 = 近い)"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth map"
-msgstr ""
+msgstr "深度マップ"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download depth map"
-msgstr ""
+msgstr "深度マップをダウンロード"
 
 #~ msgid "Cumulative Layer Masks"
 #~ msgstr ""
@@ -1675,12 +1675,12 @@ msgstr ""
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Mask {0}"
-msgstr ""
+msgstr "マスク {0}"
 
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download mask {0}"
-msgstr ""
+msgstr "マスク {0}をダウンロード"
 
 #~ msgid ""
 #~ "Output is N-1 cumulative B&W masks at source resolution, ready to drop into\n"
@@ -1689,25 +1689,27 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Running depth estimation…"
-msgstr ""
+msgstr "深度推定を実行中…"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layers & Thresholds"
-msgstr ""
+msgstr "レイヤーとしきい値"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layers:"
-msgstr ""
+msgstr "レイヤー:"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
 "Drag the markers on the histogram to adjust where layers split. Each cut is the depth\n"
 "value where the layer boundary sits (0 = far, 255 = near)."
 msgstr ""
+"ヒストグラム上のマーカーをドラッグしてレイヤーの分割位置を調整します。\n"
+"各カットはレイヤー境界の深度値です (0 = 遠い、255 = 近い)。"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Cumulative Masks"
-msgstr ""
+msgstr "累積マスク"
 
 #~ msgid ""
 #~ "{0} mask{1} for {2} layers. Mask k is\n"
@@ -1718,26 +1720,28 @@ msgstr ""
 #. placeholder {1}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Mask {0} — covers layers 1–{1}"
-msgstr ""
+msgstr "マスク {0} — レイヤー 1–{1} をカバー"
 
 #: src/lib/components/layer-separator/MaskCanvas.svelte
 msgid "Mask"
-msgstr ""
+msgstr "マスク"
 
 #: src/lib/components/layer-separator/DepthHistogram.svelte
 msgid "Depth histogram with draggable layer thresholds"
-msgstr ""
+msgstr "ドラッグ可能なレイヤーしきい値付き深度ヒストグラム"
 
 #. placeholder {0}: i + 1
 #: src/lib/components/layer-separator/DepthHistogram.svelte
 msgid "Threshold {0}"
-msgstr ""
+msgstr "しきい値 {0}"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
 "Output is N-1 cumulative B&W masks at source resolution, ready to drop into Photoshop\n"
 "as layer masks."
 msgstr ""
+"出力は元画像解像度の N-1 個の累積白黒マスクで、Photoshop のレイヤーマスクとして\n"
+"そのまま使用できます。"
 
 #. placeholder {0}: masks.length
 #. placeholder {1}: masks.length === 1 ? '' : 's'
@@ -1747,17 +1751,19 @@ msgid ""
 "{0} mask{1} for {2} layers. Mask k is BLACK\n"
 "where layers 1..k live; the frontmost layer has no mask."
 msgstr ""
+"{2} 個のレイヤーに対して {0} 個のマスク{1}。マスク k はレイヤー 1..k がある場所が黒、\n"
+"最前面のレイヤーにはマスクがありません。"
 
 #~ msgid "Click to pick an object"
 #~ msgstr ""
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Predicting mask"
-msgstr ""
+msgstr "マスクを予測中"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Refine with object clicks"
-msgstr ""
+msgstr "オブジェクトクリックで調整"
 
 #~ msgid ""
 #~ "Depth gets some objects wrong (e.g. the building grouped with the foreground leaves).\n"
@@ -1767,11 +1773,11 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "farthest"
-msgstr ""
+msgstr "最遠"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "nearest"
-msgstr ""
+msgstr "最近"
 
 #~ msgid "Layer {0} <0/>"
 #~ msgstr ""
@@ -1780,25 +1786,25 @@ msgstr ""
 #. placeholder {1}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Remove object {0} from layer {1}"
-msgstr ""
+msgstr "オブジェクト {0} をレイヤー {1} から削除"
 
 #. placeholder {0}: j + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Object {0} <0>×</0>"
-msgstr ""
+msgstr "オブジェクト {0} <0>×</0>"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Editing…"
-msgstr ""
+msgstr "編集中…"
 
 #. placeholder {0}: samLoadProgress
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Loading segmentation model… {0}%"
-msgstr ""
+msgstr "セグメンテーションモデルを読み込み中… {0}%"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Preparing image…"
-msgstr ""
+msgstr "画像を準備中…"
 
 #~ msgid "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
 #~ msgstr ""
@@ -1811,11 +1817,11 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Click on the object you want to assign to this layer"
-msgstr ""
+msgstr "このレイヤーに割り当てたいオブジェクトをクリック"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
@@ -1823,6 +1829,9 @@ msgid ""
 "Click <0>Add object</0> on a layer, then click that object on the image — a segmentation\n"
 "model picks out the shape and forces it into the layer you chose."
 msgstr ""
+"深度では一部のオブジェクトが間違って分類されます (例: 前景の葉と一緒にされた建物)。\n"
+"レイヤーで <0>オブジェクトを追加</0> をクリックし、画像でそのオブジェクトをクリックすると —\n"
+"セグメンテーションモデルが形状を抽出し、選んだレイヤーに強制的に割り当てます。"
 
 #~ msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
 #~ msgstr ""
@@ -1835,29 +1844,31 @@ msgid ""
 "Click anywhere on the image to build a mask for <0>Layer {0}</0>. Each click refines the previous\n"
 "result."
 msgstr ""
+"画像のどこでもクリックして <0>レイヤー {0}</0> のマスクを構築。\n"
+"各クリックで前の結果を絞り込みます。"
 
 #. placeholder {0}: pickedPoints.length
 #. placeholder {1}: pickedPoints.length === 1 ? '' : 's'
 #. placeholder {2}: editingLayerIndex + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Accept ({0} point{1} → layer {2})"
-msgstr ""
+msgstr "確定 ({0} 個の点{1} → レイヤー {2})"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Clear points"
-msgstr ""
+msgstr "点をクリア"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Zoom out"
-msgstr ""
+msgstr "ズームアウト"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Fit to width"
-msgstr ""
+msgstr "幅に合わせる"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Zoom in"
-msgstr ""
+msgstr "ズームイン"
 
 #~ msgid ""
 #~ "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine\n"
@@ -1869,59 +1880,63 @@ msgid ""
 "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine small\n"
 "areas"
 msgstr ""
+"<0>クリック</0> 追加 · <1>Shift+クリック</1> 削除 · ズーム & スクロールで\n"
+"細かい領域を調整"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Remove the last point (⌘Z)"
-msgstr ""
+msgstr "最後の点を削除 (⌘Z)"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Undo last point"
-msgstr ""
+msgstr "最後の点を元に戻す"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid "Layer Separator"
-msgstr ""
+msgstr "レイヤー分離"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid ""
 "Split a landscape or painting into depth-ordered layers. Uses Depth Anything V2 + SAM\n"
 "clicks to produce Photoshop-ready B&W layer masks."
 msgstr ""
+"風景や絵画を深度順のレイヤーに分割。Depth Anything V2 + SAM クリックを使い、\n"
+"Photoshop 向けの白黒レイヤーマスクを生成します。"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid "Tool #06"
-msgstr ""
+msgstr "ツール #06"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download all as zip"
-msgstr ""
+msgstr "すべて ZIP でダウンロード"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Anything V2 small"
-msgstr ""
+msgstr "Depth Anything V2 small"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Faster, good for most images"
-msgstr ""
+msgstr "高速、ほとんどの画像に最適"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Anything V2 base"
-msgstr ""
+msgstr "Depth Anything V2 base"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Slower, sharper edges"
-msgstr ""
+msgstr "低速、よりシャープなエッジ"
 
 #. placeholder {0}: selectedDepthModelName
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer Separator ({0})"
-msgstr ""
+msgstr "レイヤー分離 ({0})"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Model"
-msgstr ""
+msgstr "深度モデル"
 
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer {0}"
-msgstr ""
+msgstr "レイヤー {0}"

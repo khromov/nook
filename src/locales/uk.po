@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:20:18.035Z\n"
-"PO-Revision-Date: 2026-05-25T18:06:40.549Z\n"
+"PO-Revision-Date: 2026-05-25T18:09:42.692Z\n"
 "Last-Translator: \n"
 "Language: uk\n"
 "Language-Team: \n"
@@ -196,8 +196,8 @@ msgstr "<0/> Обробка зображення"
 
 #. placeholder {0}: progress
 #. placeholder {0}: progress
-#. placeholder {0}: downloadProgress
 #. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
@@ -273,8 +273,8 @@ msgstr "Обрані зображення ({0})"
 msgid "<0/> Clear All"
 msgstr "<0/> Очистити все"
 
-#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
@@ -1622,22 +1622,22 @@ msgstr "Більше інструментів"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Loading Depth Model"
-msgstr ""
+msgstr "Завантаження моделі глибини"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Downloading Depth Anything V2 (~100 MB). Cached after first load."
-msgstr ""
+msgstr "Завантажується Depth Anything V2 (~100 МБ). Кешується після першого завантаження."
 
 #~ msgid "Layer Separator (Depth Anything V2 small)"
 #~ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Upload Image"
-msgstr ""
+msgstr "Завантажити зображення"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Choose an image <0/>"
-msgstr ""
+msgstr "Виберіть зображення <0/>"
 
 #~ msgid ""
 #~ "Depth model runs locally in your browser. Output is {0} cumulative B&W masks\n"
@@ -1649,19 +1649,19 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Source & Depth"
-msgstr ""
+msgstr "Оригінал і глибина"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth map (white = near)"
-msgstr ""
+msgstr "Карта глибини (білий = близько)"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth map"
-msgstr ""
+msgstr "Карта глибини"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download depth map"
-msgstr ""
+msgstr "Завантажити карту глибини"
 
 #~ msgid "Cumulative Layer Masks"
 #~ msgstr ""
@@ -1675,12 +1675,12 @@ msgstr ""
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Mask {0}"
-msgstr ""
+msgstr "Маска {0}"
 
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download mask {0}"
-msgstr ""
+msgstr "Завантажити маску {0}"
 
 #~ msgid ""
 #~ "Output is N-1 cumulative B&W masks at source resolution, ready to drop into\n"
@@ -1689,25 +1689,27 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Running depth estimation…"
-msgstr ""
+msgstr "Обчислення глибини…"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layers & Thresholds"
-msgstr ""
+msgstr "Шари та пороги"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layers:"
-msgstr ""
+msgstr "Шари:"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
 "Drag the markers on the histogram to adjust where layers split. Each cut is the depth\n"
 "value where the layer boundary sits (0 = far, 255 = near)."
 msgstr ""
+"Перетягуйте маркери на гістограмі, щоб налаштувати поділ шарів.\n"
+"Кожен зріз — значення глибини, де розташована межа шару (0 = далеко, 255 = близько)."
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Cumulative Masks"
-msgstr ""
+msgstr "Кумулятивні маски"
 
 #~ msgid ""
 #~ "{0} mask{1} for {2} layers. Mask k is\n"
@@ -1718,26 +1720,28 @@ msgstr ""
 #. placeholder {1}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Mask {0} — covers layers 1–{1}"
-msgstr ""
+msgstr "Маска {0} — охоплює шари 1–{1}"
 
 #: src/lib/components/layer-separator/MaskCanvas.svelte
 msgid "Mask"
-msgstr ""
+msgstr "Маска"
 
 #: src/lib/components/layer-separator/DepthHistogram.svelte
 msgid "Depth histogram with draggable layer thresholds"
-msgstr ""
+msgstr "Гістограма глибини з перетягуваними порогами шарів"
 
 #. placeholder {0}: i + 1
 #: src/lib/components/layer-separator/DepthHistogram.svelte
 msgid "Threshold {0}"
-msgstr ""
+msgstr "Поріг {0}"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
 "Output is N-1 cumulative B&W masks at source resolution, ready to drop into Photoshop\n"
 "as layer masks."
 msgstr ""
+"Результат — N-1 кумулятивних чорно-білих масок в оригінальній роздільній здатності,\n"
+"готових для використання як маски шарів у Photoshop."
 
 #. placeholder {0}: masks.length
 #. placeholder {1}: masks.length === 1 ? '' : 's'
@@ -1747,17 +1751,19 @@ msgid ""
 "{0} mask{1} for {2} layers. Mask k is BLACK\n"
 "where layers 1..k live; the frontmost layer has no mask."
 msgstr ""
+"{0} мас{1} для {2} шарів. Маска k — ЧОРНА\n"
+"там, де шари 1..k; передній шар не має маски."
 
 #~ msgid "Click to pick an object"
 #~ msgstr ""
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Predicting mask"
-msgstr ""
+msgstr "Прогнозування маски"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Refine with object clicks"
-msgstr ""
+msgstr "Уточнити кліками по об'єктах"
 
 #~ msgid ""
 #~ "Depth gets some objects wrong (e.g. the building grouped with the foreground leaves).\n"
@@ -1767,11 +1773,11 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "farthest"
-msgstr ""
+msgstr "найдальший"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "nearest"
-msgstr ""
+msgstr "найближчий"
 
 #~ msgid "Layer {0} <0/>"
 #~ msgstr ""
@@ -1780,25 +1786,25 @@ msgstr ""
 #. placeholder {1}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Remove object {0} from layer {1}"
-msgstr ""
+msgstr "Видалити об'єкт {0} з шару {1}"
 
 #. placeholder {0}: j + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Object {0} <0>×</0>"
-msgstr ""
+msgstr "Об'єкт {0} <0>×</0>"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Editing…"
-msgstr ""
+msgstr "Редагування…"
 
 #. placeholder {0}: samLoadProgress
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Loading segmentation model… {0}%"
-msgstr ""
+msgstr "Завантаження моделі сегментації… {0}%"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Preparing image…"
-msgstr ""
+msgstr "Підготовка зображення…"
 
 #~ msgid "Click anywhere on the image to pick an object for <0>Layer {0}</0>."
 #~ msgstr ""
@@ -1811,11 +1817,11 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Cancel"
-msgstr ""
+msgstr "Скасувати"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Click on the object you want to assign to this layer"
-msgstr ""
+msgstr "Клацніть по об'єкту, який хочете призначити цьому шару"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid ""
@@ -1823,6 +1829,9 @@ msgid ""
 "Click <0>Add object</0> on a layer, then click that object on the image — a segmentation\n"
 "model picks out the shape and forces it into the layer you chose."
 msgstr ""
+"Глибина неправильно групує деякі об'єкти (наприклад, будівлю з листям переднього плану).\n"
+"Натисніть <0>Додати об'єкт</0> на шарі, потім клацніть по цьому об'єкту на зображенні —\n"
+"модель сегментації виділяє форму і примусово призначає її обраному шару."
 
 #~ msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
 #~ msgstr ""
@@ -1835,29 +1844,31 @@ msgid ""
 "Click anywhere on the image to build a mask for <0>Layer {0}</0>. Each click refines the previous\n"
 "result."
 msgstr ""
+"Клацніть будь-де на зображенні, щоб побудувати маску для <0>шару {0}</0>.\n"
+"Кожен клік уточнює попередній результат."
 
 #. placeholder {0}: pickedPoints.length
 #. placeholder {1}: pickedPoints.length === 1 ? '' : 's'
 #. placeholder {2}: editingLayerIndex + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Accept ({0} point{1} → layer {2})"
-msgstr ""
+msgstr "Підтвердити ({0} точ{1} → шар {2})"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Clear points"
-msgstr ""
+msgstr "Очистити точки"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Zoom out"
-msgstr ""
+msgstr "Зменшити"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Fit to width"
-msgstr ""
+msgstr "За шириною"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Zoom in"
-msgstr ""
+msgstr "Збільшити"
 
 #~ msgid ""
 #~ "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine\n"
@@ -1869,59 +1880,63 @@ msgid ""
 "<0>Click</0> add · <1>Shift+click</1> subtract · zoom & scroll to refine small\n"
 "areas"
 msgstr ""
+"<0>Клік</0> додати · <1>Shift+клік</1> прибрати · масштабуйте та прокручуйте\n"
+"для уточнення малих ділянок"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Remove the last point (⌘Z)"
-msgstr ""
+msgstr "Видалити останню точку (⌘Z)"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Undo last point"
-msgstr ""
+msgstr "Скасувати останню точку"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid "Layer Separator"
-msgstr ""
+msgstr "Розділення шарів"
 
 #: src/routes/[[lang]]/+page.svelte
 msgid ""
 "Split a landscape or painting into depth-ordered layers. Uses Depth Anything V2 + SAM\n"
 "clicks to produce Photoshop-ready B&W layer masks."
 msgstr ""
+"Розділіть пейзаж або картину на шари за глибиною. Використовує Depth Anything V2 + кліки SAM\n"
+"для створення чорно-білих масок шарів, готових для Photoshop."
 
 #: src/routes/[[lang]]/+page.svelte
 msgid "Tool #06"
-msgstr ""
+msgstr "Інструмент #06"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Download all as zip"
-msgstr ""
+msgstr "Завантажити все як zip"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Anything V2 small"
-msgstr ""
+msgstr "Depth Anything V2 small"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Faster, good for most images"
-msgstr ""
+msgstr "Швидше, добре для більшості зображень"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Anything V2 base"
-msgstr ""
+msgstr "Depth Anything V2 base"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Slower, sharper edges"
-msgstr ""
+msgstr "Повільніше, чіткіші краї"
 
 #. placeholder {0}: selectedDepthModelName
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer Separator ({0})"
-msgstr ""
+msgstr "Розділення шарів ({0})"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Model"
-msgstr ""
+msgstr "Модель глибини"
 
 #. placeholder {0}: i + 1
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer {0}"
-msgstr ""
+msgstr "Шар {0}"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2026-05-25T18:06:40.543Z\n"
+"PO-Revision-Date: 2026-05-25T18:09:42.685Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -100,8 +100,8 @@ msgstr "Demo File"
 msgid "Listen →"
 msgstr "Listen →"
 
-#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #. placeholder {0}: (file.size / 1024 / 1024).toFixed(1)
+#. placeholder {0}: (selectedFile.size / 1024 / 1024).toFixed(2)
 #: src/lib/components/background-remover/BackgroundRemoverUpload.svelte
 #: src/lib/components/whisper/FileUpload.svelte
 msgid "{0} MB"
@@ -146,8 +146,8 @@ msgstr "<0/> Transcribing Audio"
 
 #. placeholder {0}: progress
 #. placeholder {0}: progress
-#. placeholder {0}: downloadProgress
 #. placeholder {0}: progress
+#. placeholder {0}: downloadProgress
 #: src/lib/components/background-remover/BackgroundRemoverProgress.svelte
 #: src/lib/components/common/LoadingProgress.svelte
 #: src/lib/components/whisper/TranscriptionProgress.svelte
