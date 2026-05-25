@@ -14,6 +14,7 @@
 	import LoadingProgress from '$lib/components/common/LoadingProgress.svelte';
 	import ErrorDisplay from '$lib/components/common/ErrorDisplay.svelte';
 	import { useWakeLock } from '$lib/wakeLock.svelte';
+	import JSZip from 'jszip';
 
 	import MaskCanvas from '$lib/components/layer-separator/MaskCanvas.svelte';
 	import DepthHistogram from '$lib/components/layer-separator/DepthHistogram.svelte';
@@ -40,9 +41,27 @@
 	type DepthPipeline = (input: string) => Promise<DepthOutput>;
 	type ProgressEvent = { status: string; progress?: number };
 
-	const MODEL_ID = 'onnx-community/depth-anything-v2-small';
+	const DEPTH_MODELS = [
+		{
+			id: 'onnx-community/depth-anything-v2-small',
+			name: 'Depth Anything V2 small',
+			size: '~100 MB',
+			description: 'Faster, good for most images'
+		},
+		{
+			id: 'onnx-community/depth-anything-v2-base',
+			name: 'Depth Anything V2 base',
+			size: '~390 MB',
+			description: 'Slower, sharper edges'
+		}
+	];
 	const MIN_LAYERS = 2;
 	const MAX_LAYERS = 5;
+
+	let selectedDepthModelId = $state(DEPTH_MODELS[0].id);
+	const selectedDepthModelName = $derived(
+		DEPTH_MODELS.find((m) => m.id === selectedDepthModelId)?.name ?? selectedDepthModelId
+	);
 
 	let isModelLoaded = $state(false);
 	let isLoadingModel = $state(false);
@@ -134,7 +153,7 @@
 			modelLoadProgress = 0;
 			await requestWakeLock();
 
-			depthEstimator = (await pipeline('depth-estimation', MODEL_ID, {
+			depthEstimator = (await pipeline('depth-estimation', selectedDepthModelId, {
 				progress_callback: (progress: ProgressEvent) => {
 					if (progress.status === 'progress') {
 						modelLoadProgress = Math.round(progress.progress ?? 0);
@@ -343,6 +362,33 @@
 		setTimeout(() => URL.revokeObjectURL(url), 5000);
 	}
 
+	async function downloadAllAsZip() {
+		if (masks.length === 0 || !depthData) return;
+		const zip = new JSZip();
+		// Each mask as a PNG.
+		for (let i = 0; i < masks.length; i++) {
+			const url = await grayscaleToBlobUrl(masks[i], depthW, depthH);
+			try {
+				const blob = await (await fetch(url)).blob();
+				zip.file(`${sourceFileName}_mask_${i + 1}.png`, blob);
+			} finally {
+				URL.revokeObjectURL(url);
+			}
+		}
+		// Also include the depth map for reference.
+		const depthUrl = await grayscaleToBlobUrl(depthData, depthW, depthH);
+		try {
+			const depthBlob = await (await fetch(depthUrl)).blob();
+			zip.file(`${sourceFileName}_depth.png`, depthBlob);
+		} finally {
+			URL.revokeObjectURL(depthUrl);
+		}
+		const zipBlob = await zip.generateAsync({ type: 'blob' });
+		const zipUrl = URL.createObjectURL(zipBlob);
+		downloadBlobUrl(zipUrl, `${sourceFileName}_layers.zip`);
+		setTimeout(() => URL.revokeObjectURL(zipUrl), 5000);
+	}
+
 	function reset() {
 		depthData = null;
 		depthW = 0;
@@ -361,6 +407,15 @@
 	function retry() {
 		error = false;
 		if (!isModelLoaded) loadModel();
+	}
+
+	function handleDepthModelChange(modelId: string) {
+		if (modelId === selectedDepthModelId) return;
+		selectedDepthModelId = modelId;
+		reset();
+		isModelLoaded = false;
+		depthEstimator = null;
+		loadModel();
 	}
 
 	onDestroy(() => {
@@ -389,7 +444,7 @@
 	</div>
 {:else}
 	<CardInterface>
-		<Toolbar modelInfo="Layer Separator (Depth Anything V2 small)" ModelIcon={ImageIcon}>
+		<Toolbar modelInfo="Layer Separator ({selectedDepthModelName})" ModelIcon={ImageIcon}>
 			{#if depthData}
 				<ActionButton onClick={reset} variant="danger" Icon={RefreshCcwIcon}>Restart</ActionButton>
 			{/if}
@@ -397,8 +452,26 @@
 
 		<ContentArea>
 			{#if !depthData}
-				<SectionCard rotation={-0.1} animationDelay={0}>
-					<StepHeader stepNumber={1} title="Upload Image" backgroundColor="#98fb98" />
+				<SectionCard rotation={0.2} animationDelay={0}>
+					<StepHeader stepNumber={1} title="Depth Model" backgroundColor="#ff69b4" />
+					<div class="model-buttons">
+						{#each DEPTH_MODELS as model (model.id)}
+							<button
+								class="model-btn"
+								class:active={selectedDepthModelId === model.id}
+								onclick={() => handleDepthModelChange(model.id)}
+								disabled={isLoadingModel}
+							>
+								<span class="model-name">{model.name}</span>
+								<span class="model-size">{model.size}</span>
+								<span class="model-desc">{model.description}</span>
+							</button>
+						{/each}
+					</div>
+				</SectionCard>
+
+				<SectionCard rotation={-0.1} animationDelay={0.1}>
+					<StepHeader stepNumber={2} title="Upload Image" backgroundColor="#98fb98" />
 					<div class="upload">
 						<label class="upload-label">
 							Choose an image
@@ -422,7 +495,7 @@
 
 			{#if depthData && originalImageUrl && !isProcessing}
 				<SectionCard rotation={0.2} animationDelay={0}>
-					<StepHeader stepNumber={2} title="Source & Depth" />
+					<StepHeader stepNumber={3} title="Source & Depth" />
 					<div class="grid">
 						<figure>
 							<figcaption>Original</figcaption>
@@ -437,7 +510,7 @@
 				</SectionCard>
 
 				<SectionCard rotation={-0.2} animationDelay={0.1}>
-					<StepHeader stepNumber={3} title="Layers & Thresholds" backgroundColor="#ffd93d" />
+					<StepHeader stepNumber={4} title="Layers & Thresholds" backgroundColor="#ffd93d" />
 
 					<div class="layer-count">
 						<span class="layer-count-label">Layers:</span>
@@ -460,7 +533,7 @@
 				</SectionCard>
 
 				<SectionCard rotation={0.15} animationDelay={0.15}>
-					<StepHeader stepNumber={4} title="Refine with object clicks" backgroundColor="#ff69b4" />
+					<StepHeader stepNumber={5} title="Refine with object clicks" backgroundColor="#ff69b4" />
 					<p class="hint">
 						Depth gets some objects wrong (e.g. the building grouped with the foreground leaves).
 						Click <strong>Add object</strong> on a layer, then click that object on the image — a segmentation
@@ -555,11 +628,16 @@
 				</SectionCard>
 
 				<SectionCard rotation={0.1} animationDelay={0.2}>
-					<StepHeader stepNumber={5} title="Cumulative Masks" />
+					<StepHeader stepNumber={6} title="Cumulative Masks" />
 					<p class="hint">
 						{masks.length} mask{masks.length === 1 ? '' : 's'} for {layers.length} layers. Mask k is BLACK
 						where layers 1..k live; the frontmost layer has no mask.
 					</p>
+					<div class="masks-actions">
+						<ActionButton onClick={downloadAllAsZip} variant="success" Icon={DownloadIcon}>
+							Download all as zip
+						</ActionButton>
+					</div>
 					<div class="masks-grid">
 						{#each masks as mask, i (i)}
 							<figure>
@@ -807,9 +885,76 @@
 		padding: 0;
 		align-self: flex-start;
 	}
+	.masks-actions {
+		display: flex;
+		justify-content: center;
+		margin: 1rem 0;
+	}
+	.model-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.model-btn {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		padding: 1rem 1.25rem;
+		background: #f8f8f8;
+		border: 3px solid #000;
+		border-radius: 8px;
+		cursor: pointer;
+		font-family: inherit;
+		box-shadow: 4px 4px 0 #000;
+		min-width: 200px;
+		text-align: left;
+	}
+	.model-btn:hover:not(:disabled) {
+		transform: translate(-2px, -2px);
+		box-shadow: 6px 6px 0 #000;
+	}
+	.model-btn.active {
+		background: #ffd93d;
+		transform: translate(-2px, -2px);
+		box-shadow: 6px 6px 0 #000;
+	}
+	.model-btn:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+	.model-name {
+		font-weight: 700;
+		font-size: 0.95rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+	.model-size {
+		font-size: 0.75rem;
+		color: #555;
+		font-family: monospace;
+	}
+	.model-desc {
+		font-size: 0.8rem;
+		color: #444;
+	}
 	@media (max-width: 700px) {
 		.grid {
 			grid-template-columns: 1fr;
+		}
+		.layer-row {
+			padding: 0.5rem;
+			gap: 0.5rem;
+		}
+		.layer-row-label {
+			width: 100%;
+			justify-content: flex-start;
+		}
+		.add-override-btn {
+			width: 100%;
+		}
+		.depth-range {
+			display: none;
 		}
 	}
 </style>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:20:18.035Z\n"
-"PO-Revision-Date: 2026-05-24T21:51:15.973Z\n"
+"PO-Revision-Date: 2026-05-25T17:48:41.971Z\n"
 "Last-Translator: \n"
 "Language: uk\n"
 "Language-Team: \n"
@@ -1628,9 +1628,8 @@ msgstr ""
 msgid "Downloading Depth Anything V2 (~100 MB). Cached after first load."
 msgstr ""
 
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Layer Separator (Depth Anything V2 small)"
-msgstr ""
+#~ msgid "Layer Separator (Depth Anything V2 small)"
+#~ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Upload Image"
@@ -1879,4 +1878,47 @@ msgstr ""
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Undo last point"
+msgstr ""
+
+#: src/routes/[[lang]]/+page.svelte
+msgid "Layer Separator"
+msgstr ""
+
+#: src/routes/[[lang]]/+page.svelte
+msgid ""
+"Split a landscape or painting into depth-ordered layers. Uses Depth Anything V2 + SAM\n"
+"clicks to produce Photoshop-ready B&W layer masks."
+msgstr ""
+
+#: src/routes/[[lang]]/+page.svelte
+msgid "Tool #06"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Download all as zip"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Depth Anything V2 small"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Faster, good for most images"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Depth Anything V2 base"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Slower, sharper edges"
+msgstr ""
+
+#. placeholder {0}: selectedDepthModelName
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Layer Separator ({0})"
+msgstr ""
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Depth Model"
 msgstr ""

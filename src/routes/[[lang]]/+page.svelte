@@ -4,6 +4,7 @@
 	import ImageIcon from 'virtual:icons/lucide/image';
 	import SpeechIcon from 'virtual:icons/lucide/speech';
 	import CalculatorIcon from 'virtual:icons/lucide/calculator';
+	import LayersIcon from 'virtual:icons/lucide/layers-3';
 	import { page } from '$app/stores';
 	import { getCurrentLanguageFromPage, createLocalizedLink } from '$lib/i18n-utils';
 
@@ -13,6 +14,7 @@
 	const transcribeLink = $derived(createLocalizedLink('/transcribe', currentLang));
 	const ttsLink = $derived(createLocalizedLink('/text-to-speech', currentLang));
 	const backgroundLink = $derived(createLocalizedLink('/background-remover', currentLang));
+	const layerSeparatorLink = $derived(createLocalizedLink('/layer-separator', currentLang));
 	const tokensLink = $derived(createLocalizedLink('/count-tokens', currentLang));
 </script>
 
@@ -84,8 +86,22 @@
 				</div>
 			</a>
 
-			<a href={tokensLink} class="feature-card tokens-card">
+			<a href={layerSeparatorLink} class="feature-card layer-card">
 				<div class="card-number">Tool #05</div>
+				<div class="card-content">
+					<div class="icon-container">
+						<LayersIcon style="width: 48px; height: 48px; stroke-width: 2.5" />
+					</div>
+					<h2>Layer Separator</h2>
+					<p class="feature-description">
+						Split a landscape or painting into depth-ordered layers. Uses Depth Anything V2 + SAM
+						clicks to produce Photoshop-ready B&amp;W layer masks.
+					</p>
+				</div>
+			</a>
+
+			<a href={tokensLink} class="feature-card tokens-card">
+				<div class="card-number">Tool #06</div>
 				<div class="card-content">
 					<div class="icon-container">
 						<CalculatorIcon style="width: 48px; height: 48px; stroke-width: 2.5" />
@@ -243,6 +259,10 @@
 
 	.feature-card:nth-child(5) {
 		animation-delay: 0.6s;
+	}
+
+	.feature-card:nth-child(6) {
+		animation-delay: 0.7s;
 	}
 
 	@keyframes cardFade {

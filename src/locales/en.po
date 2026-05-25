@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2026-05-24T21:51:15.968Z\n"
+"PO-Revision-Date: 2026-05-25T17:48:41.967Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1628,9 +1628,8 @@ msgstr "Loading Depth Model"
 msgid "Downloading Depth Anything V2 (~100 MB). Cached after first load."
 msgstr "Downloading Depth Anything V2 (~100 MB). Cached after first load."
 
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Layer Separator (Depth Anything V2 small)"
-msgstr "Layer Separator (Depth Anything V2 small)"
+#~ msgid "Layer Separator (Depth Anything V2 small)"
+#~ msgstr "Layer Separator (Depth Anything V2 small)"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Upload Image"
@@ -1907,3 +1906,48 @@ msgstr "Remove the last point (⌘Z)"
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Undo last point"
 msgstr "Undo last point"
+
+#: src/routes/[[lang]]/+page.svelte
+msgid "Layer Separator"
+msgstr "Layer Separator"
+
+#: src/routes/[[lang]]/+page.svelte
+msgid ""
+"Split a landscape or painting into depth-ordered layers. Uses Depth Anything V2 + SAM\n"
+"clicks to produce Photoshop-ready B&W layer masks."
+msgstr ""
+"Split a landscape or painting into depth-ordered layers. Uses Depth Anything V2 + SAM\n"
+"clicks to produce Photoshop-ready B&W layer masks."
+
+#: src/routes/[[lang]]/+page.svelte
+msgid "Tool #06"
+msgstr "Tool #06"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Download all as zip"
+msgstr "Download all as zip"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Depth Anything V2 small"
+msgstr "Depth Anything V2 small"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Faster, good for most images"
+msgstr "Faster, good for most images"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Depth Anything V2 base"
+msgstr "Depth Anything V2 base"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Slower, sharper edges"
+msgstr "Slower, sharper edges"
+
+#. placeholder {0}: selectedDepthModelName
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Layer Separator ({0})"
+msgstr "Layer Separator ({0})"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Depth Model"
+msgstr "Depth Model"
