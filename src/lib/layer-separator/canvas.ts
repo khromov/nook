@@ -1,12 +1,8 @@
 /**
- * Render a single-channel byte array (0..255) as a grayscale PNG blob URL.
+ * Render a single-channel byte array (0..255) as a grayscale PNG Blob.
  * `data` must have length `width * height`.
  */
-export function grayscaleToBlobUrl(
-	data: Uint8Array,
-	width: number,
-	height: number
-): Promise<string> {
+export function grayscaleToBlob(data: Uint8Array, width: number, height: number): Promise<Blob> {
 	const canvas = document.createElement('canvas');
 	canvas.width = width;
 	canvas.height = height;
@@ -26,10 +22,23 @@ export function grayscaleToBlobUrl(
 
 	return new Promise((resolve, reject) => {
 		canvas.toBlob((blob) => {
-			if (blob) resolve(URL.createObjectURL(blob));
+			if (blob) resolve(blob);
 			else reject(new Error('toBlob returned null'));
 		}, 'image/png');
 	});
+}
+
+/**
+ * Convenience wrapper that creates a blob URL ready for an `<a download>` link.
+ * Caller is responsible for revoking via `URL.revokeObjectURL`.
+ */
+export async function grayscaleToBlobUrl(
+	data: Uint8Array,
+	width: number,
+	height: number
+): Promise<string> {
+	const blob = await grayscaleToBlob(data, width, height);
+	return URL.createObjectURL(blob);
 }
 
 /**

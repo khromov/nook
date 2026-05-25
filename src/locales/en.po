@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T12:44:06.349Z\n"
-"PO-Revision-Date: 2026-05-25T17:48:41.967Z\n"
+"PO-Revision-Date: 2026-05-25T18:06:40.543Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1845,10 +1845,8 @@ msgstr ""
 "Click <0>Add object</0> on a layer, then click that object on the image — a segmentation\n"
 "model picks out the shape and forces it into the layer you chose."
 
-#. placeholder {0}: i + 1
-#: src/routes/[[lang]]/layer-separator/+page.svelte
-msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
-msgstr "Layer {0} <0>depth {0}–{1}</0> <1/>"
+#~ msgid "Layer {0} <0>depth {0}–{1}</0> <1/>"
+#~ msgstr "Layer {0} <0>depth {0}–{1}</0> <1/>"
 
 #~ msgid "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
 #~ msgstr "<0>Click</0> = add to mask · <1>Shift+click</1> = remove from mask"
@@ -1951,3 +1949,8 @@ msgstr "Layer Separator ({0})"
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Depth Model"
 msgstr "Depth Model"
+
+#. placeholder {0}: i + 1
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "Layer {0}"
+msgstr "Layer {0}"

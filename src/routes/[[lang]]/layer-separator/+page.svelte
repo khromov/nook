@@ -26,7 +26,11 @@
 		layersFromThresholds,
 		resizeThresholds
 	} from '$lib/layer-separator/masks';
-	import { grayscaleToBlobUrl, downloadBlobUrl } from '$lib/layer-separator/canvas';
+	import {
+		grayscaleToBlob,
+		grayscaleToBlobUrl,
+		downloadBlobUrl
+	} from '$lib/layer-separator/canvas';
 	import {
 		loadSam,
 		encodeImage,
@@ -139,6 +143,10 @@
 		if (env.backends?.onnx?.wasm) {
 			env.backends.onnx.wasm.wasmPaths = '/transformers/';
 		}
+		// Mutates the transformers.js global config; this conflicts with the background-remover
+		// which sets its own remoteHost to BASE_MODEL_URL at module top-level. First visit wins
+		// per session — re-visit doesn't reload the module. Switch to BASE_MODEL_URL once the
+		// depth + SAM models are hosted on the project CDN.
 		env.remoteHost = 'https://huggingface.co/';
 		env.remotePathTemplate = '{model}/resolve/{revision}/';
 		const cleanup = setupWakeLock(() => isProcessing || isLoadingModel);
@@ -302,6 +310,12 @@
 		await runPrediction();
 	}
 
+	function removeOverride(layerIdx: number, overrideIdx: number) {
+		overridesByLayer = overridesByLayer.map((arr, i) =>
+			i === layerIdx ? arr.filter((_, j) => j !== overrideIdx) : arr
+		);
+	}
+
 	$effect(() => {
 		if (editingLayerIndex === null) return;
 		function onKeyDown(e: KeyboardEvent) {
@@ -313,12 +327,6 @@
 		window.addEventListener('keydown', onKeyDown);
 		return () => window.removeEventListener('keydown', onKeyDown);
 	});
-
-	function removeOverride(layerIdx: number, overrideIdx: number) {
-		overridesByLayer = overridesByLayer.map((arr, i) =>
-			i === layerIdx ? arr.filter((_, j) => j !== overrideIdx) : arr
-		);
-	}
 
 	function handleFile(e: Event) {
 		const file = (e.target as HTMLInputElement).files?.[0];
@@ -365,24 +373,14 @@
 	async function downloadAllAsZip() {
 		if (masks.length === 0 || !depthData) return;
 		const zip = new JSZip();
-		// Each mask as a PNG.
 		for (let i = 0; i < masks.length; i++) {
-			const url = await grayscaleToBlobUrl(masks[i], depthW, depthH);
-			try {
-				const blob = await (await fetch(url)).blob();
-				zip.file(`${sourceFileName}_mask_${i + 1}.png`, blob);
-			} finally {
-				URL.revokeObjectURL(url);
-			}
+			const blob = await grayscaleToBlob(masks[i], depthW, depthH);
+			zip.file(`${sourceFileName}_mask_${i + 1}.png`, blob);
 		}
 		// Also include the depth map for reference.
-		const depthUrl = await grayscaleToBlobUrl(depthData, depthW, depthH);
-		try {
-			const depthBlob = await (await fetch(depthUrl)).blob();
-			zip.file(`${sourceFileName}_depth.png`, depthBlob);
-		} finally {
-			URL.revokeObjectURL(depthUrl);
-		}
+		const depthBlob = await grayscaleToBlob(depthData, depthW, depthH);
+		zip.file(`${sourceFileName}_depth.png`, depthBlob);
+
 		const zipBlob = await zip.generateAsync({ type: 'blob' });
 		const zipUrl = URL.createObjectURL(zipBlob);
 		downloadBlobUrl(zipUrl, `${sourceFileName}_layers.zip`);
@@ -546,11 +544,13 @@
 							{@const isNear = i === layers.length - 1}
 							<div class="layer-row" class:active={editingLayerIndex === i}>
 								<div class="layer-row-label">
-									Layer {i + 1}
-									<span class="depth-range">depth {layer.depthMin}–{layer.depthMax}</span>
-									{#if isFar}<span class="tag">farthest</span>{:else if isNear}<span class="tag"
-											>nearest</span
-										>{/if}
+									<span class="layer-name">Layer {i + 1}</span>
+									<span class="depth-range">{layer.depthMin}–{layer.depthMax}</span>
+									{#if isFar}
+										<span class="tag">farthest</span>
+									{:else if isNear}
+										<span class="tag">nearest</span>
+									{/if}
 								</div>
 								<div class="layer-row-overrides">
 									{#each overridesByLayer[i] ?? [] as ov, j (j)}
@@ -780,6 +780,11 @@
 		letter-spacing: 0;
 		font-weight: 600;
 	}
+	.layer-name {
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
 	.depth-range {
 		font-size: 0.7rem;
 		color: #888;
@@ -787,6 +792,12 @@
 		text-transform: none;
 		letter-spacing: 0;
 		font-family: monospace;
+	}
+	.depth-range::before {
+		content: '[';
+	}
+	.depth-range::after {
+		content: ']';
 	}
 	.layer-row-overrides {
 		display: flex;
