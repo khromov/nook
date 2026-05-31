@@ -1942,12 +1942,12 @@ msgstr "Lager {0}"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "<0/> Updating masks…"
-msgstr ""
+msgstr "<0/> Uppdaterar masker…"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Segmenting object"
-msgstr ""
+msgstr "Segmenterar objekt"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "<0/> Segmenting…"
-msgstr ""
+msgstr "<0/> Segmenterar…"

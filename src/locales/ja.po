@@ -1942,12 +1942,12 @@ msgstr "レイヤー {0}"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "<0/> Updating masks…"
-msgstr ""
+msgstr "<0/> マスクを更新中…"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "Segmenting object"
-msgstr ""
+msgstr "オブジェクトをセグメント化"
 
 #: src/lib/components/layer-separator/SamPicker.svelte
 msgid "<0/> Segmenting…"
-msgstr ""
+msgstr "<0/> セグメント化中…"

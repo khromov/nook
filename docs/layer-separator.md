@@ -44,6 +44,7 @@ src/lib/layer-separator/
 ├── types.ts          Layer + LayerOverride types
 ├── masks.ts          Pure mask math
 ├── masks.spec.ts     ~28 Vitest cases
+├── masks.worker.ts   Runs depthToMasks off the main thread
 ├── canvas.ts         Uint8Array → PNG blob URL helpers
 └── sam.ts            SlimSAM loader + image-embedding cache + multi-point predict
 
@@ -63,7 +64,12 @@ src/routes/[[lang]]/layer-separator/
 - `committedThresholds: number[]` — debounced 150 ms copy that the mask derivation actually reads. This is what lets dragging stay fluid while the (expensive) mask repaint waits for the user to settle.
 - `overridesByLayer: LayerOverride[][]` — parallel to layers; each override is a binary `Uint8Array` from SAM that wins over the depth threshold for the region it covers.
 - `layers = $derived(layersFromThresholds(committedThresholds))` with `overrides` glued in per layer.
-- `masks = $derived(depthToMasks(depthData, layers))` — the N − 1 cumulative B&W masks rendered live to canvases.
+- `masks = $state.raw<Uint8Array[]>([])` — the N − 1 cumulative B&W masks rendered live to canvases. A `$effect` posts `(depthData, layers)` to `masks.worker.ts`, which runs the full-resolution `depthToMasks` pixel loop off the main thread and transfers the buffers back; the main thread stays free to paint the "Updating masks…" indicator instead of freezing on large images. A monotonic request id discards stale responses, with a synchronous double-`requestAnimationFrame` fallback if the worker fails to load.
+
+### Loading states
+
+- `isComputingMasks` / `masksUpdating` drive the "Updating masks…" indicator and dim the cumulative-mask grid while the worker recomputes (also covers the 150 ms threshold-drag debounce window and override accepts).
+- `isPredicting` drives the "Segmenting…" spinner in `SamPicker`. `runPrediction` awaits a double-`requestAnimationFrame` (`nextPaint()`) before the blocking SAM `predictMask` call so the spinner renders first; point add/remove/clear/undo and the Accept button are disabled while predicting.
 
 ### Pure mask math (`masks.ts`)
 
@@ -87,7 +93,7 @@ src/routes/[[lang]]/layer-separator/
 - **No free-form brush** — overrides come only from SAM clicks (or depth thresholds). The `LayerOverride.source` field already enumerates `'paint'` for a future brush implementation.
 - **Models served from Hugging Face directly** rather than the project's DigitalOcean CDN. Should be revisited if first-load latency or rate-limits become a problem.
 - **Mobile layout** has not been polished; the histogram, picker, and threshold UI assume a wide viewport.
-- **i18n**: strings are not yet wrapped for Wuchale (other features in this app are).
+- **`MaskCanvas` still paints on the main thread** — `depthToMasks` is offloaded to a worker, but each canvas redraws its `putImageData` loop on the main thread, so a brief freeze can still occur after the worker returns. SAM inference (transformers.js) also runs on the main thread.
 
 ## Open follow-ups
 
