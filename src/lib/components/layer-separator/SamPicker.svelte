@@ -123,7 +123,10 @@
 				{/each}
 			{/if}
 			{#if isPredicting}
-				<div class="spinner" aria-label="Predicting mask">…</div>
+				<div class="spinner" role="status" aria-label="Segmenting object">
+					<span class="spinner-dot" aria-hidden="true"></span>
+					Segmenting…
+				</div>
 			{/if}
 		</div>
 	</div>
@@ -217,11 +220,32 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 		background: #000;
 		color: #fff;
 		padding: 0.4rem 0.8rem;
 		font-weight: 700;
-		letter-spacing: 2px;
+		letter-spacing: 1px;
+	}
+	.spinner-dot {
+		width: 12px;
+		height: 12px;
+		border: 3px solid #fff;
+		border-top-color: transparent;
+		border-radius: 50%;
+		animation: spinner-rotate 0.6s linear infinite;
+	}
+	@keyframes spinner-rotate {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.spinner-dot {
+			animation: none;
+		}
 	}
 	.picker.predicting img {
 		cursor: wait;

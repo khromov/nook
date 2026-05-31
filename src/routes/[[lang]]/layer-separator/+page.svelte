@@ -40,6 +40,7 @@
 		type SamPoint
 	} from '$lib/layer-separator/sam';
 	import type { LayerOverride } from '$lib/layer-separator/types';
+	import type { MasksResponse } from '$lib/layer-separator/masks.worker';
 
 	type DepthOutput = { depth: RawImage };
 	type DepthPipeline = (input: string) => Promise<DepthOutput>;
@@ -131,10 +132,92 @@
 		};
 	});
 
-	const masks = $derived.by(() => {
-		if (!depthData) return [];
-		return depthToMasks(depthData, layers);
+	// Cumulative masks are recomputed in a worker so the full-resolution pixel loop
+	// doesn't freeze the editor on large images — the click/commit that triggered the
+	// recompute returns immediately, the "Updating masks…" indicator paints and keeps
+	// animating, and the result is applied when the worker reports back.
+	// $state.raw keeps the typed-array masks un-proxied (matches the old $derived).
+	let masks = $state.raw<Uint8Array[]>([]);
+	let isComputingMasks = $state(false);
+
+	let masksWorker: Worker | null = null;
+	let workerFailed = false;
+	// Monotonic id so a slow response for stale input is ignored when newer input
+	// has already been dispatched.
+	let masksRequestId = 0;
+
+	function ensureMasksWorker(): Worker | null {
+		if (workerFailed) return null;
+		if (!masksWorker) {
+			try {
+				masksWorker = new Worker(new URL('$lib/layer-separator/masks.worker.js', import.meta.url), {
+					type: 'module'
+				});
+				masksWorker.onmessage = (e: MessageEvent<MasksResponse>) => {
+					if (e.data.id !== masksRequestId) return; // stale result
+					masks = e.data.masks;
+					isComputingMasks = false;
+				};
+				masksWorker.onerror = () => {
+					// Fall back to main-thread compute for the rest of the session.
+					workerFailed = true;
+					masksWorker = null;
+					if (depthData) masks = depthToMasks(depthData, layers);
+					isComputingMasks = false;
+				};
+			} catch {
+				workerFailed = true;
+				return null;
+			}
+		}
+		return masksWorker;
+	}
+
+	$effect(() => {
+		const depth = depthData;
+		const currentLayers = layers;
+		if (!depth) {
+			masks = [];
+			isComputingMasks = false;
+			return;
+		}
+		isComputingMasks = true;
+		const id = ++masksRequestId;
+		// Plain snapshot the worker can structured-clone (overrides live in $state).
+		const payloadLayers = currentLayers.map((l) => ({
+			depthMin: l.depthMin,
+			depthMax: l.depthMax,
+			overrides: l.overrides.map((o) => ({ source: o.source, mask: o.mask }))
+		}));
+
+		const worker = ensureMasksWorker();
+		if (worker) {
+			worker.postMessage({ id, depth, layers: payloadLayers });
+			return;
+		}
+
+		// No worker available: yield a paint so the indicator shows, then compute.
+		let inner = 0;
+		const outer = requestAnimationFrame(() => {
+			inner = requestAnimationFrame(() => {
+				if (id !== masksRequestId) return;
+				masks = depthToMasks(depth, payloadLayers);
+				isComputingMasks = false;
+			});
+		});
+		return () => {
+			cancelAnimationFrame(outer);
+			if (inner) cancelAnimationFrame(inner);
+		};
 	});
+
+	// True while the on-screen masks are stale relative to the user's input: during
+	// the threshold-drag debounce window and while the recompute above is in flight.
+	const masksUpdating = $derived(
+		isComputingMasks ||
+			thresholds.length !== committedThresholds.length ||
+			thresholds.some((t, i) => t !== committedThresholds[i])
+	);
 
 	let depthEstimator: DepthPipeline | null = null;
 	const { requestWakeLock, releaseWakeLock, setupWakeLock } = useWakeLock();
@@ -264,9 +347,20 @@
 	}
 
 	async function handleSamClick(x: number, y: number, label: 0 | 1) {
-		if (!samSession || editingLayerIndex === null) return;
+		// Ignore clicks while a prediction is in flight so points don't stack up and
+		// fire overlapping predictions that race to set `pendingMask`.
+		if (!samSession || editingLayerIndex === null || isPredicting) return;
 		pickedPoints = [...pickedPoints, { x, y, label }];
 		await runPrediction();
+	}
+
+	// Resolve after the browser has had a chance to paint (two frames: the first
+	// callback runs before a paint, the second after it). Lets a loading indicator
+	// become visible before a synchronous, main-thread-blocking step runs.
+	function nextPaint(): Promise<void> {
+		return new Promise((resolve) =>
+			requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+		);
 	}
 
 	async function runPrediction() {
@@ -275,6 +369,8 @@
 			return;
 		}
 		isPredicting = true;
+		// Paint the "Segmenting…" spinner before SAM inference blocks the main thread.
+		await nextPaint();
 		try {
 			const result = await predictMask(samSession, pickedPoints);
 			if (result.width !== depthW || result.height !== depthH) {
@@ -300,12 +396,13 @@
 	}
 
 	function clearPoints() {
+		if (isPredicting) return;
 		pickedPoints = [];
 		pendingMask = null;
 	}
 
 	async function undoLastPoint() {
-		if (pickedPoints.length === 0) return;
+		if (isPredicting || pickedPoints.length === 0) return;
 		pickedPoints = pickedPoints.slice(0, -1);
 		await runPrediction();
 	}
@@ -420,6 +517,7 @@
 		if (originalImageUrl && originalImageUrl.startsWith('blob:')) {
 			URL.revokeObjectURL(originalImageUrl);
 		}
+		masksWorker?.terminate();
 	});
 </script>
 
@@ -605,7 +703,11 @@
 								/>
 								<div class="sam-actions">
 									{#if pendingMask}
-										<ActionButton onClick={acceptOverride} variant="success">
+										<ActionButton
+											onClick={acceptOverride}
+											variant="success"
+											disabled={isPredicting}
+										>
 											Accept ({pickedPoints.length} point{pickedPoints.length === 1 ? '' : 's'}
 											→ layer {editingLayerIndex + 1})
 										</ActionButton>
@@ -614,11 +716,14 @@
 										<button
 											class="link-btn"
 											onclick={undoLastPoint}
+											disabled={isPredicting}
 											title="Remove the last point (⌘Z)"
 										>
 											Undo last point
 										</button>
-										<button class="link-btn" onclick={clearPoints}>Clear points</button>
+										<button class="link-btn" onclick={clearPoints} disabled={isPredicting}>
+											Clear points
+										</button>
 									{/if}
 									<button class="link-btn" onclick={cancelEdit}>Cancel</button>
 								</div>
@@ -629,16 +734,27 @@
 
 				<SectionCard rotation={0.1} animationDelay={0.2}>
 					<StepHeader stepNumber={6} title="Cumulative Masks" />
+					{#if masksUpdating}
+						<p class="masks-updating" role="status" aria-live="polite">
+							<span class="mini-spinner" aria-hidden="true"></span>
+							Updating masks…
+						</p>
+					{/if}
 					<p class="hint">
 						{masks.length} mask{masks.length === 1 ? '' : 's'} for {layers.length} layers. Mask k is BLACK
 						where layers 1..k live; the frontmost layer has no mask.
 					</p>
 					<div class="masks-actions">
-						<ActionButton onClick={downloadAllAsZip} variant="success" Icon={DownloadIcon}>
+						<ActionButton
+							onClick={downloadAllAsZip}
+							variant="success"
+							Icon={DownloadIcon}
+							disabled={masksUpdating}
+						>
 							Download all as zip
 						</ActionButton>
 					</div>
-					<div class="masks-grid">
+					<div class="masks-grid" class:updating={masksUpdating} aria-busy={masksUpdating}>
 						{#each masks as mask, i (i)}
 							<figure>
 								<figcaption>Mask {i + 1} — covers layers 1–{i + 1}</figcaption>
@@ -896,10 +1012,49 @@
 		padding: 0;
 		align-self: flex-start;
 	}
+	.link-btn:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+		text-decoration: none;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.mini-spinner {
+			animation: none;
+		}
+	}
 	.masks-actions {
 		display: flex;
 		justify-content: center;
 		margin: 1rem 0;
+	}
+	.masks-updating {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0 0 0.5rem;
+		font-weight: 700;
+		font-size: 0.875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		color: #ff69b4;
+	}
+	.mini-spinner {
+		width: 14px;
+		height: 14px;
+		border: 3px solid #000;
+		border-top-color: transparent;
+		border-radius: 50%;
+		animation: spin 0.6s linear infinite;
+	}
+	.masks-grid.updating {
+		opacity: 0.45;
+		pointer-events: none;
+		transition: opacity 0.15s ease;
+	}
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
 	}
 	.model-buttons {
 		display: flex;

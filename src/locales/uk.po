@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-25T21:20:18.035Z\n"
-"PO-Revision-Date: 2026-05-25T18:09:42.692Z\n"
+"PO-Revision-Date: 2026-05-31T09:28:20.440Z\n"
 "Last-Translator: \n"
 "Language: uk\n"
 "Language-Team: \n"
@@ -1757,9 +1757,8 @@ msgstr ""
 #~ msgid "Click to pick an object"
 #~ msgstr ""
 
-#: src/lib/components/layer-separator/SamPicker.svelte
-msgid "Predicting mask"
-msgstr "Прогнозування маски"
+#~ msgid "Predicting mask"
+#~ msgstr "Прогнозування маски"
 
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Refine with object clicks"
@@ -1940,3 +1939,15 @@ msgstr "Модель глибини"
 #: src/routes/[[lang]]/layer-separator/+page.svelte
 msgid "Layer {0}"
 msgstr "Шар {0}"
+
+#: src/routes/[[lang]]/layer-separator/+page.svelte
+msgid "<0/> Updating masks…"
+msgstr ""
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "Segmenting object"
+msgstr ""
+
+#: src/lib/components/layer-separator/SamPicker.svelte
+msgid "<0/> Segmenting…"
+msgstr ""
