@@ -1,4 +1,4 @@
-FROM node:24-slim AS builder
+FROM node:26.13.0-slim AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -8,7 +8,7 @@ ENV PUBLIC_DISABLE_OPFS=$PUBLIC_DISABLE_OPFS
 RUN npm run build
 RUN npm prune --production
 
-FROM node:24-slim
+FROM node:26.13.0-slim
 WORKDIR /app
 COPY --from=builder /app/server.js server.js
 COPY --from=builder /app/build build/

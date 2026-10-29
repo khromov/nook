@@ -26,6 +26,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,format=long
 
       - name: Login to GHCR
         uses: docker/login-action@v3
@@ -35,7 +38,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and Push Docker Image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/amd64
@@ -46,9 +49,9 @@ jobs:
             PUBLIC_DISABLE_OPFS=false
 
       - name: Deploy on CapRover
-        uses: caprover/deploy-from-github@v1.1.2
+        uses: caprover/deploy-from-github@v2
         with:
           server: '${{ secrets.APP_SERVER }}'
           app: 'svelte-local-ai'
           token: '${{ secrets.APP_TOKEN }}'
-          image: 'ghcr.io/khromov/nook:main'
+          image: 'ghcr.io/khromov/nook:sha-${{ github.sha }}'
